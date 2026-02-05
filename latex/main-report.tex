@@ -44,66 +44,106 @@
     techreport,
     TNF,
     equalmargins,
-    % logopath=./logos,
-    % fontpath=./fonts,
-    nofancyfonts
+    nofancyfonts,
+    nocompactverb
 ]{jkureport}
 %% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% 
-\usepackage{import}
+%% Packages
+
 \usepackage{amsfonts}
-\usepackage{acronym}
+\usepackage{euler}
+\usepackage[european, straightvoltages]{circuitikz}
+\usepackage{siunitx}
+\usepackage{wrapfig}
+\usepackage{minted}
+\usepackage{algpseudocode, algorithm}
+\usepackage{fontawesome5} 
+\usepackage[dvipsnames]{xcolor}
+
 %% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Setup
+
+\graphicspath{{images/}}
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+
+\preto\tabular{\setcounter{magicrownumbers}{0}}
+\newcounter{magicrownumbers}
+\newcommand\rownumber{\stepcounter{magicrownumbers}\arabic{magicrownumbers}}
+
+\ctikzset{tripoles/mos style/arrows}
+\ctikzset{diodes/scale=0.7}
+\ctikzset{resistors/scale=0.7}
+\floatname{algorithm}{Algorithmus}
 
 \begin{document}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% 
+%% Titlepage
 
-\title{Space for your report title}
+\title{Protokoll}
 %\titleshort{Optional space for your abbreviated title}
 
-\subtitle{Technical Report\\%
+\subtitle{Digitale Schaltungstechnik PR - WS2025\\%
 	\usekomafont{subtitlesmall}%
-	\hfill\\%
-	Optional space for mentioning e.g.\ your research lab\\
 	\hfill\\%
 }
 
 \author{%
-	Simon Grundner, k12136610 %\and
-	\affiliation{Institute of Networks~and~Security}
+    Sophie Öttl \authornewline
+    k12308187 \and
+	Simon Grundner \authornewline
+    k12136610
 	\authornewline
-	% \authorphone{+43 732 2468-XXXX}
-	\authormail{k12136610@students.jku.at}
-	\authorweb{https://jku.at/ins}
+	\affiliation{Institut für Integrierte Schaltungen}
+	\authornewline
+	\authorweb{https://jku.at/iic}
 	\authornewline
 }
-%\date{2020-04-09}
-%\partnerlogo{logos/ins}
-\revisionblock{Space for your revision block, acknowledgements, etc.}
-%\reportnumber{Space for your report number}
-\setbottommark{Simon Grundner, k12136610}
-\abstract{Space for your (short) abstract.}
-%\keywords{Space for your comma-separated keywords}
+\partnerlogo{logos/iic.png}
+\setbottommark{Sophie Öttl k12308187, Simon Grundner k12136610}
+\titleshort{Protokoll - Digitale Schaltungstechnik PR}
 
 \maketitle
+
 %% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% 
+%% Report Contents
+
 \cleardoubleoddpage
 \tableofcontents
-%\cleardoubleoddpage
-%\import{./}{acronyms}
-%% 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\cleardoubleoddpage
+
+\section*{Geräteliste}
+
+\begin{table}[h]
+    \centering
+    \caption{Caption}
+    \label{tab:geraeteliste}
+    \begin{tabularx}{\textwidth}{rXX}
+    \toprule
+    Pos. & Bezeichnung & Serien Nummer \\ \midrule
+    \rownumber & Multimeter & IH807686 \\
+    \rownumber & Oszilloskop & \\
+    \bottomrule
+    \end{tabularx}
+\end{table}
+
+\input{aufgabe1}
+\input{aufgabe2}
+\input{aufgabe3}
+\input{aufgabe4}
+\input{aufgabe5}
+\input{aufgabe6}
+\input{aufgabe7}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \end{document}
 \endinput

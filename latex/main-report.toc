@@ -1,2 +1,81 @@
-\babel@toc {ngerman}{}\relax 
+\babel@toc {nil}{}\relax 
+\contentsline {section}{\numberline {1}Ampelsteuerung}{5}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Vorbereitung}{5}{subsection.1.1}%
+\contentsline {section}{\numberline {2}Reaktionsspiel}{6}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Vorbereitung}{6}{subsection.2.1}%
+\contentsline {subsubsection}{\numberline {2.1.1}Widerstandsberechnung}{6}{subsubsection.2.1.1}%
+\contentsline {subsubsection}{\numberline {2.1.2}Fragen}{6}{subsubsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.2}Durchführung}{6}{subsection.2.2}%
+\contentsline {section}{\numberline {3}Realisierung eines Logic Analyzers}{7}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Vorbereitung}{7}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Durchführung}{7}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Ergebnisse}{7}{subsection.3.3}%
+\contentsline {section}{\numberline {4}Wertebestimmung von Widerstand und Kondensator}{8}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Vorbereitung}{8}{subsection.4.1}%
+\contentsline {subsubsection}{\numberline {4.1.1}Widerstandsbestimmung}{8}{subsubsection.4.1.1}%
+\contentsline {subsubsection}{\numberline {4.1.2}Spannungsteiler}{8}{subsubsection.4.1.2}%
+\contentsline {paragraph}{\nonumberline a)}{8}{paragraph*.5}%
+\contentsline {paragraph}{\nonumberline b)}{8}{paragraph*.7}%
+\contentsline {subsubsection}{\numberline {4.1.3}Kondensatorladung}{9}{subsubsection.4.1.3}%
+\contentsline {paragraph}{\nonumberline a)}{9}{paragraph*.9}%
+\contentsline {paragraph}{\nonumberline b)}{9}{paragraph*.11}%
+\contentsline {subsection}{\numberline {4.2}Durchführung}{9}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Ergebnisse}{10}{subsection.4.3}%
+\contentsline {subsubsection}{\numberline {4.3.1}Widerstand 1}{10}{subsubsection.4.3.1}%
+\contentsline {paragraph}{\nonumberline Ohmmeter}{10}{paragraph*.13}%
+\contentsline {paragraph}{\nonumberline Farbcode}{10}{paragraph*.15}%
+\contentsline {paragraph}{\nonumberline UI-Messung}{10}{paragraph*.17}%
+\contentsline {paragraph}{\nonumberline Programm}{10}{paragraph*.19}%
+\contentsline {subsubsection}{\numberline {4.3.2}Widerstand 2}{11}{subsubsection.4.3.2}%
+\contentsline {paragraph}{\nonumberline Ohmmeter}{11}{paragraph*.21}%
+\contentsline {paragraph}{\nonumberline Farbcode}{11}{paragraph*.23}%
+\contentsline {paragraph}{\nonumberline UI-Messung}{11}{paragraph*.25}%
+\contentsline {paragraph}{\nonumberline Programm}{11}{paragraph*.27}%
+\contentsline {subsubsection}{\numberline {4.3.3}Widerstand 3}{12}{subsubsection.4.3.3}%
+\contentsline {paragraph}{\nonumberline Ohmmeter}{12}{paragraph*.29}%
+\contentsline {paragraph}{\nonumberline Farbcode}{12}{paragraph*.31}%
+\contentsline {paragraph}{\nonumberline UI-Messung}{12}{paragraph*.33}%
+\contentsline {paragraph}{\nonumberline Programm}{12}{paragraph*.35}%
+\contentsline {subsubsection}{\numberline {4.3.4}Widerstand 4}{13}{subsubsection.4.3.4}%
+\contentsline {paragraph}{\nonumberline Ohmmeter}{13}{paragraph*.37}%
+\contentsline {paragraph}{\nonumberline Farbcode}{13}{paragraph*.39}%
+\contentsline {paragraph}{\nonumberline UI-Messung}{13}{paragraph*.41}%
+\contentsline {paragraph}{\nonumberline Programm}{13}{paragraph*.43}%
+\contentsline {subsubsection}{\numberline {4.3.5}Kondensator 1}{14}{subsubsection.4.3.5}%
+\contentsline {paragraph}{\nonumberline Marking code}{14}{paragraph*.45}%
+\contentsline {paragraph}{\nonumberline Programm}{14}{paragraph*.47}%
+\contentsline {subsubsection}{\numberline {4.3.6}Kondensator 2}{14}{subsubsection.4.3.6}%
+\contentsline {paragraph}{\nonumberline Marking code}{14}{paragraph*.49}%
+\contentsline {paragraph}{\nonumberline Programm}{14}{paragraph*.51}%
+\contentsline {subsubsection}{\numberline {4.3.7}Kondensator 3}{14}{subsubsection.4.3.7}%
+\contentsline {paragraph}{\nonumberline Marking code}{14}{paragraph*.53}%
+\contentsline {paragraph}{\nonumberline Programm}{14}{paragraph*.55}%
+\contentsline {section}{\numberline {5}Ansteuerung eines Lautsprechers}{15}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Vorbereitung}{15}{subsection.5.1}%
+\contentsline {subsubsection}{\numberline {5.1.1}2-Bit R2R Netzwerk}{15}{subsubsection.5.1.1}%
+\contentsline {subsubsection}{\numberline {5.1.2}Sinus Wellentabelle}{16}{subsubsection.5.1.2}%
+\contentsline {paragraph}{\nonumberline a)}{16}{paragraph*.57}%
+\contentsline {paragraph}{\nonumberline b)}{17}{paragraph*.59}%
+\contentsline {subsection}{\numberline {5.2}Durchführung}{17}{subsection.5.2}%
+\contentsline {subsubsection}{\numberline {5.2.1}Aufbau am Steckbrett}{17}{subsubsection.5.2.1}%
+\contentsline {subsubsection}{\numberline {5.2.2}Programmierung}{17}{subsubsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.3}Ergebnisse}{17}{subsection.5.3}%
+\contentsline {section}{\numberline {6}Motorsteuerung mit Näherungssensor}{18}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Vorbereitung}{18}{subsection.6.1}%
+\contentsline {subsubsection}{\numberline {6.1.1}Ultraschall-Modul HC-SR04 information}{18}{subsubsection.6.1.1}%
+\contentsline {subsubsection}{\numberline {6.1.2}Plan für die Verwendung des Ultraschall Moduls}{18}{subsubsection.6.1.2}%
+\contentsline {subsubsection}{\numberline {6.1.3}Schieberegister für 7 segment Anzeige}{19}{subsubsection.6.1.3}%
+\contentsline {subsubsection}{\numberline {6.1.4}Berechnung Vorwiderstände}{19}{subsubsection.6.1.4}%
+\contentsline {subsection}{\numberline {6.2}Praktikumsaufgabe}{19}{subsection.6.2}%
+\contentsline {subsubsection}{\numberline {6.2.1}e}{19}{subsubsection.6.2.1}%
+\contentsline {section}{\numberline {7}Datenübertragung mittels Infra-Rot (IR)}{20}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Vorbereitung}{20}{subsection.7.1}%
+\contentsline {subsubsection}{\numberline {7.1.1}Morse Code Symbole}{20}{subsubsection.7.1.1}%
+\contentsline {subsubsection}{\numberline {7.1.2}Codierung des Morsesignals}{20}{subsubsection.7.1.2}%
+\contentsline {subsubsection}{\numberline {7.1.3}Widerstandsberechnung}{21}{subsubsection.7.1.3}%
+\contentsline {subsection}{\numberline {7.2}Durchführung}{21}{subsection.7.2}%
+\contentsline {subsubsection}{\numberline {7.2.1}Aufbau am Steckbrett}{21}{subsubsection.7.2.1}%
+\contentsline {subsubsection}{\numberline {7.2.2}Implementierung des Senders}{21}{subsubsection.7.2.2}%
+\contentsline {subsubsection}{\numberline {7.2.3}Implementierung des Empfängers}{21}{subsubsection.7.2.3}%
+\contentsline {subsection}{\numberline {7.3}Ergebnisse}{21}{subsection.7.3}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

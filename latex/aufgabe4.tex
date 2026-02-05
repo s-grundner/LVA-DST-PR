@@ -1,16 +1,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% AUFGABE 4
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\newpage
-\section{Wertebestimmung von Widerstand und Kondensator}
-
-\subsection{Vorbereitung}
-\subsubsection{Widerstandsbestimmung}
-
+%%
 \newcommand{\resistorRow}[3]{%
     \noindent
-    \begin{minipage}[c]{0.4\textwidth}
+    \begin{minipage}[c]{0.49\textwidth}
         \includegraphics[width=5cm]{#1} 
     \end{minipage}%
     \hfill
@@ -22,12 +14,20 @@
     
     \vspace{1cm} % Abstand zur nächsten Reihe
 }
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% AUFGABE 4
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+\section{Wertebestimmung von Widerstand und Kondensator}
+
+\subsection{Vorbereitung}
+\subsubsection{Widerstandsbestimmung}
 
 \resistorRow{resistor1.png}{\SI{47}{\kilo\ohm}}{$\pm \SI{5}{\percent}$}
-
-\resistorRow{resistor2.png}{\SI{3,9}{\mega\ohm}}{$\pm \SI{5}{\percent}$}
-
-\resistorRow{resistor3.png}{\SI{6,8}{\kilo\ohm}}{$\pm \SI{10}{\percent}$}
+\resistorRow{resistor2.png}{\SI{3.9}{\mega\ohm}}{$\pm \SI{5}{\percent}$}
+\resistorRow{resistor3.png}{\SI{6.8}{\kilo\ohm}}{$\pm \SI{10}{\percent}$}
 
 \subsubsection{Spannungsteiler}
 
@@ -36,9 +36,7 @@ Die Spannung teilt sich am Spannungsteiler im Verhältnis der Widerstände auf.
 \[
     U_{R1} = U_e - U_a = \SI{5}{\volt} - \SI{3}{\volt} = \SI{2}{\volt}
 \]
-Das Verhältnis der Widerstände $R_1 : R_2$ entspricht dem Verhältnis der Spannungen $U_{R1} : U_a$, also \textbf{2:3}.
-
-\noindent Berechnung von $R_2$ mit $R_1 = \SI{10}{\kilo\ohm}$:
+Das Verhältnis der Widerstände $R_1 : R_2$ entspricht dem Verhältnis der Spannungen $U_{R1} : U_a$, also \textbf{2:3}. Berechnung von $R_2$ mit $R_1 = \SI{10}{\kilo\ohm}$:
 \begin{align*}
     \frac{R_1}{R_2} &= \frac{U_{R1}}{U_a} \\
     R_2 &= R_1 \cdot \frac{U_a}{U_{R1}} \\
@@ -64,12 +62,11 @@ Berechnung von $R_x$:
 \[
 u_c(t) = U_q \cdot \left(1 - e^{-\frac{t}{\tau}}\right)
 \]
-Es ist bekannt, dass der Kondensator nach der Zeitkonstante $\tau = R \cdot C$ circa \SI{63}{\percent} der Endspannung erreicht hat ($1 - e^{-1} \approx 0.63$).
-
-\noindent Da nach $t = \SI{100}{\milli\second}$ genau dieser Wert erreicht ist, gilt:
-\[ \tau = \SI{100}{\milli\second} \]
-
-\noindent Daraus lässt sich die Kapazität $C$ berechnen:
+Es ist bekannt, dass der Kondensator nach der Zeitkonstante $\tau = R \cdot C$ circa \SI{63}{\percent} der Endspannung erreicht hat ($1 - e^{-1} \approx 0.63$). Da nach $t = \SI{100}{\milli\second}$ genau dieser Wert erreicht ist, gilt:
+\[
+\tau = \SI{100}{\milli\second}
+\]
+Daraus lässt sich die Kapazität $C$ berechnen:
 \begin{align*}
     \tau &= R \cdot C \\
     C &= \frac{\tau}{R} \\
@@ -94,25 +91,40 @@ Es ist bekannt, dass der Kondensator nach der Zeitkonstante $\tau = R \cdot C$ c
     \item Stückliste
 \end{itemize}
 
+Bilder
+
+\begin{itemize}
+    \item Schaltplan (tinkercad)
+    \item Strom und Spannungsmessung
+\end{itemize}
+
+\begin{figure}
+    \caption{Messschaltung zur Strom und Spannungsmessung eines Widerstands.}\label{fig:ui-mess}
+\end{figure}
+
 \newpage
 \subsection{Ergebnisse}
 
 \subsubsection{Widerstand 1}
 
-\paragraph{Farbcode}
+\paragraph{Ohmmeter} gemessen: \SI{100.3}{\ohm}
 
-Braun Schwarz Schwarz Schwarz Braun
+\paragraph{Farbcode} Der Widerstand weist 5 Ringe mit folgenden Farben auf:
 
-\SI{100}{\ohm}
+\begin{tabularx}{\textwidth}{Y|Y|Y|Y|Y}
+    \color{white}\textbf{Braun}\cellcolor{brown} &
+    \color{white}\textbf{Schwarz}\cellcolor{black} &
+    \color{white}\textbf{Schwarz}\cellcolor{black} &
+    \color{white}\textbf{Schwarz}\cellcolor{black} &
+    \color{white}\textbf{Braun}\cellcolor{brown}
+\end{tabularx}
 
-\paragraph{Mulitmeter}
+Diese Farbkombination entspricht \SI{100}{\ohm} $\pm$ \SI{1}{\percent}.
 
-gemessen: \SI{100.3}{\ohm} $\pm$ \SI{1}{\percent}
-
-\paragraph{UI-Messung}
+\paragraph{UI-Messung} Messung von Strom und Spannung durch den Widerstand.
 
 \begin{table}[h]
-    \caption{}\label{}
+    \caption{Strom und Spannungsmessung gemäß \autoref{fig:ui-mess} mit anschließender Berechnung des Widerstandes mit dem Ohmschen Gesetz.}
 \begin{tabularx}{\textwidth}{YYY}
     \toprule
 Strom / \si{\ampere} & Spannung / \si{\volt} & Widerstand / \si{\ohm} \\ \midrule
@@ -120,12 +132,10 @@ Strom / \si{\ampere} & Spannung / \si{\volt} & Widerstand / \si{\ohm} \\ \midrul
 \end{tabularx}
 \end{table}
 
-\paragraph{Programm}
-
-hHalo
+\paragraph{Programm} Vom Programm wurden folgende Werte über die serielle Schnittstelle empfangen:
 
 \begin{table}[h]
-    \caption{}\label{}
+    \caption{Ausgabe des berechneten Widerstandswertes und dem ADC Messwert.}
 \begin{tabularx}{\textwidth}{YY}
 \toprule
 Widerstandswert / \si{\ohm} & ADC Messwert \\ \midrule
@@ -136,20 +146,26 @@ Widerstandswert / \si{\ohm} & ADC Messwert \\ \midrule
 \end{tabularx}
 \end{table}
 
+\newpage
 \subsubsection{Widerstand 2}
 
-\paragraph{Mulitmeter} gemessen: \SI{12.01}{\kilo\ohm}
+\paragraph{Ohmmeter} Gemessen: \SI{12.01}{\kilo\ohm}
 
-\paragraph{Farbcode} 
+\paragraph{Farbcode} Der Widerstand weist 4 Ringe mit folgenden Farben auf:
 
-4 Ringe
+\begin{tabularx}{\textwidth}{Y|Y|Y|Y}
+    \color{white}\textbf{Braun}\cellcolor{brown} &
+    \color{white}\textbf{Rot}\cellcolor{red} &
+    \color{black}\textbf{Orange}\cellcolor{orange} &
+    \color{black}\textbf{Gold}\cellcolor{Goldenrod}
+\end{tabularx}
 
-Braun Rot Orange Gold
+Diese Farbkombination entspricht \SI{12}{\kilo\ohm} $\pm$ \SI{5}{\percent}.
 
-\SI{12}{\kilo\ohm} $\pm$ \SI{5}{\percent}
+\paragraph{UI-Messung} Messung von Strom und Spannung durch den Widerstand.
 
 \begin{table}[h]
-    \caption{}\label{}
+    \caption{Strom und Spannungsmessung gemäß \autoref{fig:ui-mess} mit anschließender Berechnung des Widerstandes mit dem Ohmschen Gesetz.}
 \begin{tabularx}{\textwidth}{YYY}
     \toprule
 Strom / \si{\ampere} & Spannung / \si{\volt} & Widerstand / \si{\ohm} \\ \midrule
@@ -157,10 +173,10 @@ Strom / \si{\ampere} & Spannung / \si{\volt} & Widerstand / \si{\ohm} \\ \midrul
 \end{tabularx}
 \end{table}
 
-\paragraph{Programm}
+\paragraph{Programm} Vom Programm wurden folgende Werte über die serielle Schnittstelle empfangen:
 
 \begin{table}[h]
-    \caption{}\label{}
+    \caption{Ausgabe des berechneten Widerstandswertes und dem ADC Messwert.}
 \begin{tabularx}{\textwidth}{YY}
 \toprule
 Widerstandswert / \si{\ohm} & ADC Messwert \\ \midrule
@@ -171,9 +187,10 @@ Widerstandswert / \si{\ohm} & ADC Messwert \\ \midrule
 \end{tabularx}
 \end{table}
 
+\newpage
 \subsubsection{Widerstand 3}
 
-\paragraph{Multimeter} gemessen: \SI{185.7}{\kilo\ohm}
+\paragraph{Ohmmeter} gemessen: \SI{185.7}{\kilo\ohm}
 
 \paragraph{Farbcode} Der Widerstand weist 5 Ringe mit folgenden Farben auf:
 
@@ -187,10 +204,21 @@ Widerstandswert / \si{\ohm} & ADC Messwert \\ \midrule
 
 Diese Farbkombination entspricht \SI{180}{\kilo\ohm} $\pm$ \SI{1}{\percent}.
 
-\paragraph{Programm} Vom Programm wurden folgende Werte über die Serielle Schnittstelle empfangen:
+\paragraph{UI-Messung} Messung von Strom und Spannung durch den Widerstand.
 
 \begin{table}[h]
-    \caption{}\label{}
+    \caption{Strom und Spannungsmessung gemäß \autoref{fig:ui-mess} mit anschließender Berechnung des Widerstandes mit dem Ohmschen Gesetz.}
+\begin{tabularx}{\textwidth}{YYY}
+    \toprule
+Strom / \si{\milli\ampere} & Spannung / \si{\volt} & Widerstand / \si{\ohm} \\ \midrule
+0.026 & 4.8 & \\ \bottomrule
+\end{tabularx}
+\end{table}
+
+\paragraph{Programm} Vom Programm wurden folgende Werte über die serielle Schnittstelle empfangen:
+
+\begin{table}[h]
+    \caption{Ausgabe des berechneten Widerstandswertes und dem ADC Messwert.}
 \begin{tabularx}{\textwidth}{YY}
     \toprule
 Widerstandswert / \si{\ohm} & ADC Messwert \\ \midrule
@@ -202,34 +230,10 @@ Widerstandswert / \si{\ohm} & ADC Messwert \\ \midrule
 \end{tabularx}
 \end{table}
 
-\paragraph{UI-Messung}
-
-\begin{table}[h]
-    \caption{}\label{}
-\begin{tabularx}{\textwidth}{YYY}
-    \toprule
-Strom / \si{\milli\ampere} & Spannung / \si{\volt} & Widerstand / \si{\ohm} \\ \midrule
-0.026 & 4.8 & \\ \bottomrule
-\end{tabularx}
-\end{table}
-
-
+\newpage
 \subsubsection{Widerstand 4}
 
-\paragraph{Ohmmeter}
-
-gemessen: \SI{1.01}{\kilo\ohm}
-
-\paragraph{UI-Messung}
-
-\begin{table}[h]
-    \caption{}\label{}
-\begin{tabularx}{\textwidth}{YYY}
-    \toprule
-Strom / \si{\ampere} & Spannung / \si{\volt} & Widerstand / \si{\ohm} \\ \midrule
-0.459 & 0.464 & \\ \bottomrule
-\end{tabularx}
-\end{table}
+\paragraph{Ohmmeter} gemessen: \SI{1.01}{\kilo\ohm}
 
 \paragraph{Farbcode} Der Widerstand weist 5 Ringe mit folgenden Farben auf:
 
@@ -243,12 +247,21 @@ Strom / \si{\ampere} & Spannung / \si{\volt} & Widerstand / \si{\ohm} \\ \midrul
 
 Diese Farbkombination entspricht \SI{1}{\kilo\ohm} $\pm$ \SI{1}{\percent}.
 
-\paragraph{Programm}
-
-HAllo
+\paragraph{UI-Messung} Messung von Strom und Spannung durch den Widerstand.
 
 \begin{table}[h]
-    \caption{}\label{}
+    \caption{Strom und Spannungsmessung gemäß \autoref{fig:ui-mess} mit anschließender Berechnung des Widerstandes mit dem Ohmschen Gesetz.}
+\begin{tabularx}{\textwidth}{YYY}
+    \toprule
+Strom / \si{\ampere} & Spannung / \si{\volt} & Widerstand / \si{\ohm} \\ \midrule
+0.459 & 0.464 & \\ \bottomrule
+\end{tabularx}
+\end{table}
+
+\paragraph{Programm} Vom Programm wurden folgende Werte über die serielle Schnittstelle empfangen:
+
+\begin{table}[h]
+    \caption{Ausgabe des berechneten Widerstandswertes und dem ADC Messwert.}
 \begin{tabularx}{\textwidth}{YY}
     \toprule
 Widerstandswert / \si{\ohm} & ADC Messwert \\ \midrule
@@ -259,6 +272,7 @@ Widerstandswert / \si{\ohm} & ADC Messwert \\ \midrule
 \end{tabularx}
 \end{table}
 
+\newpage
 \subsubsection{Kondensator 1}
 
 \paragraph{Marking code} Am Bauteil wurde der Wert \SI{220}{\micro\farad} abgelesen.
@@ -285,7 +299,7 @@ Widerstandswert / \si{\ohm} & ADC Messwert \\ \midrule
 
 \paragraph{Marking code} Am Bauteil wurde der Wert \SI{10}{\micro\farad} abgelesen.
 
-\paragraph{Programm} Vom Programm wurden folgende Werte abgelesen:
+\paragraph{Programm} Vom Programm wurden folgende Werte über die serielle Schnittstelle empfangen:
 
 \begin{itemize}
     \item Charge Time: \SI{103276}{\micro\second}

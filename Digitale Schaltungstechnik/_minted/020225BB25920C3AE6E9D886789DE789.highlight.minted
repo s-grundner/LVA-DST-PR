@@ -1,3 +1,0 @@
-\begin{MintedVerbatim}[commandchars=\\\{\}]
-\PYG{n}{tone}\PYG{p}{(}\PYG{n}{TX\PYGZus{}PIN}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{F\PYGZus{}IR\PYGZus{}HZ}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{DOT\PYGZus{}TIME\PYGZus{}MS}\PYG{p}{)}
-\end{MintedVerbatim}

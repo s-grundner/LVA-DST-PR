@@ -1,6 +1,16 @@
-#include "Arduino.h"
 #include "inttypes.h"
-#include "ir.h"
+
+#define F_IR_HZ 38000
+#define F_BAUD_BPS 9600
+
+// Number of UNITs representing a morse symbol
+typedef enum {
+  UNIT = 1,
+  DOT = 1,
+  DASH = 3,
+  INTER_SYM = 1,
+  PAUSE = 7
+} morseUnit;
 
 typedef struct {
   uint8_t code; // 0 for dot, 1 for dash
@@ -37,6 +47,8 @@ static const morseCode morseTable[26] = {
 };
 
 const int TX_PIN = 3;
+static const uint16_t UNIT_LEN_MS = 200;
+static const uint32_t UNIT_LEN_US = 200000;
 
 static void sendMorseChar(char c);
 static void sendMorseChar(char c) {
@@ -52,11 +64,13 @@ static void sendMorseChar(char c) {
   morseCode m = morseTable[idx];
 
   for (int i = m.len - 1; i >= 0; i--) {
+    tone(TX_PIN, F_IR_HZ);
     if (m.code & (1 << i)) {
-      tone(TX_PIN, F_IR_HZ, DASH * UNIT_LEN_MS);
+      delay(DASH * UNIT_LEN_MS);
     } else {
-      tone(TX_PIN, F_IR_HZ, DOT * UNIT_LEN_MS);
+      delay(DASH * UNIT_LEN_MS);
     }
+    noTone();
     delay(INTER_SYM * UNIT_LEN_MS);
   }
   delay(PAUSE * UNIT_LEN_MS);
@@ -64,16 +78,16 @@ static void sendMorseChar(char c) {
 
 void setup() {
   Serial.begin(F_BAUD_BPS);
-
-  // IR LED (Ud = 1.6V, Imax = 130mA)
-  // digitalWrite(TX_PIN, HIGH);
+  pinMode(TX_PIN, OUTPUT);
+  digitalWrite(TX_PIN, HIGH);
 }
 
 void loop() {
-  if (Serial.available() > 0) {
-    sendMorseChar(Serial.read());
-  }
-  // sendMorseChar('Q');
-  // sendMorseChar('S');
-  // sendMorseChar('L');
+  // if (Serial.available() > 0) {
+  //  sendMorseChar(Serial.read());
+  // }
+  
+  sendMorseChar('Q');
+  sendMorseChar('S');
+  sendMorseChar('L');
 }
