@@ -1,0 +1,109 @@
+% !TeX program = xelatex
+% !TeX encoding = UTF-8
+% !TeX spellcheck = en_US
+% !BIB program = biber
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%%            JJJJ   K                         K   UUUU         UUUU  
+%%            JJJJ   KKKK                   KKKK   UUUU         UUUU  
+%%            JJJJ   KKKKKK               KKKKKK   UUUU         UUUU  
+%%            JJJJ      KKKKKK         KKKKKK      UUUU         UUUU  
+%%            JJJJ         KKKKKK   KKKKKK         UUUU         UUUU  
+%%            JJJJ            KKKKKKKKK            UUUU         UUUU  
+%%    JJ     JJJJJ               KKK               UUUUU       UUUUU  
+%%  JJJJJJJJJJJJJ    KKKKKKKKKKKKKKKKKKKKKKKKKKK    UUUUUUUUUUUUUUU   
+%%    JJJJJJJJJ      KKKKKKKKKKKKKKKKKKKKKKKKKKK      UUUUUUUUUUU     
+%% 
+%%            Template created by Michael Roland (2021)
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+\documentclass[
+    a4paper,
+    oneside,
+    10pt,
+    ngerman
+]{scrartcl}
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+\usepackage[utf8]{inputenc}
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+\usepackage[
+    techreport,
+    TNF,
+    equalmargins,
+    % logopath=./logos,
+    % fontpath=./fonts,
+    nofancyfonts
+]{jkureport}
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+\usepackage{import}
+\usepackage{amsfonts}
+\usepackage{acronym}
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+
+\title{Space for your report title}
+%\titleshort{Optional space for your abbreviated title}
+
+\subtitle{Technical Report\\%
+	\usekomafont{subtitlesmall}%
+	\hfill\\%
+	Optional space for mentioning e.g.\ your research lab\\
+	\hfill\\%
+}
+
+\author{%
+	Simon Grundner, k12136610 %\and
+	\affiliation{Institute of Networks~and~Security}
+	\authornewline
+	% \authorphone{+43 732 2468-XXXX}
+	\authormail{k12136610@students.jku.at}
+	\authorweb{https://jku.at/ins}
+	\authornewline
+}
+%\date{2020-04-09}
+%\partnerlogo{logos/ins}
+\revisionblock{Space for your revision block, acknowledgements, etc.}
+%\reportnumber{Space for your report number}
+\setbottommark{Simon Grundner, k12136610}
+\abstract{Space for your (short) abstract.}
+%\keywords{Space for your comma-separated keywords}
+
+\maketitle
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+\cleardoubleoddpage
+\tableofcontents
+%\cleardoubleoddpage
+%\import{./}{acronyms}
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\end{document}
+\endinput

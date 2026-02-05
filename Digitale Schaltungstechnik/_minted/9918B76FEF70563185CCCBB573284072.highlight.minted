@@ -1,0 +1,10 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{k}{const}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{ledPins}\PYG{p}{[}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{4}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{6}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{7}\PYG{p}{\PYGZcb{}}\PYG{p}{;}
+\PYG{k}{const}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{buttonPin}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{2}\PYG{p}{;}
+
+\PYG{k}{for}\PYG{+w}{ }\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{+w}{ }\PYG{l+m+mi}{5}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{i}\PYG{o}{+}\PYG{o}{+}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{pinMode}\PYG{p}{(}\PYG{n}{ledPins}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{OUTPUT}\PYG{p}{)}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\PYG{n}{pinMode}\PYG{p}{(}\PYG{n}{buttonPin}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{INPUT\PYGZus{}PULLUP}\PYG{p}{)}\PYG{p}{;}
+\PYG{n}{attachInterrupt}\PYG{p}{(}\PYG{n}{digitalPinToInterrupt}\PYG{p}{(}\PYG{n}{buttonPin}\PYG{p}{)}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{handlePress}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{FALLING}\PYG{p}{)}\PYG{p}{;}
+\end{MintedVerbatim}

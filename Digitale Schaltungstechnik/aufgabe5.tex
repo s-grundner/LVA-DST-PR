@@ -1,0 +1,195 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% AUFGABE 5
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+\section{Ansteuerung eines Lautsprechers}
+
+\subsection{Vorbereitung}
+
+\subsubsection{2-Bit R2R Netzwerk}
+
+Ein 2-Bit Digital-Analog Wandler wird mit einem R2R-Netzwerk realisiert.
+
+\begin{figure}[h]
+\centering
+\begin{circuitikz}
+\begin{scope}
+    \draw (0,0) node[anchor=east]{$U_\text{B1}$}
+        to[R=$2R$, o-*] ++(1.5,0) coordinate(k1)
+        to[short, -o] ++(1,0) node[anchor=west]{$U_\text{a}$};
+    \draw (k1)
+        to[R=$R$] ++(0,-1.5) coordinate(k2)
+        to[R=$2R$] ++(0,-1.5) node[ground]{};
+    \draw (k2)
+        to[R, l_=$2R$, *-o] ++(-1.5,0) node[anchor=east]{$U_\text{B2}$};
+    \end{scope}
+\begin{scope}[xshift=4cm, yshift=-1.5cm]
+    \node at (0,0) {\Large$\equiv$};
+\end{scope}
+\begin{scope}[xshift=6cm]
+    \draw (0,-3) node[ground]{}
+        to[vsource, v<=$U_\text{B1}$] ++(0,1.5)
+        to[R=$2R$] ++(0,1.5) node[anchor=south, color=red]{$\varphi_1$}
+        to[R=$R$, *-*] ++(2,0) node[anchor=south, color=red]{$\varphi_2$};
+    \draw (2,-3) node[ground]{}
+        to[vsource, v<=$U_\text{B2}$] ++(0,1.5)
+        to[R=$2R$] ++(0,1.5)
+        to[R=$2R$] ++(2,0) -- ++(0,-3) node[ground]{};
+\end{scope}
+\end{circuitikz}
+\caption{R2R Netzwerk}
+\label{fig:r2r}
+\end{figure}
+
+Um das Netzwerk zu lösen, wird das Knotenpotential-Verfahren verwendet. Das Netzwerk weist dabei zwei Knoten mit den Potenzialen $\varphi_1$ und $\varphi_2$ bezüglich Masse auf, wobei zu erkennen ist, dass $\varphi_1 = U_\text{a}$ ist. Es lässt sich ein Gleichungssystem der Form
+\begin{equation}
+    \begin{bmatrix}
+        G_{11} & -G_{12} \\  -G_{21} & G_{22} 
+    \end{bmatrix} \begin{bmatrix}
+        \varphi_1 \\ \varphi_2 
+    \end{bmatrix} = \begin{bmatrix}
+        I_1 \\ I_2 
+    \end{bmatrix}
+\end{equation}
+
+aufstellen. Dabei ist $G_{ii}$ die Summe der an Knoten $i$ anliegenden Leitwerte und $G_{ij}$ die Summe der Leitwerte, welche Knoten $i$ und Knoten $j$ verbinden. Es gilt $G_{ij} = G_{ji}$ wenn $i\neq j$. $I_i$ sind die zum Knoten $i$ zufließenden Quellströme, diese können aus den realen Spannungsquellen mit der jeweiligen Ersatzstromquelle berechnet werden.
+\begin{align*}
+    \begin{bmatrix}
+        \frac{1}{2R} + \frac{1}{R} & -\frac{1}{R} \\
+        -\frac{1}{R} & \frac{1}{R} + \frac{1}{2R} + \frac{1}{2R}
+    \end{bmatrix} \begin{bmatrix}
+        \varphi_1 \\ \varphi_2 
+    \end{bmatrix} &= \begin{bmatrix}
+        U_\text{B1} \frac{1}{2R} \\ U_\text{B2} \frac{1}{2R}
+    \end{bmatrix} \\
+    2R\begin{bmatrix}
+        \frac{3}{2R} & -\frac{1}{R} \\
+        -\frac{1}{R} & \frac{4}{2R}
+    \end{bmatrix} \begin{bmatrix}
+        \varphi_1 \\ \varphi_2 
+    \end{bmatrix} &= \begin{bmatrix}
+        U_\text{B1} \\ U_\text{B2}
+    \end{bmatrix} \\
+    \begin{matrix}
+        \color{gray} 2 \text{I} + \text{II} \to \\ \hspace{1pt}
+    \end{matrix}
+    \begin{bmatrix}
+        3 & -2 \\ -2 & 4
+    \end{bmatrix} \begin{bmatrix}
+        \varphi_1 \\ \varphi_2 
+    \end{bmatrix} &= \begin{bmatrix}
+        U_\text{B1} \\ U_\text{B2}
+    \end{bmatrix} \\
+    \begin{bmatrix}
+        4 & 0 \\ -2 & 4
+    \end{bmatrix} \begin{bmatrix}
+        \varphi_1 \\ \varphi_2 
+    \end{bmatrix} &= \begin{bmatrix}
+        2U_\text{B1} + U_\text{B2} \\
+        U_\text{B2}
+    \end{bmatrix}
+\end{align*}
+
+Aus der ersten Zeile des Gleichungssystems und mit $\varphi_1 = U_\text{a}$ folgt nun
+\begin{equation}
+4\varphi_1 = 2U_\text{B1} + U_\text{B2} \implies U_\text{a} = \frac{U_\text{B1}}{2} + \frac{U_\text{B2}}{4}
+\label{eq:2bit-r2r}
+\end{equation}
+
+Die Ausgangswerte bei verschiedenen Eingangsstellungen sind in \autoref{tab:ua-r2r} gezeigt. Das Muster in \autoref{eq:2bit-r2r} lässt sich auch für 4-Bit fortsetzen
+\[
+U_\text{a,4-Bit} = \frac{U_\text{B1}}{2} + \frac{U_\text{B2}}{4} + \frac{U_\text{B3}}{8} + \frac{U_\text{B4}}{16}
+\]
+
+\begin{table}[t]
+    \centering
+    \caption{Ausgänge des 2-Bit R2R Netzwerkes bei verschiedenen Eingangsstellungen} \label{tab:ua-r2r}
+    \begin{tabularx}{10cm}{YYY}
+         \toprule
+         $U_\text{B1}$  & $U_\text{B2}$  & $U_\text{a}$               \\ \midrule
+         \SI{0}{\volt}  & \SI{0}{\volt}  & \SI{0}{\volt}              \\
+         \SI{0}{\volt}  & $U_\text{Bit}$ & $\frac{1}{4} U_\text{Bit}$ \\
+         $U_\text{Bit}$ & \SI{0}{\volt}  & $\frac{1}{2} U_\text{Bit}$ \\
+         $U_\text{Bit}$ & $U_\text{Bit}$ & $\frac{3}{4} U_\text{Bit}$ \\
+         \bottomrule
+    \end{tabularx}
+\end{table}
+
+\subsubsection{Sinus Wellentabelle}
+
+\paragraph{a)} Die Amplitude eines Sinus wird über eine Periode in 20 Werte diskretisiert. Die diskreten Werte erhält man mit:
+
+\[
+D_\text{SIN} = \mathrm{round\left(U_\text{SIN}\frac{D_\text{MAX}}{U_\text{MAX}}\right)} = \mathrm{round\left(U_\text{SIN}\frac{15}{\SI{5}{\volt}}\right)} 
+\]
+
+Die Berechneten Werte sind in \autoref{tab:sin-wavetable} aufgeführt.
+
+\begin{table}[h]
+    \centering
+    \caption{Amplituden des Sinus im Bereich \si{0}-\SI{5}{\volt}, unterteilt in 20 Stützwerte.}\label{tab:sin-wavetable}
+    \begin{tabularx}{10cm}{YYY}
+    \toprule
+    $U_\text{SIN}$ / \si{\volt} & $D_\text{SIN}$ Dezimal & $D_\text{SIN}$ Hexadezimal \\ \midrule
+    2.5 & 8  & 0x8 \\
+    3.3 & 10 & 0xA \\
+    4.0 & 12 & 0xC \\
+    4.5 & 14 & 0xE \\
+    4.9 & 15 & 0xF \\
+    5.0 & 15 & 0xF \\
+    4.9 & 15 & 0xF \\
+    4.5 & 14 & 0xE \\
+    4.0 & 12 & 0xC \\
+    3.3 & 10 & 0xA \\
+    2.5 & 8  & 0x8 \\
+    1.7 & 5  & 0x5 \\
+    1.0 & 3  & 0x3 \\
+    0.5 & 2  & 0x2 \\
+    0.1 & 0  & 0x0 \\
+    0.0 & 0  & 0x0 \\
+    0.1 & 0  & 0x0 \\
+    0.5 & 2  & 0x2 \\
+    1.0 & 3  & 0x3 \\
+    1.7 & 5  & 0x5 \\
+    \bottomrule
+    \end{tabularx}
+\end{table}
+
+\newpage
+\paragraph{b)} In einer Periodendauer $T$ müssen alle $N=20$ Werte der Wellentabelle durchlaufen werden. Die Zeit, wie lange ein Bitmuster am Ausgang anliegen muss, ergibt sich durch 
+\[
+t_\text{b} = \frac{T}{N} = \frac{1}{fN}.
+\]
+
+Die berechneten Werte sind in \autoref{tab:bittime} dargestellt.
+
+\begin{table}[h]
+    \centering
+    \caption{Caption}\label{tab:bittime}
+    \begin{tabularx}{\textwidth}{YYY}
+    \toprule
+    Ton & Frequenz $f$ / \si{\hertz} & Zeit pro Bitmuster $t_\text{b}$ /  \si{\micro\second} \\ \midrule
+    c' & 262 & 190.84 \\ 
+    d’ & 294 & 170.07 \\
+    e’ & 330 & 151.52 \\
+    f’ & 349 & 143.27 \\
+    g’ & 392 & 127.55 \\
+    a’ & 440 & 113.64 \\
+    h’ & 494 & 101.21 \\
+    \bottomrule
+    \end{tabularx}
+\end{table}
+
+\subsection{Durchführung}
+
+\begin{itemize}
+    \item \href{https://www.tinkercad.com/things/hU8WRWTzGr5-dst-05-dac?sharecode=2duybfDI0pM_EacXxbHUI9-fU3gsZ_a5ntZMXiP6KmM}{Tinker CAD Link}
+    \item Stückliste
+\end{itemize}
+
+\subsubsection{Aufbau am Steckbrett}
+
+\subsubsection{Programmierung}
+
+\subsection{Ergebnisse}

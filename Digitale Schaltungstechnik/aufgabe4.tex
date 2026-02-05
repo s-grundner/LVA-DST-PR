@@ -1,0 +1,166 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% AUFGABE 4
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+\section{Wertebestimmung von Widerstand und Kondensator}
+
+\subsection{Vorbereitung}
+\subsubsection{Widerstandsbestimmung}
+
+\newcommand{\resistorRow}[3]{%
+    \noindent
+    \begin{minipage}[c]{0.4\textwidth}
+        \includegraphics[width=5cm]{#1} 
+    \end{minipage}%
+    \hfill
+    \begin{minipage}[c]{0.5\textwidth}
+        \large
+        Widerstandswert: \underline{\hspace{0.2cm} #2 \hspace{0.2cm}} \\[0.3cm]
+        Toleranz: \hspace{1.3cm} \underline{\hspace{0.2cm} #3 \hspace{0.2cm}}
+    \end{minipage}
+    
+    \vspace{1cm} % Abstand zur nächsten Reihe
+}
+
+\resistorRow{resistor1.png}{\SI{47}{\kilo\ohm}}{$\pm \SI{5}{\percent}$}
+
+\resistorRow{resistor2.png}{\SI{3,9}{\mega\ohm}}{$\pm \SI{5}{\percent}$}
+
+\resistorRow{resistor3.png}{\SI{6,8}{\kilo\ohm}}{$\pm \SI{10}{\percent}$}
+
+\subsubsection{Spannungsteiler}
+
+\paragraph{a)}
+Die Spannung teilt sich am Spannungsteiler im Verhältnis der Widerstände auf.
+\[
+    U_{R1} = U_e - U_a = \SI{5}{\volt} - \SI{3}{\volt} = \SI{2}{\volt}
+\]
+Das Verhältnis der Widerstände $R_1 : R_2$ entspricht dem Verhältnis der Spannungen $U_{R1} : U_a$, also \textbf{2:3}.
+
+\noindent Berechnung von $R_2$ mit $R_1 = \SI{10}{\kilo\ohm}$:
+\begin{align*}
+    \frac{R_1}{R_2} &= \frac{U_{R1}}{U_a} \\
+    R_2 &= R_1 \cdot \frac{U_a}{U_{R1}} \\
+    R_2 &= \SI{10}{\kilo\ohm} \cdot \frac{\SI{3}{\volt}}{\SI{2}{\volt}} \\
+    R_2 &= \SI{15}{\kilo\ohm}
+\end{align*}
+
+\paragraph{b)}
+Der Widerstand $R_2$ wird durch $R_x$ ersetzt. Die neue Ausgangsspannung beträgt $U_a = \SI{1}{\volt}$.
+\[
+    U_{R1} = \SI{5}{\volt} - \SI{1}{\volt} = \SI{4}{\volt}
+\]
+Berechnung von $R_x$:
+\begin{align*}
+    R_x &= R_1 \cdot \frac{U_a}{U_{R1}} \\
+    R_x &= \SI{10}{\kilo\ohm} \cdot \frac{\SI{1}{\volt}}{\SI{4}{\volt}} \\
+    R_x &= \SI{2.5}{\kilo\ohm}
+\end{align*}
+
+\subsubsection{Kondensatorladung}
+
+\paragraph{a)} Die Spannung am Kondensator folgt der Ladefunktion:
+\[
+u_c(t) = U_q \cdot \left(1 - e^{-\frac{t}{\tau}}\right)
+\]
+Es ist bekannt, dass der Kondensator nach der Zeitkonstante $\tau = R \cdot C$ circa \SI{63}{\percent} der Endspannung erreicht hat ($1 - e^{-1} \approx 0.63$).
+
+\noindent Da nach $t = \SI{100}{\milli\second}$ genau dieser Wert erreicht ist, gilt:
+\[ \tau = \SI{100}{\milli\second} \]
+
+\noindent Daraus lässt sich die Kapazität $C$ berechnen:
+\begin{align*}
+    \tau &= R \cdot C \\
+    C &= \frac{\tau}{R} \\
+    C &= \frac{\SI{0.1}{\second}}{\SI{10}{\kilo\ohm}} \\
+    C &= \SI{0.00001}{\farad} = \SI{10}{\micro\farad}
+\end{align*}
+
+\paragraph{b)} Der Kondensator gilt als vollständig geladen (Spannung $> 99\,\%$), wenn eine Zeit von ca. $5 \cdot \tau$ vergangen ist ($1 - e^{-5} \approx 0.993$).
+
+\noindent Die Ladedauer beträgt somit:
+\begin{align*}
+    t_{\text{voll}} &\approx 5 \cdot \tau \\
+    t_{\text{voll}} &= 5 \cdot \SI{100}{\milli\second} \\
+    t_{\text{voll}} &= \SI{500}{\milli\second}
+\end{align*}
+
+\subsection{Durchführung}
+
+\begin{itemize}
+    \item \href{https://www.tinkercad.com/things/6dP6bOFcvVJ-4-widerstandsmessung?sharecode=cloxrV9fQVUj9Cfl4C-4CEYhAw4g13SRQi1Q5vM9bJg}{Tinker CAD Link Aufgabe 1}
+    \item \href{https://www.tinkercad.com/things/84XtVuCZHAm-4-kapazitatsmessung?sharecode=4kCbAaRwm3v1nCWt6jAq8217Vbh7pe0KWzrzvLyUI0Q}{Tinker CAD Link Aufgabe 2}
+    \item Stückliste
+\end{itemize}
+
+\subsection{Ergebnisse}
+
+\subsubsection{Widerstand 1}
+
+\paragraph{Farbcode}
+
+Braun Schwarz Schwarz Schwarz Braun
+
+\SI{100}{\ohm}
+
+\paragraph{Mulitmeter}
+
+gemessen: \SI{100.3}{\ohm} $\pm$ \SI{1}{\percent}
+
+
+\paragraph{Programm}
+
+hHalo
+
+\begin{table}[h]
+    \caption{}\label{}
+\begin{tabularx}{\textwidth}{YY}
+\toprule
+Widerstandswert / \si{\ohm} & ADC Messwert \\ \midrule
+78.50 & 8 \\ \midrule
+58.76 & 6 \\
+68.62 & 7 \\
+78.50 & 8 \\ \bottomrule
+\end{tabularx}
+\end{table}
+
+\subsubsection{Widerstand 2}
+
+\paragraph{Mulitmeter} gemessen: \SI{12.01}{\kilo\ohm}
+
+\paragraph{Farbcode} 
+
+\subsubsection{Widerstand 3}
+
+
+\paragraph{Multimeter} gemessen: \SI{185.7}{\kilo\ohm}
+
+\paragraph{Farbcode}
+
+Braun Graun Schwarz Orange Braun
+
+\SI{180}{\kilo\ohm} $\pm$ \SI{1}{\percent}
+
+\paragraph{Programm}
+
+HAllo
+
+\begin{table}[h]
+    \caption{}\label{}
+\begin{tabularx}{\textwidth}{YY}
+    \toprule
+Widerstandswert / \si{\ohm} & ADC Messwert \\ \midrule
+179090.73 & 970 \\
+186362.31 & 972 \\
+182657.92 & 971 \\
+194215.59 & 974 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsubsection{Widerstand 4}
+
+\paragraph{Mulitmeter}
+
+gemessen: \SI{1.01}{\kilo\ohm}

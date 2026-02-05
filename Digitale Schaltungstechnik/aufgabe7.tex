@@ -1,0 +1,96 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% AUFGABE 7
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\newcommand{\mdot}{\textbullet\,}
+\newcommand{\mdash}{\rule[0.4ex]{0.5em}{0.2ex}\,}
+
+\section{Datenübertragung mittels Infra-Rot (IR)}
+
+Mit zwei Arduino Uno Boards soll eine Übertragung von Morsecodes mittels Infra-Rot Lichtsignalen aufgebaut werden. Sender seitig wird eine IR-LED angesteuert, sodass Infrarotsignale mit einer Frequenz von \SI{38}{\kilo\hertz} gesendet werden. Die Symbole der Morsezeichen (\mdash,\textbullet) werden dabei mit unterschiedlicher Sendedauer enkodiert. Als Empfänger wird das IR-Detektor-Modul KY-022 verwendet, welches am Ausgang \mintinline{c++}{LOW} ausgibt, wenn es ein IR-Lichtignal mit der genannten Frequenz detektiert, ansonsten \mintinline{c++}{HIGH}.
+
+\subsection{Vorbereitung}
+
+\subsubsection{Morse Code Symbole}
+
+Eine Liste der Morse-Codewörter für das Alphabet ist in \autoref{tab:morse-abc} aufgeführt.
+
+\begin{table}[h]
+\centering
+\caption{Morsealphabet} \label{tab:morse-abc}
+\begin{tabularx}{\textwidth}{YYYYYY}
+    \toprule
+    Buchstabe & Code & Buchstabe & Code & Buchstabe & Code \\ \midrule
+    A & \mdot\mdash              & J & \mdot\mdash\mdash\mdash & S & \mdot\mdot\mdot \\
+    B & \mdash\mdot\mdot\mdot    & K & \mdash\mdot\mdash       & T & \mdash \\
+    C & \mdash\mdot\mdash\mdot   & L & \mdot\mdash\mdot\mdot   & U & \mdot\mdot\mdash \\
+    D & \mdash\mdot\mdot         & M & \mdash\mdash            & V & \mdot\mdot\mdot\mdash \\
+    E & \mdot                    & N & \mdash\mdot             & W & \mdot\mdash\mdash \\
+    F & \mdot\mdot\mdash\mdot    & O & \mdash\mdash\mdash      & X & \mdash\mdot\mdot\mdash \\
+    G & \mdash\mdash\mdot        & P & \mdot\mdash\mdash\mdot  & Y & \mdash\mdot\mdash\mdash \\
+    H & \mdot\mdot\mdot\mdot     & Q & \mdash\mdash\mdot\mdash & Z & \mdash\mdash\mdot\mdot \\
+    I & \mdot\mdot               & R & \mdot\mdash\mdot        &   &  \\
+    \bottomrule
+\end{tabularx}
+\end{table}
+
+\subsubsection{Codierung des Morsesignals}
+
+Um die Symbole der Morse-Codewörter zu übertragen, wird mit der Funktion \mintinline{c++}{tone(pin, frequency, duration)} ein \SI{38}{\kilo\hertz} Rechtecksignal mit unterschiedlicher Dauer auf dem LED-GPIO Pin ausgegeben. Damit die Methode \mintinline{c++}{tone()} funktioniert, muss der Pin ein PWM Pin sein, z.B. 3 oder 11. Um die richtigen Symboldauern für die Symbole in einem Morse-Codewort zu senden, kann ein Ablauf wie in Algorithmus \ref{alg:tone} verwendet werden.
+
+\begin{algorithm}[h]
+\caption{Ablauf zum Senden der Korrekten Symboldauern in einem Morse-Codewort}\label{alg:tone}
+\begin{algorithmic}
+\ForAll{Symbols in Codeword}
+    \If{Symbol is Dash}
+        \State \mintinline{c++}{tone(TX_PIN, F_IR_HZ, DASH_TIME_MS)}
+    \Else
+        \State \mintinline{c++}{tone(TX_PIN, F_IR_HZ, DOT_TIME_MS)}
+    \EndIf
+    \State \mintinline{c++}{delay(INTER_SYMBOL_TIME_MS)}
+\EndFor
+\State \mintinline{c++}{delay(PAUSE_TIME_MS)}
+\end{algorithmic}
+\end{algorithm}
+
+\newpage
+\subsubsection{Widerstandsberechnung}
+
+\begin{wrapfigure}[14]{r}{5cm}
+\vspace*{-11pt}
+\centering
+\begin{circuitikz}[scale=0.9, transform shape]
+    \draw (0,0) node[ground]{} node[nmos, anchor=S](T1){$R_{\text{DS,on}}$};
+    \draw (T1.G) to[R,l_=$R_1$, -o] ++(-1.5,0) node[anchor=east]{IO-Pin};
+    \draw (T1.D) to[R,l_=$R_2$, i<_=\SI{130}{\milli\ampere}] ++(0,1.5) to[stroke led, invert, l^={IR-LED}, v<=\SI{1.6}{\volt}] ++(0,1) node[vcc]{$\SI{5}{\volt}$};
+\end{circuitikz}
+\caption{NMOS Treiber für die Infrarot LED.}
+\end{wrapfigure}
+
+Für die IR-Diode soll sich im Betrieb ein Arbeitspunkt von $I=\SI{130}{\milli\ampere}$ und $U_F=\SI{1.6}{\volt}$ einstellen. Um den Strom durch die Diode einzustellen, muss der Widerstand $R_2$ passend dimensioniert werden.
+
+Die restliche Spannung die nicht über die Diode abfällt, muss über $R_2$ und $R_\text{DS,on}$ abfallen. Mit $R_{\text{DS,on}}=\SI{14}{\ohm}$ ergibt sich:
+\[
+R_2 = \frac{\SI{5}{\volt} - \SI{1.6}{\volt}}{\SI{130}{\milli\ampere}} - R_\text{DS,on} = \SI{12.15}{\ohm}
+\]
+Um den Maximalstrom nicht zu überschreiten, wird der nächst höhere Widerstand aus der E6 Reihe gewählt.
+\[
+R_2 = \SI{15}{\ohm}
+\]
+
+\subsection{Durchführung}
+
+
+\begin{itemize}
+    \item \href{https://www.tinkercad.com/things/0UY9zs3iKwE-dst-07-ir?sharecode=mE1HyXRFxTP7FBArqWQ20zcDbVb7zpU4BAKAofIcNlk}{Tinker CAD Link}
+    \item Stückliste
+\end{itemize}
+
+
+\subsubsection{Aufbau am Steckbrett}
+
+\subsubsection{Implementierung des Senders}
+
+\subsubsection{Implementierung des Empfängers}
+
+\subsection{Ergebnisse}

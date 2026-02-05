@@ -1,0 +1,118 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+
+\PYG{c+c1}{// C++ code}
+\PYG{c+c1}{//}
+\PYG{k}{const}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{SHIFT\PYGZus{}IN}\PYG{o}{=}\PYG{l+m+mi}{4}\PYG{p}{;}
+\PYG{k}{const}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{SHIFT\PYGZus{}OUTPUT}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{;}
+\PYG{k}{const}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{SHIFT\PYGZus{}CLK}\PYG{o}{=}\PYG{l+m+mi}{6}\PYG{p}{;}
+
+\PYG{k}{const}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{BUTTON\PYGZus{}UP}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{2}\PYG{p}{;}
+\PYG{k}{const}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{BUTTON\PYGZus{}DOWN}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{3}\PYG{p}{;}
+
+\PYG{k}{volatile}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{currentNumber}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{;}
+\PYG{k}{volatile}\PYG{+w}{ }\PYG{k+kt}{bool}\PYG{+w}{ }\PYG{n}{needsUpdate}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nb}{true}\PYG{p}{;}
+
+\PYG{k+kt}{unsigned}\PYG{+w}{ }\PYG{k+kt}{long}\PYG{+w}{ }\PYG{n}{lastInterruptTime}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{;}
+\PYG{k}{const}\PYG{+w}{ }\PYG{k+kt}{unsigned}\PYG{+w}{ }\PYG{k+kt}{long}\PYG{+w}{ }\PYG{n}{debounceDelay}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{200}\PYG{p}{;}
+
+
+\PYG{k}{const}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{MOTOR\PYGZus{}LED\PYGZus{}OFF}\PYG{o}{=}\PYG{l+m+mi}{9}\PYG{p}{;}
+\PYG{k}{const}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{MOTOR\PYGZus{}LED\PYGZus{}ON}\PYG{o}{=}\PYG{l+m+mi}{8}\PYG{p}{;}
+\PYG{k}{const}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{MOTOR\PYGZus{}PWM\PYGZus{}LEFT}\PYG{o}{=}\PYG{l+m+mi}{10}\PYG{p}{;}
+
+\PYG{k}{volatile}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{motorSpeed}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{;}
+
+\PYG{k}{const}\PYG{+w}{ }\PYG{k+kt}{uint8\PYGZus{}t}\PYG{+w}{ }\PYG{n}{segmentPatterns}\PYG{p}{[}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{l+m+mb}{0b11111100}\PYG{p}{,}\PYG{+w}{ }\PYG{c+c1}{// 0}
+\PYG{+w}{  }\PYG{l+m+mb}{0b01100000}\PYG{p}{,}\PYG{+w}{ }\PYG{c+c1}{// 1}
+\PYG{+w}{  }\PYG{l+m+mb}{0b11011010}\PYG{p}{,}\PYG{+w}{ }\PYG{c+c1}{// 2}
+\PYG{+w}{  }\PYG{l+m+mb}{0b11110010}\PYG{p}{,}\PYG{+w}{ }\PYG{c+c1}{// 3}
+\PYG{+w}{  }\PYG{l+m+mb}{0b01100110}\PYG{p}{,}\PYG{+w}{ }\PYG{c+c1}{// 4}
+\PYG{+w}{  }\PYG{l+m+mb}{0b10110110}\PYG{p}{,}\PYG{+w}{ }\PYG{c+c1}{// 5}
+\PYG{+w}{  }\PYG{l+m+mb}{0b10111110}\PYG{p}{,}\PYG{+w}{ }\PYG{c+c1}{// 6}
+\PYG{+w}{  }\PYG{l+m+mb}{0b11100000}\PYG{p}{,}\PYG{+w}{ }\PYG{c+c1}{// 7}
+\PYG{+w}{  }\PYG{l+m+mb}{0b11111110}\PYG{p}{,}\PYG{+w}{ }\PYG{c+c1}{// 8}
+\PYG{+w}{  }\PYG{l+m+mb}{0b11110110}\PYG{+w}{  }\PYG{c+c1}{// 9}
+\PYG{p}{\PYGZcb{}}\PYG{p}{;}
+
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{setup}\PYG{p}{(}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n}{pinMode}\PYG{p}{(}\PYG{n}{LED\PYGZus{}BUILTIN}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{OUTPUT}\PYG{p}{)}\PYG{p}{;}
+
+\PYG{+w}{  }\PYG{n}{pinMode}\PYG{p}{(}\PYG{n}{SHIFT\PYGZus{}IN}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{OUTPUT}\PYG{p}{)}\PYG{p}{;}
+\PYG{+w}{  }\PYG{n}{pinMode}\PYG{p}{(}\PYG{n}{SHIFT\PYGZus{}CLK}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{OUTPUT}\PYG{p}{)}\PYG{p}{;}
+\PYG{+w}{  }\PYG{n}{pinMode}\PYG{p}{(}\PYG{n}{SHIFT\PYGZus{}OUTPUT}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{OUTPUT}\PYG{p}{)}\PYG{p}{;}
+
+\PYG{+w}{  }\PYG{n}{pinMode}\PYG{p}{(}\PYG{n}{MOTOR\PYGZus{}PWM\PYGZus{}LEFT}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{OUTPUT}\PYG{p}{)}\PYG{p}{;}
+\PYG{+w}{  }\PYG{n}{pinMode}\PYG{p}{(}\PYG{n}{MOTOR\PYGZus{}LED\PYGZus{}OFF}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{OUTPUT}\PYG{p}{)}\PYG{p}{;}
+\PYG{+w}{  }\PYG{n}{pinMode}\PYG{p}{(}\PYG{n}{MOTOR\PYGZus{}PWM\PYGZus{}LEFT}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{OUTPUT}\PYG{p}{)}\PYG{p}{;}
+
+\PYG{+w}{  }\PYG{n}{pinMode}\PYG{p}{(}\PYG{n}{BUTTON\PYGZus{}UP}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{INPUT\PYGZus{}PULLUP}\PYG{p}{)}\PYG{p}{;}
+\PYG{+w}{  }\PYG{n}{pinMode}\PYG{p}{(}\PYG{n}{MOTOR\PYGZus{}LED\PYGZus{}ON}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{OUTPUT}\PYG{p}{)}\PYG{p}{;}
+
+\PYG{+w}{  }\PYG{n}{attachInterrupt}\PYG{p}{(}\PYG{n}{digitalPinToInterrupt}\PYG{p}{(}\PYG{n}{BUTTON\PYGZus{}UP}\PYG{p}{)}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{countUp}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{FALLING}\PYG{p}{)}\PYG{p}{;}
+\PYG{+w}{  }\PYG{n}{attachInterrupt}\PYG{p}{(}\PYG{n}{digitalPinToInterrupt}\PYG{p}{(}\PYG{n}{BUTTON\PYGZus{}DOWN}\PYG{p}{)}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{countDown}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{FALLING}\PYG{p}{)}\PYG{p}{;}
+
+
+
+\PYG{+w}{  }\PYG{n}{setShiftRegister}\PYG{p}{(}\PYG{n}{currentNumber}\PYG{p}{)}\PYG{p}{;}
+\PYG{+w}{  }\PYG{n}{setMotorSpeed}\PYG{p}{(}\PYG{n}{currentNumber}\PYG{p}{)}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{loop}\PYG{p}{(}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{k}{if}\PYG{p}{(}\PYG{n}{needsUpdate}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{needsUpdate}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nb}{false}\PYG{p}{;}
+\PYG{+w}{    }\PYG{n}{setShiftRegister}\PYG{p}{(}\PYG{n}{currentNumber}\PYG{p}{)}\PYG{p}{;}
+\PYG{+w}{    }\PYG{n}{setMotorSpeed}\PYG{p}{(}\PYG{n}{currentNumber}\PYG{p}{)}\PYG{p}{;}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{countUp}\PYG{p}{(}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{k+kt}{unsigned}\PYG{+w}{ }\PYG{k+kt}{long}\PYG{+w}{ }\PYG{n}{time}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{millis}\PYG{p}{(}\PYG{p}{)}\PYG{p}{;}
+\PYG{+w}{  }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{time}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{n}{lastInterruptTime}\PYG{+w}{ }\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{debounceDelay}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{if}\PYG{p}{(}\PYG{n}{currentNumber}\PYG{+w}{ }\PYG{o}{\PYGZgt{}}\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{9}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{      }\PYG{n}{currentNumber}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{+w}{   }\PYG{p}{;}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{k}{else}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{      }\PYG{n}{currentNumber}\PYG{o}{+}\PYG{o}{+}\PYG{p}{;}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{n}{needsUpdate}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nb}{true}\PYG{p}{;}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{n}{lastInterruptTime}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{time}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{countDown}\PYG{p}{(}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{k+kt}{unsigned}\PYG{+w}{ }\PYG{k+kt}{long}\PYG{+w}{ }\PYG{n}{time}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{millis}\PYG{p}{(}\PYG{p}{)}\PYG{p}{;}
+\PYG{+w}{  }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{time}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{n}{lastInterruptTime}\PYG{+w}{ }\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{debounceDelay}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{k}{if}\PYG{p}{(}\PYG{n}{currentNumber}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{      }\PYG{n}{currentNumber}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{9}\PYG{p}{;}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{k}{else}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{      }\PYG{n}{currentNumber}\PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZhy{}}\PYG{p}{;}
+\PYG{+w}{    }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{n}{needsUpdate}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nb}{true}\PYG{p}{;}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{n}{lastInterruptTime}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{time}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+
+
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{setShiftRegister}\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{number}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{n}{digitalWrite}\PYG{p}{(}\PYG{n}{SHIFT\PYGZus{}OUTPUT}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{LOW}\PYG{p}{)}\PYG{p}{;}
+
+\PYG{+w}{  }\PYG{n}{shiftOut}\PYG{p}{(}\PYG{n}{SHIFT\PYGZus{}IN}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{SHIFT\PYGZus{}CLK}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{LSBFIRST}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{segmentPatterns}\PYG{p}{[}\PYG{n}{number}\PYG{p}{]}\PYG{p}{)}\PYG{p}{;}
+
+\PYG{+w}{  }\PYG{n}{digitalWrite}\PYG{p}{(}\PYG{n}{SHIFT\PYGZus{}OUTPUT}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{HIGH}\PYG{p}{)}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kt}{void}\PYG{+w}{ }\PYG{n+nf}{setMotorSpeed}\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{number}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{  }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{pwmValue}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{map}\PYG{p}{(}\PYG{n}{number}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{9}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{255}\PYG{p}{)}\PYG{p}{;}
+\PYG{+w}{  }\PYG{n}{analogWrite}\PYG{p}{(}\PYG{n}{MOTOR\PYGZus{}PWM\PYGZus{}LEFT}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{pwmValue}\PYG{p}{)}\PYG{p}{;}
+
+\PYG{+w}{  }\PYG{k}{if}\PYG{p}{(}\PYG{n}{number}\PYG{+w}{ }\PYG{o}{!}\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{digitalWrite}\PYG{p}{(}\PYG{n}{MOTOR\PYGZus{}LED\PYGZus{}OFF}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{LOW}\PYG{p}{)}\PYG{p}{;}
+\PYG{+w}{    }\PYG{n}{digitalWrite}\PYG{p}{(}\PYG{n}{MOTOR\PYGZus{}LED\PYGZus{}ON}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{HIGH}\PYG{p}{)}\PYG{p}{;}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{k}{else}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{+w}{    }\PYG{n}{digitalWrite}\PYG{p}{(}\PYG{n}{MOTOR\PYGZus{}LED\PYGZus{}ON}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{LOW}\PYG{p}{)}\PYG{p}{;}
+\PYG{+w}{    }\PYG{n}{digitalWrite}\PYG{p}{(}\PYG{n}{MOTOR\PYGZus{}LED\PYGZus{}OFF}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{HIGH}\PYG{p}{)}\PYG{p}{;}
+\PYG{+w}{  }\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+\end{MintedVerbatim}

@@ -1,0 +1,151 @@
+% !TeX program = xelatex
+% !TeX encoding = UTF-8
+% !TeX spellcheck = en_US
+% !BIB program = biber
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%%            JJJJ   K                         K   UUUU         UUUU  
+%%            JJJJ   KKKK                   KKKK   UUUU         UUUU  
+%%            JJJJ   KKKKKK               KKKKKK   UUUU         UUUU  
+%%            JJJJ      KKKKKK         KKKKKK      UUUU         UUUU  
+%%            JJJJ         KKKKKK   KKKKKK         UUUU         UUUU  
+%%            JJJJ            KKKKKKKKK            UUUU         UUUU  
+%%    JJ     JJJJJ               KKK               UUUUU       UUUUU  
+%%  JJJJJJJJJJJJJ    KKKKKKKKKKKKKKKKKKKKKKKKKKK    UUUUUUUUUUUUUUU   
+%%    JJJJJJJJJ      KKKKKKKKKKKKKKKKKKKKKKKKKKK      UUUUUUUUUUU     
+%% 
+%%            Template created by Michael Roland (2021)
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+\documentclass[
+    a4paper,
+    oneside,
+    10pt,
+    ngerman
+]{scrartcl}
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+\usepackage[utf8]{inputenc}
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+\usepackage[
+    techreport,
+    TNF,
+    equalmargins,
+    nofancyfonts,
+    nocompactverb
+]{jkureport}
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Packages
+
+\usepackage{amsfonts}
+\usepackage{euler}
+\usepackage[european, straightvoltages]{circuitikz}
+\usepackage{siunitx}
+\usepackage{wrapfig}
+\usepackage{minted}
+\usepackage{algpseudocode, algorithm}
+\usepackage{fontawesome5} 
+
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Setup
+
+\graphicspath{{images/}}
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+
+\preto\tabular{\setcounter{magicrownumbers}{0}}
+\newcounter{magicrownumbers}
+\newcommand\rownumber{\stepcounter{magicrownumbers}\arabic{magicrownumbers}}
+
+\ctikzset{tripoles/mos style/arrows}
+\ctikzset{diodes/scale=0.7}
+\ctikzset{resistors/scale=0.7}
+\floatname{algorithm}{Algorithmus}
+
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Titlepage
+
+\title{Protokoll}
+%\titleshort{Optional space for your abbreviated title}
+
+\subtitle{Digitale Schaltungstechnik PR - WS2025\\%
+	\usekomafont{subtitlesmall}%
+	\hfill\\%
+}
+
+\author{%
+    Sophie Öttl \authornewline
+    k12308187 \and
+	Simon Grundner \authornewline
+    k12136610 \and
+	\authornewline
+	\affiliation{Institut für Integrierte Schaltungen}
+	\authornewline
+	\authorweb{https://jku.at/iic}
+	\authornewline
+}
+\partnerlogo{logos/iic.png}
+\setbottommark{Sophie Öttl k12308187, Simon Grundner k12136610}
+\titleshort{Protokoll - Digitale Schaltungstechnik PR}
+
+\maketitle
+
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Report Contents
+
+\cleardoubleoddpage
+\tableofcontents
+
+\cleardoubleoddpage
+
+\section*{Geräteliste}
+
+\begin{table}[h]
+    \centering
+    \caption{Caption}
+    \label{tab:geraeteliste}
+    \begin{tabularx}{\textwidth}{rXX}
+    \toprule
+    Pos. & Bezeichnung & Inventar Nr.\\ \midrule
+    \rownumber & Multimeter & \\
+    \rownumber & Oszilloskop & \\
+    \bottomrule
+    \end{tabularx}
+\end{table}
+
+\input{aufgabe1}
+\input{aufgabe2}
+\input{aufgabe3}
+\input{aufgabe4}
+\input{aufgabe5}
+\input{aufgabe6}
+\input{aufgabe7}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
+\endinput

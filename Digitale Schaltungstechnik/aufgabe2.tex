@@ -1,0 +1,53 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% AUFGABE 2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Reaktionsspiel}
+
+\subsection{Vorbereitung}
+\subsubsection{Widerstandsberechnung}
+
+Berechnet:
+\[
+    R_{V,\text{calc}} = \frac{\SI{5}{\volt} - \SI{2}{\volt}}{\SI{15}{\milli\ampere}} = \SI{200}{\ohm}
+\]
+
+ Aus E6-Reihe gewählt:
+\[
+    R_{V} = \SI{220}{\ohm}
+\]
+
+\subsubsection{Fragen}
+
+\begin{block}
+    \begin{itemize}
+    \item[\faQuestion] Wie kann das Mikrocontroller-Programm zu einem beliebigen Zeitpunkt gestoppt werden? Wie kann ausgewertet werden, ob der Taster zum richtigen oder zum falschen Zeitpunkt gedruckt wurde? 
+    \end{itemize}
+\end{block}
+
+Das Programm kann mittels eines \textbf{externen Interrupts} zu einem beliebigen Zeitpunkt unterbrochen werden. Ein Interrupt wird dazu an einen Pin konfiguriert. 
+
+Sobald der Interrupt ausgelöst wird, springt das Programm direkt in die \textbf{Interrupt-Service-Routine (ISR)}. Dort werden Variablen gesetzt, welche die \texttt{loop}-Methode anschließend überprüft, um den Ablauf zu stoppen. 
+
+Zudem kann in der ISR der aktuelle Status (z.B. welche LED gerade aktiv ist) gespeichert werden. Da der Interrupt sofort reagiert, lässt sich so exakt auswerten, ob der Taster zum richtigen Zeitpunkt gedrückt wurde.
+
+
+\subsection{Durchführung}
+
+\begin{itemize}
+    \item \href{https://www.tinkercad.com/things/4kQIa2P7zRc-2-reaktionsspiel?sharecode=tN5XWwIVhA9dR5oYUQt6OY9f_J_8c10GSfd3RA9Iedc}{Tinker CAD Link}
+    \item Stückliste
+\end{itemize}
+
+\begin{minted}{c++}
+const int ledPins[] = {3, 4, 5, 6, 7};
+const int buttonPin = 2;
+
+for (int i = 0; i < 5; i++) {
+    pinMode(ledPins[i], OUTPUT);
+}
+pinMode(buttonPin, INPUT_PULLUP);
+attachInterrupt(digitalPinToInterrupt(buttonPin), handlePress, FALLING);
+\end{minted}
+
+Da nur die Pins 2 und 3 mit einem Interrupt konfiguriert werden können, wurde der Taster mit Pin 2 verbunden. Pin 3 bis 7 sind von den LEDs belegt. 
