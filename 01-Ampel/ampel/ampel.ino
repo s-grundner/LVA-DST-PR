@@ -1,7 +1,3 @@
-// Rv = (Vout - Vd)/Id
-// Rv = (5-3)V / 15 mA = 200 Ohm
-// E6 Reihe -> 220 Ohm
-
 const uint8_t RED = 4;
 const uint8_t YELLOW = 3;
 const uint8_t GREEN = 2;

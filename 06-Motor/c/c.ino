@@ -1,5 +1,3 @@
-// C++ code
-//
 const int SHIFT_IN=4;
 const int SHIFT_OUTPUT=5;
 const int SHIFT_CLK=6;

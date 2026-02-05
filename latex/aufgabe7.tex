@@ -1,9 +1,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+\newcommand{\mdot}{\textbullet\,}
+\newcommand{\mdash}{\rule[0.4ex]{0.5em}{0.2ex}\,}
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% AUFGABE 7
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
-\newcommand{\mdot}{\textbullet\,}
-\newcommand{\mdash}{\rule[0.4ex]{0.5em}{0.2ex}\,}
 
 \section{Datenübertragung mittels Infra-Rot (IR)}
 
@@ -42,11 +45,13 @@ Um die Symbole der Morse-Codewörter zu übertragen, wird mit der Funktion \mint
 \caption{Ablauf zum Senden der Korrekten Symboldauern in einem Morse-Codewort}\label{alg:tone}
 \begin{algorithmic}
 \ForAll{Symbols in Codeword}
+    \State \mintinline{c++}{tone(TX_PIN, F_IR_HZ)}
     \If{Symbol is Dash}
-        \State \mintinline{c++}{tone(TX_PIN, F_IR_HZ, DASH_TIME_MS)}
+        \State \mintinline{c++}{delay(DASH_TIME_MS)}
     \Else
-        \State \mintinline{c++}{tone(TX_PIN, F_IR_HZ, DOT_TIME_MS)}
+        \State \mintinline{c++}{delay(DOT_TIME_MS)}
     \EndIf
+    \State \mintinline{c++}{noTone(TX_PIN)}
     \State \mintinline{c++}{delay(INTER_SYMBOL_TIME_MS)}
 \EndFor
 \State \mintinline{c++}{delay(PAUSE_TIME_MS)}
@@ -80,12 +85,10 @@ R_2 = \SI{15}{\ohm}
 
 \subsection{Durchführung}
 
-
 \begin{itemize}
     \item \href{https://www.tinkercad.com/things/0UY9zs3iKwE-dst-07-ir?sharecode=mE1HyXRFxTP7FBArqWQ20zcDbVb7zpU4BAKAofIcNlk}{Tinker CAD Link}
     \item Stückliste
 \end{itemize}
-
 
 \subsubsection{Aufbau am Steckbrett}
 

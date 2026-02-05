@@ -24,7 +24,7 @@ static const char morseTree[MORSE_TREE_LEN] = {
 
 static const int RX_PIN = 3;
 static const uint16_t UNIT_LEN_MS = 200;
-static const uint32_t UNIT_LEN_US = 200000;
+static const uint32_t UNIT_LEN_US = UNIT_LEN_MS * 1000;
 static const uint32_t TIMEOUT_US = (PAUSE - UNIT) * UNIT_LEN_US;
 static const uint32_t DOT_THRESH_US = (DOT + UNIT) * UNIT_LEN_US;
 static const uint32_t DASH_THRESH_US = (DASH + UNIT) * UNIT_LEN_US;
@@ -33,7 +33,6 @@ void setup() {
   Serial.begin(F_BAUD_BPS);
   pinMode(RX_PIN, INPUT);
 }
-
 
 void loop() {
   uint8_t morseTreeIdx = 0;

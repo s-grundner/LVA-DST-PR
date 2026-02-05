@@ -6,3 +6,21 @@
 \section{Ampelsteuerung}
 
 \subsection{Vorbereitung}
+
+\begin{wrapfigure}[4]{r}{3cm}
+\vspace*{-11pt}
+\centering
+\begin{circuitikz}[scale=0.9, transform shape]
+    \draw (0,0) node[ground]{}
+    to[R,l^=$R_V$, i<_=\SI{15}{\milli\ampere}] ++(0,1.5)
+    to[stroke led, invert, l^={LED}, v<=\SI{2}{\volt}] ++(0,1)
+    |- ++(-1,0.5) node[ocirc]{} node[above right]{IO-Pin (\SI{5}{\volt})};
+\end{circuitikz}
+\caption{LED mit Vorwiderstand}
+\end{wrapfigure}
+
+\[
+R_V = \frac{U_\text{vcc} - U_F}{I_D} = \frac{\SI{5}{\volt} - \SI{2}{\volt}}{\SI{15}{\milli\ampere}} = \SI{200}{\ohm}
+\]
+
+E6 Reihe -> 220 Ohm

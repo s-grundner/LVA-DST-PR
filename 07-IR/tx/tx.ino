@@ -68,7 +68,7 @@ static void sendMorseChar(char c) {
     if (m.code & (1 << i)) {
       delay(DASH * UNIT_LEN_MS);
     } else {
-      delay(DASH * UNIT_LEN_MS);
+      delay(DOT * UNIT_LEN_MS);
     }
     noTone();
     delay(INTER_SYM * UNIT_LEN_MS);
@@ -79,7 +79,6 @@ static void sendMorseChar(char c) {
 void setup() {
   Serial.begin(F_BAUD_BPS);
   pinMode(TX_PIN, OUTPUT);
-  digitalWrite(TX_PIN, HIGH);
 }
 
 void loop() {
