@@ -10,7 +10,7 @@
 
 \section{Datenübertragung mittels Infra-Rot (IR)}
 
-Mit zwei Arduino Uno Boards soll eine Übertragung von Morsecodes mittels Infra-Rot Lichtsignalen aufgebaut werden. Sender seitig wird eine IR-LED angesteuert, sodass Infrarotsignale mit einer Frequenz von \SI{38}{\kilo\hertz} gesendet werden. Die Symbole der Morsezeichen (\mdash,\textbullet) werden dabei mit unterschiedlicher Sendedauer enkodiert. Als Empfänger wird das IR-Detektor-Modul KY-022 verwendet, welches am Ausgang \mintinline{c++}{LOW} ausgibt, wenn es ein IR-Lichtignal mit der genannten Frequenz detektiert, ansonsten \mintinline{c++}{HIGH}.
+Mit zwei Arduino Uno Boards soll eine Übertragung von Morsecodes mittels Infra-Rot Lichtsignalen aufgebaut werden. Sender seitig wird eine IR-LED angesteuert, sodass Infrarotsignale mit einer Frequenz von \SI{38}{\kilo\hertz} gesendet werden. Die Symbole der Morsezeichen (\mdash,\textbullet) werden dabei mit unterschiedlicher Sendedauer enkodiert. Als Empfänger wird das IR-Detektor-Modul KY-022 verwendet, welches am Ausgang \lstinline!LOW! ausgibt, wenn es ein IR-Lichtignal mit der genannten Frequenz detektiert, ansonsten \lstinline!HIGH!.
 
 \subsection{Vorbereitung}
 
@@ -39,26 +39,27 @@ Eine Liste der Morse-Codewörter für das Alphabet ist in \autoref{tab:morse-abc
 
 \subsubsection{Codierung des Morsesignals}
 
-Um die Symbole der Morse-Codewörter zu übertragen, wird mit der Funktion \mintinline{c++}{tone(pin, frequency, duration)} ein \SI{38}{\kilo\hertz} Rechtecksignal mit unterschiedlicher Dauer auf dem LED-GPIO Pin ausgegeben. Damit die Methode \mintinline{c++}{tone()} funktioniert, muss der Pin ein PWM Pin sein, z.B. 3 oder 11. Um die richtigen Symboldauern für die Symbole in einem Morse-Codewort zu senden, kann ein Ablauf wie in Algorithmus \ref{alg:tone} verwendet werden.
+Um die Symbole der Morse-Codewörter zu übertragen, wird mit der Funktion \lstinline!tone(pin, frequency, duration)! ein \SI{38}{\kilo\hertz} Rechtecksignal mit unterschiedlicher Dauer auf dem LED-GPIO Pin ausgegeben. 
 
 \begin{algorithm}[h]
 \caption{Ablauf zum Senden der Korrekten Symboldauern in einem Morse-Codewort}\label{alg:tone}
 \begin{algorithmic}
 \ForAll{Symbols in Codeword}
-    \State \mintinline{c++}{tone(TX_PIN, F_IR_HZ)}
+    \State \lstinline!tone(TX_PIN, F_IR_HZ)!
     \If{Symbol is Dash}
-        \State \mintinline{c++}{delay(DASH_TIME_MS)}
+        \State \lstinline!delay(DASH_TIME_MS)!
     \Else
-        \State \mintinline{c++}{delay(DOT_TIME_MS)}
+        \State \lstinline!delay(DOT_TIME_MS)!
     \EndIf
-    \State \mintinline{c++}{noTone(TX_PIN)}
-    \State \mintinline{c++}{delay(INTER_SYMBOL_TIME_MS)}
+    \State \lstinline!noTone(TX_PIN)!
+    \State \lstinline!delay(INTER_SYMBOL_TIME_MS)!
 \EndFor
-\State \mintinline{c++}{delay(PAUSE_TIME_MS)}
+\State \lstinline!delay(PAUSE_TIME_MS)!
 \end{algorithmic}
 \end{algorithm}
 
-\newpage
+Damit die Methode \lstinline!tone()! funktioniert, muss der Pin ein PWM Pin sein, z.B. 3 oder 11. Um die richtigen Symboldauern für die Symbole in einem Morse-Codewort zu senden, kann ein Ablauf wie in Algorithmus \ref{alg:tone} verwendet werden.
+
 \subsubsection{Widerstandsberechnung}
 
 \begin{wrapfigure}[14]{r}{5cm}
@@ -92,8 +93,48 @@ R_2 = \SI{15}{\ohm}
 
 \subsubsection{Aufbau am Steckbrett}
 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{7/tinker-cad.png}
+    \caption{Planung des Aufbaus in TinkerCAD}
+\end{figure}
+
+Foto vom Aufbau Einfügen
+
 \subsubsection{Implementierung des Senders}
 
+Um die Buchstaben im Alphabet auf Morsecodewörter umzuwandeln, wird eine Tabelle verwendet, welche die Zusammensetzungen von Dots und Dashes, sowie die Länge des jeweiligen Codewortes speichert. Der Code wird als eine binäre Zahl gespeichert, dabei korrespondiert eine 0 zu einem Dot und eine 1 zu einem Dash.
+
+\lstinputlisting[
+    firstline=2,
+    lastline=31,
+    caption={Globale Variablen und Definitionen des Senders}
+]{../07-IR/tx/tx.ino}
+
+\lstinputlisting[
+    firstline=33,
+    lastline=56,
+    caption={Methode zum Senden von Charakteren als Morsesymbolen}
+]{../07-IR/tx/tx.ino}
+
+\lstinputlisting[
+    firstline=58,
+    lastline=71,
+    caption={Setup und Loop des Senders}
+]{../07-IR/tx/tx.ino}
+
 \subsubsection{Implementierung des Empfängers}
+
+\lstinputlisting[
+    firstline=2,
+    lastline=30,
+    caption={Globale Variablen und Definitionen des Empfängers}
+]{../07-IR/rx/rx.ino}
+
+\lstinputlisting[
+    firstline=31,
+    lastline=58,
+    caption={Setup und Loop des Empfängers}
+]{../07-IR/rx/rx.ino}
 
 \subsection{Ergebnisse}

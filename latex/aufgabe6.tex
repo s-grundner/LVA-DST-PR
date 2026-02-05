@@ -16,7 +16,7 @@
 %https://www.mikrocontroller.net/attachment/218122/HC-SR04_ultraschallmodul_beschreibung_3.pdf
 Folgende wichtige Spezifikationsdaten konnten auf Mikrocontroller.net gefunden werden:
 
-\begin{itemize}
+\begin{itemize}[noitemsep]
     \item Messbereich: 2 cm bis ca. 300 cm.
     \item Auflösung: Systembedingt ca. 3 mm.
     \item Versorgung: 5V Spannung bei einer Stromaufnahme von weniger als 2 mA.
@@ -25,8 +25,8 @@ Folgende wichtige Spezifikationsdaten konnten auf Mikrocontroller.net gefunden w
 
 Pin Belegung (Von links nach Rechts):
 
-\begin{itemize}
-    \item \textbf{Pin 1: } VCC (5V)
+\begin{itemize}[noitemsep]
+    \item \textbf{Pin 1: } VCC (\SI{5}{\volt})
     \item \textbf{Pin 2: } Trigger eingang TTL (0-0.8V ist low, 2,4-5V ist High)
     \item \textbf{Pin 3: } Ausgang Messergebnis TTL
     \item \textbf{Pin 4: } Ground
@@ -37,7 +37,7 @@ Das modul sendet nach 250 $\mu\sec$ ein signal. Nun geht der ausgang auf High. S
 Damit ergibt sich die entfernung als:
 
 \[
-d = \frac{t * 34,3cm / ms}{2}
+    d = \frac{t \cdot 34.3\frac{\si{\centi\meter}}{\si{\milli\second}}}{2}
 \]
 
 Das Ergebnis kann durch Temperatur, rauhe oberflächen und schlechtem winkel verschlechtert werden.
@@ -78,27 +78,19 @@ Im hauptprogramm wird der steuer pin kurz auf high und wieder auf low gesetzt um
 \end{table}
 
 \subsubsection{Berechnung Vorwiderstände}
-Die Benötigte DiodenSpannung der LEDs ist $U_D=2V$ bei einem Strom $I_D=15mA$. Es ist mit einer Spannung von $U_{CC}=5V$ an den Ausgängen des Schieberegisters zu rechnen. Der Vorwiederstand Kann wie folgt berechnet werden:
+Die Benötigte Dioden Spannung der LEDs ist $U_D=\SI{2}{\volt}$ bei einem Strom $I_D=\SI{15}{\milli\ampere}$. Es ist mit einer Spannung von $U_{CC}=\SI{5}{\volt}$ an den Ausgängen des Schieberegisters zu rechnen. Der Vorwiederstand Kann wie folgt berechnet werden:
 
-$
-U_{R_V} = U_{CC} - U_D = 5V - 2V = 3V
-$
+\begin{align*}
+    U_{R_V} &= U_{CC} - U_D = \SI{5}{\volt} - \SI{2}{\volt} = \SI{3}{\volt} \\
+    I_{R_V} &= I_D = \SI{15}{\milli\ampere} \\
+    R_V &= \frac{U_{R_V}}{I_{R_V}} = \frac{\SI{3}{\volt}}{\SI{15}{\milli\ampere}} = \SI{200}{\ohm}
+\end{align*}
 
-$
-I_{R_V} = I_D = 15mA
-$
-
-$
-R_V=\frac{U_{R_V}}{I_{R_V}} = \frac{3V}{15mA} = 200 \Omega
-$
-
-Die E6 Reihe enthält die Werte (1,0 1,5 2,2 3,3 4,7 6,8). Damit sind die nähesten 2 Widerstände $150\Omega$ und $220\Omega$. Da der Strom von $I_D=15mA$ nicht überschritten werden soll, wählen wir den größeren Widerstand. Somit ist der Vorwiderstand: $R_V=220\Omega$
+Die E6 Reihe enthält die Werte (1,0 1,5 2,2 3,3 4,7 6,8). Damit sind die nähesten 2 Widerstände \SI{150}{\ohm} und \SI{220}{\ohm}. Da der Strom von $I_D=\SI{15}{\milli\ampere}$ nicht überschritten werden soll, wählen wir den größeren Widerstand. Somit ist der Vorwiderstand: $R_V=\SI{220}{\ohm}$
 
 \subsection{Praktikumsaufgabe}
 
 \subsubsection{e}
 
-\begin{minted}{c++}
-\end{minted}
 
 

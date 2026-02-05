@@ -2,7 +2,6 @@
 
 #define MORSE_TREE_LEN 31
 #define F_IR_HZ 38000
-#define F_BAUD_BPS 9600
 
 // Number of UNITs representing a morse symbol
 typedef enum {
@@ -30,7 +29,7 @@ static const uint32_t DOT_THRESH_US = (DOT + UNIT) * UNIT_LEN_US;
 static const uint32_t DASH_THRESH_US = (DASH + UNIT) * UNIT_LEN_US;
 
 void setup() {
-  Serial.begin(F_BAUD_BPS);
+  Serial.begin(9600);
   pinMode(RX_PIN, INPUT);
 }
 
