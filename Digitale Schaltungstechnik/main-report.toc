@@ -28,42 +28,45 @@
 \contentsline {subsubsection}{\numberline {4.3.2}Widerstand 2}{9}{subsubsection.4.3.2}%
 \contentsline {paragraph}{\nonumberline Mulitmeter}{9}{paragraph*.19}%
 \contentsline {paragraph}{\nonumberline Farbcode}{9}{paragraph*.21}%
+\contentsline {paragraph}{\nonumberline Programm}{9}{table.3}%
 \contentsline {subsubsection}{\numberline {4.3.3}Widerstand 3}{9}{subsubsection.4.3.3}%
-\contentsline {paragraph}{\nonumberline Multimeter}{9}{paragraph*.23}%
-\contentsline {paragraph}{\nonumberline Farbcode}{9}{paragraph*.25}%
-\contentsline {paragraph}{\nonumberline Programm}{9}{paragraph*.27}%
+\contentsline {paragraph}{\nonumberline Multimeter}{9}{paragraph*.25}%
+\contentsline {paragraph}{\nonumberline Farbcode}{9}{paragraph*.27}%
+\contentsline {paragraph}{\nonumberline Programm}{9}{paragraph*.29}%
 \contentsline {subsubsection}{\numberline {4.3.4}Widerstand 4}{9}{subsubsection.4.3.4}%
-\contentsline {paragraph}{\nonumberline Mulitmeter}{9}{paragraph*.29}%
-\contentsline {section}{\numberline {5}Ansteuerung eines Lautsprechers}{10}{section.5}%
-\contentsline {subsection}{\numberline {5.1}Vorbereitung}{10}{subsection.5.1}%
-\contentsline {subsubsection}{\numberline {5.1.1}2-Bit R2R Netzwerk}{10}{subsubsection.5.1.1}%
-\contentsline {subsubsection}{\numberline {5.1.2}Sinus Wellentabelle}{11}{subsubsection.5.1.2}%
-\contentsline {paragraph}{\nonumberline a)}{11}{paragraph*.31}%
-\contentsline {paragraph}{\nonumberline b)}{12}{paragraph*.33}%
-\contentsline {subsection}{\numberline {5.2}Durchführung}{12}{subsection.5.2}%
-\contentsline {subsubsection}{\numberline {5.2.1}Aufbau am Steckbrett}{12}{subsubsection.5.2.1}%
-\contentsline {subsubsection}{\numberline {5.2.2}Programmierung}{12}{subsubsection.5.2.2}%
-\contentsline {subsection}{\numberline {5.3}Ergebnisse}{12}{subsection.5.3}%
-\contentsline {section}{\numberline {6}Motorsteuerung mit Näherungssensor}{13}{section.6}%
-\contentsline {subsection}{\numberline {6.1}Vorbereitung}{13}{subsection.6.1}%
-\contentsline {subsubsection}{\numberline {6.1.1}Ultraschall-Modul HC-SR04 information}{13}{subsubsection.6.1.1}%
-\contentsline {subsubsection}{\numberline {6.1.2}Plan für die Verwendung des Ultraschall Moduls}{13}{subsubsection.6.1.2}%
-\contentsline {subsubsection}{\numberline {6.1.3}Schieberegister für 7 segment Anzeige}{14}{subsubsection.6.1.3}%
-\contentsline {subsubsection}{\numberline {6.1.4}Berechnung Vorwiderstände}{14}{subsubsection.6.1.4}%
-\contentsline {subsection}{\numberline {6.2}Praktikumsaufgabe}{15}{subsection.6.2}%
-\contentsline {subsubsection}{\numberline {6.2.1}7 Segment}{15}{subsubsection.6.2.1}%
-\contentsline {subsection}{\numberline {6.3}b}{15}{subsection.6.3}%
-\contentsline {subsubsection}{\numberline {6.3.1}c}{15}{subsubsection.6.3.1}%
-\contentsline {subsubsection}{\numberline {6.3.2}d}{16}{subsubsection.6.3.2}%
-\contentsline {subsubsection}{\numberline {6.3.3}e}{18}{subsubsection.6.3.3}%
-\contentsline {section}{\numberline {7}Datenübertragung mittels Infra-Rot (IR)}{22}{section.7}%
-\contentsline {subsection}{\numberline {7.1}Vorbereitung}{22}{subsection.7.1}%
-\contentsline {subsubsection}{\numberline {7.1.1}Morse Code Symbole}{22}{subsubsection.7.1.1}%
-\contentsline {subsubsection}{\numberline {7.1.2}Codierung des Morsesignals}{22}{subsubsection.7.1.2}%
-\contentsline {subsubsection}{\numberline {7.1.3}Widerstandsberechnung}{23}{subsubsection.7.1.3}%
-\contentsline {subsection}{\numberline {7.2}Durchführung}{23}{subsection.7.2}%
-\contentsline {subsubsection}{\numberline {7.2.1}Aufbau am Steckbrett}{23}{subsubsection.7.2.1}%
-\contentsline {subsubsection}{\numberline {7.2.2}Implementierung des Senders}{23}{subsubsection.7.2.2}%
-\contentsline {subsubsection}{\numberline {7.2.3}Implementierung des Empfängers}{23}{subsubsection.7.2.3}%
-\contentsline {subsection}{\numberline {7.3}Ergebnisse}{23}{subsection.7.3}%
+\contentsline {paragraph}{\nonumberline Mulitmeter}{9}{paragraph*.31}%
+\contentsline {paragraph}{\nonumberline Farbcode}{9}{paragraph*.33}%
+\contentsline {paragraph}{\nonumberline Programm}{10}{paragraph*.35}%
+\contentsline {section}{\numberline {5}Ansteuerung eines Lautsprechers}{11}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Vorbereitung}{11}{subsection.5.1}%
+\contentsline {subsubsection}{\numberline {5.1.1}2-Bit R2R Netzwerk}{11}{subsubsection.5.1.1}%
+\contentsline {subsubsection}{\numberline {5.1.2}Sinus Wellentabelle}{12}{subsubsection.5.1.2}%
+\contentsline {paragraph}{\nonumberline a)}{12}{paragraph*.37}%
+\contentsline {paragraph}{\nonumberline b)}{13}{paragraph*.39}%
+\contentsline {subsection}{\numberline {5.2}Durchführung}{13}{subsection.5.2}%
+\contentsline {subsubsection}{\numberline {5.2.1}Aufbau am Steckbrett}{13}{subsubsection.5.2.1}%
+\contentsline {subsubsection}{\numberline {5.2.2}Programmierung}{13}{subsubsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.3}Ergebnisse}{13}{subsection.5.3}%
+\contentsline {section}{\numberline {6}Motorsteuerung mit Näherungssensor}{14}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Vorbereitung}{14}{subsection.6.1}%
+\contentsline {subsubsection}{\numberline {6.1.1}Ultraschall-Modul HC-SR04 information}{14}{subsubsection.6.1.1}%
+\contentsline {subsubsection}{\numberline {6.1.2}Plan für die Verwendung des Ultraschall Moduls}{14}{subsubsection.6.1.2}%
+\contentsline {subsubsection}{\numberline {6.1.3}Schieberegister für 7 segment Anzeige}{15}{subsubsection.6.1.3}%
+\contentsline {subsubsection}{\numberline {6.1.4}Berechnung Vorwiderstände}{15}{subsubsection.6.1.4}%
+\contentsline {subsection}{\numberline {6.2}Praktikumsaufgabe}{16}{subsection.6.2}%
+\contentsline {subsubsection}{\numberline {6.2.1}7 Segment}{16}{subsubsection.6.2.1}%
+\contentsline {subsection}{\numberline {6.3}b}{16}{subsection.6.3}%
+\contentsline {subsubsection}{\numberline {6.3.1}c}{16}{subsubsection.6.3.1}%
+\contentsline {subsubsection}{\numberline {6.3.2}d}{17}{subsubsection.6.3.2}%
+\contentsline {subsubsection}{\numberline {6.3.3}e}{19}{subsubsection.6.3.3}%
+\contentsline {section}{\numberline {7}Datenübertragung mittels Infra-Rot (IR)}{23}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Vorbereitung}{23}{subsection.7.1}%
+\contentsline {subsubsection}{\numberline {7.1.1}Morse Code Symbole}{23}{subsubsection.7.1.1}%
+\contentsline {subsubsection}{\numberline {7.1.2}Codierung des Morsesignals}{23}{subsubsection.7.1.2}%
+\contentsline {subsubsection}{\numberline {7.1.3}Widerstandsberechnung}{24}{subsubsection.7.1.3}%
+\contentsline {subsection}{\numberline {7.2}Durchführung}{24}{subsection.7.2}%
+\contentsline {subsubsection}{\numberline {7.2.1}Aufbau am Steckbrett}{24}{subsubsection.7.2.1}%
+\contentsline {subsubsection}{\numberline {7.2.2}Implementierung des Senders}{24}{subsubsection.7.2.2}%
+\contentsline {subsubsection}{\numberline {7.2.3}Implementierung des Empfängers}{24}{subsubsection.7.2.3}%
+\contentsline {subsection}{\numberline {7.3}Ergebnisse}{24}{subsection.7.3}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

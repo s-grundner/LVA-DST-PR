@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1770285151.57493 "/home/simon/Documents/MEGA/xEDU/B5_WS25/DST/Digitale Schaltungstechnik/main-report.tex" "main-report.pdf" "main-report" 1770285157.3567 0
+["pdflatex"] 1770285747.50532 "/home/simon/Documents/MEGA/xEDU/B5_WS25/DST/Digitale Schaltungstechnik/main-report.tex" "main-report.pdf" "main-report" 1770285753.21044 0
   "/home/simon/Documents/MEGA/xEDU/B5_WS25/DST/Digitale Schaltungstechnik/main-report.tex" 1770281319.42358 4121 2f2f416e9c7b0375bf4d9314c5d08ca6 ""
   "/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc" 1767555874 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texmf-dist/fonts/enc/dvips/fontawesome5/fa5free1.enc" 1767555874 3042 0e2b14b9be7d01075a4c4591d5d1781b ""
@@ -343,7 +343,7 @@
   "aufgabe1.tex" 1770277550 196 a15e0531102fca830bd014b2717b7466 ""
   "aufgabe2.tex" 1770277550 1974 88da6ca4271a48da40fd896ff4295f03 ""
   "aufgabe3.tex" 1770281550.46866 1551 8e1556920ff6103d78825c0df33b8905 ""
-  "aufgabe4.tex" 1770285145.67178 4564 b6eb7613b2324a9c0ae194325c88149e ""
+  "aufgabe4.tex" 1770285740.99428 5299 031b39e825c9d6b5e2f38bfc105d276d ""
   "aufgabe5.tex" 1770277550 6796 a08d9c6fb380329d0e56d6c374f8b504 ""
   "aufgabe6.tex" 1770277550 11555 2c609ea31b11db38c81ea1afcdf3f0ce ""
   "aufgabe7.tex" 1770277550 4615 b79601defa185b75bbebe05f86c33f74 ""
@@ -359,9 +359,9 @@
   "logos/jku_en_white.pdf" 1770277550 4879 1eac8063fd041abb055ec04e3436a693 ""
   "logos/jku_k_black.pdf" 1770277550 1555 0325737bca332d1e5b60b94958189ebc ""
   "logos/jku_k_white.pdf" 1770277550 1555 13a705b3525b9b3ee4af0ef0ae232d89 ""
-  "main-report.aux" 1770285157.18487 27990 63edc9821862887756f3e88bad9a2aac "pdflatex"
+  "main-report.aux" 1770285753.0344 28694 2f4dc91a30ed30b14c46d09d773bc56a "pdflatex"
   "main-report.tex" 1770281319.42358 4121 2f2f416e9c7b0375bf4d9314c5d08ca6 ""
-  "main-report.toc" 1770285157.19487 5682 472d73e1bf4a6d9ee0fc516621a30f79 "pdflatex"
+  "main-report.toc" 1770285753.0454 5884 211a67bafaedb5114130e09445d4c98b "pdflatex"
   (generated)
   "main-report.aux"
   "main-report.log"
