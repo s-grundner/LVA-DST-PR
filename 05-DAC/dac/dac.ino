@@ -25,6 +25,15 @@ const uint16_t octaveFreqs[12] = {
   494, // B
 };
 
+const uint8_t alleMeineEntchen[] = {
+    0, 2, 4, 5, 7, 7,
+    9, 9, 9, 9, 7,
+    9, 9, 9, 9, 7,
+    5, 5, 5, 5, 4,
+    2, 2, 2, 2, 0
+};
+const int entchenSize = sizeof(alleMeineEntchen)/sizeof(uint8_t);
+
 uint16_t keyboardToFreq(char key) {
   switch (key) {
     case 'a': return octaveFreqs[0];
@@ -56,6 +65,13 @@ void playSine(uint16_t freq, uint16_t duration_ms) {
   }
 }
 
+void playAlleMeineEntchen() {
+  for (int i = 0; i < entchenSize; i++){
+    playSine(octaveFreqs[alleMeineEntchen[i]], 500); 
+    delay(200);
+  }
+}
+
 void setup() {
   DDRD |= DAC_MASK; // Configure as output
   Serial.begin(9600);
@@ -63,8 +79,13 @@ void setup() {
 
 void loop() {
   if (Serial.available()) {
-    uint16_t freq = noteToFreq(Serial.read());
-    playSine(freq, 1000);
-    delay(500);
+    char serial = Serial.read();
+    if (serial == 'y') {
+      playAlleMeineEntchen();
+    } else {
+      uint16_t freq = keyboardToFreq(serial);
+      playSine(freq, 10); 
+      delay(1);
+    }
   }
 }

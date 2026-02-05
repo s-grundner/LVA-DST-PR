@@ -70,11 +70,8 @@ void setup() {
 }
 
 void loop() {
-  char serialByte = 0;
-
   if (Serial.available() > 0) {
-    serialByte = Serial.read();
-    sendMorseChar(serialByte);
+    sendMorseChar(Serial.read());
   }
   // sendMorseChar('Q');
   // sendMorseChar('S');

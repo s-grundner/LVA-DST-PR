@@ -1,0 +1,112 @@
+// C++ code
+//
+const int SHIFT_IN=4;
+const int SHIFT_OUTPUT=5;
+const int SHIFT_CLK=6;
+
+const int BUTTON_UP = 2;
+const int BUTTON_DOWN = 3;
+
+volatile int currentNumber = 0;
+volatile bool needsUpdate = true;
+
+unsigned long lastInterruptTime = 0;
+const unsigned long debounceDelay = 200;
+
+
+const int MOTOR_LED_OFF=9;
+const int MOTOR_LED_ON=8;
+const int MOTOR_PWM_LEFT=10;
+
+volatile int motorSpeed = 0;
+
+const uint8_t segmentPatterns[] = {
+  0b11111100, // 0
+  0b01100000, // 1
+  0b11011010, // 2
+  0b11110010, // 3
+  0b01100110, // 4
+  0b10110110, // 5
+  0b10111110, // 6
+  0b11100000, // 7
+  0b11111110, // 8
+  0b11110110  // 9
+};
+
+void setup()
+{
+  pinMode(SHIFT_IN, OUTPUT);
+  pinMode(SHIFT_CLK, OUTPUT);
+  pinMode(SHIFT_OUTPUT, OUTPUT);
+  
+  pinMode(MOTOR_PWM_LEFT, OUTPUT);
+  pinMode(MOTOR_LED_OFF, OUTPUT);
+  pinMode(MOTOR_PWM_LEFT, OUTPUT);
+  
+  pinMode(BUTTON_UP, INPUT_PULLUP);
+  pinMode(BUTTON_DOWN, INPUT_PULLUP);
+  pinMode(MOTOR_LED_ON, OUTPUT);
+  
+  attachInterrupt(digitalPinToInterrupt(BUTTON_UP), countUp, FALLING);
+  attachInterrupt(digitalPinToInterrupt(BUTTON_DOWN), countDown, FALLING);
+
+  setShiftRegister(currentNumber);
+  setMotorSpeed(currentNumber);
+}
+  
+void loop()
+{
+  if(needsUpdate) {
+    needsUpdate = false;
+    setShiftRegister(currentNumber);
+    setMotorSpeed(currentNumber);
+  }
+}
+
+void countUp() {
+  unsigned long time = millis();
+  if (time - lastInterruptTime > debounceDelay) {
+    if(currentNumber >= 9) {
+      currentNumber = 0   ;
+    } else {
+      currentNumber++; 
+    }
+    needsUpdate = true;
+  }
+  lastInterruptTime = time;
+}
+
+void countDown() {
+  unsigned long time = millis();
+  if (time - lastInterruptTime > debounceDelay) {
+    if(currentNumber <=0) {
+      currentNumber = 9;
+    } else {
+      currentNumber--; 
+    }
+    needsUpdate = true;
+  }
+  lastInterruptTime = time;
+}
+
+
+void setShiftRegister(int number) {
+  digitalWrite(SHIFT_OUTPUT, LOW);
+  
+  shiftOut(SHIFT_IN, SHIFT_CLK, LSBFIRST, segmentPatterns[number]);
+  
+  digitalWrite(SHIFT_OUTPUT, HIGH);
+}
+
+void setMotorSpeed(int number) {
+  int pwmValue = map(number, 9, 0, 0, 255);
+  analogWrite(MOTOR_PWM_LEFT, pwmValue);
+  
+  if(number != 0) {
+    digitalWrite(MOTOR_LED_OFF, LOW);
+    digitalWrite(MOTOR_LED_ON, HIGH);
+  } else {
+    digitalWrite(MOTOR_LED_ON, LOW);
+    digitalWrite(MOTOR_LED_OFF, HIGH);
+  }
+}

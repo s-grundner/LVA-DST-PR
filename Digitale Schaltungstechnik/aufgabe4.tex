@@ -94,6 +94,7 @@ Es ist bekannt, dass der Kondensator nach der Zeitkonstante $\tau = R \cdot C$ c
     \item Stückliste
 \end{itemize}
 
+\newpage
 \subsection{Ergebnisse}
 
 \subsubsection{Widerstand 1}
@@ -108,6 +109,17 @@ Braun Schwarz Schwarz Schwarz Braun
 
 gemessen: \SI{100.3}{\ohm} $\pm$ \SI{1}{\percent}
 
+\paragraph{UI-Messung}
+
+\begin{table}[h]
+    \caption{}\label{}
+\begin{tabularx}{\textwidth}{YYY}
+    \toprule
+Strom / \si{\ampere} & Spannung / \si{\volt} & Widerstand / \si{\ohm} \\ \midrule
+0.500 & 0.0505 & \\ \bottomrule
+\end{tabularx}
+\end{table}
+
 \paragraph{Programm}
 
 hHalo
@@ -117,7 +129,7 @@ hHalo
 \begin{tabularx}{\textwidth}{YY}
 \toprule
 Widerstandswert / \si{\ohm} & ADC Messwert \\ \midrule
-78.50 & 8 \\ \midrule
+78.50 & 8 \\ 
 58.76 & 6 \\
 68.62 & 7 \\
 78.50 & 8 \\ \bottomrule
@@ -135,6 +147,15 @@ Widerstandswert / \si{\ohm} & ADC Messwert \\ \midrule
 Braun Rot Orange Gold
 
 \SI{12}{\kilo\ohm} $\pm$ \SI{5}{\percent}
+
+\begin{table}[h]
+    \caption{}\label{}
+\begin{tabularx}{\textwidth}{YYY}
+    \toprule
+Strom / \si{\ampere} & Spannung / \si{\volt} & Widerstand / \si{\ohm} \\ \midrule
+0.231 & 2.759 & \\ \bottomrule
+\end{tabularx}
+\end{table}
 
 \paragraph{Programm}
 
@@ -154,15 +175,19 @@ Widerstandswert / \si{\ohm} & ADC Messwert \\ \midrule
 
 \paragraph{Multimeter} gemessen: \SI{185.7}{\kilo\ohm}
 
-\paragraph{Farbcode}
+\paragraph{Farbcode} Der Widerstand weist 5 Ringe mit folgenden Farben auf:
 
-Braun Graun Schwarz Orange Braun
+\begin{tabularx}{\textwidth}{Y|Y|Y|Y|Y}
+    \color{white}\textbf{Braun}\cellcolor{brown} &
+    \color{white}\textbf{Grau}\cellcolor{gray} &
+    \color{white}\textbf{Schwarz}\cellcolor{black} &
+    \color{black}\textbf{Orange}\cellcolor{orange} &
+    \color{white}\textbf{Braun}\cellcolor{brown}
+\end{tabularx}
 
-\SI{180}{\kilo\ohm} $\pm$ \SI{1}{\percent}
+Diese Farbkombination entspricht \SI{180}{\kilo\ohm} $\pm$ \SI{1}{\percent}.
 
-\paragraph{Programm}
-
-HAllo
+\paragraph{Programm} Vom Programm wurden folgende Werte über die Serielle Schnittstelle empfangen:
 
 \begin{table}[h]
     \caption{}\label{}
@@ -177,19 +202,46 @@ Widerstandswert / \si{\ohm} & ADC Messwert \\ \midrule
 \end{tabularx}
 \end{table}
 
+\paragraph{UI-Messung}
+
+\begin{table}[h]
+    \caption{}\label{}
+\begin{tabularx}{\textwidth}{YYY}
+    \toprule
+Strom / \si{\milli\ampere} & Spannung / \si{\volt} & Widerstand / \si{\ohm} \\ \midrule
+0.026 & 4.8 & \\ \bottomrule
+\end{tabularx}
+\end{table}
+
+
 \subsubsection{Widerstand 4}
 
-\paragraph{Mulitmeter}
+\paragraph{Ohmmeter}
 
 gemessen: \SI{1.01}{\kilo\ohm}
 
-\paragraph{Farbcode}
+\paragraph{UI-Messung}
 
-5 Ringe
+\begin{table}[h]
+    \caption{}\label{}
+\begin{tabularx}{\textwidth}{YYY}
+    \toprule
+Strom / \si{\ampere} & Spannung / \si{\volt} & Widerstand / \si{\ohm} \\ \midrule
+0.459 & 0.464 & \\ \bottomrule
+\end{tabularx}
+\end{table}
 
-Braun Schwarz Schwarz Braun Braun
+\paragraph{Farbcode} Der Widerstand weist 5 Ringe mit folgenden Farben auf:
 
-\SI{1}{\kilo\ohm} $\pm$ \SI{1}{\percent}
+\begin{tabularx}{\textwidth}{Y|Y|Y|Y|Y}
+    \color{white}\textbf{Braun}\cellcolor{brown} &
+    \color{white}\textbf{Schwarz}\cellcolor{black} &
+    \color{white}\textbf{Schwarz}\cellcolor{black} &
+    \color{white}\textbf{Braun}\cellcolor{brown} &
+    \color{white}\textbf{Braun}\cellcolor{brown}
+\end{tabularx}
+
+Diese Farbkombination entspricht \SI{1}{\kilo\ohm} $\pm$ \SI{1}{\percent}.
 
 \paragraph{Programm}
 
@@ -204,6 +256,38 @@ Widerstandswert / \si{\ohm} & ADC Messwert \\ \midrule
 972.42 & 91 \\
 960.71 & 90 \\
 960.71 & 90 \\ \bottomrule
-\bottomrule
 \end{tabularx}
 \end{table}
+
+\subsubsection{Kondensator 1}
+
+\paragraph{Marking code} Am Bauteil wurde der Wert \SI{220}{\micro\farad} abgelesen.
+
+\paragraph{Programm} Vom Programm wurden folgende Werte über die Serielle Schnittstelle empfangen:
+
+\begin{itemize}
+    \item Charge Time: \SI{2397484}{\micro\second}
+    \item Capacity: \SI{239.75}{\micro\farad}
+\end{itemize}
+
+\subsubsection{Kondensator 2}
+
+\paragraph{Marking code} Am Bauteil wurde der Wert \SI{47}{\micro\farad} abgelesen.
+
+\paragraph{Programm} Vom Programm wurden folgende Werte über die Serielle Schnittstelle empfangen:
+
+\begin{itemize}
+    \item Charge Time: \SI{449468}{\micro\second}
+    \item Kapazität: \SI{44.95}{\micro\farad}
+\end{itemize}
+
+\subsubsection{Kondensator 3}
+
+\paragraph{Marking code} Am Bauteil wurde der Wert \SI{10}{\micro\farad} abgelesen.
+
+\paragraph{Programm} Vom Programm wurden folgende Werte abgelesen:
+
+\begin{itemize}
+    \item Charge Time: \SI{103276}{\micro\second}
+    \item Kapazität: \SI{10.33}{\micro\farad}
+\end{itemize}
