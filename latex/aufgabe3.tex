@@ -24,12 +24,10 @@
 %% AUFGABE 3
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\newpage
 \section{Realisierung eines Logic Analyzers}
 
-TODO
-\begin{itemize}
-    \item Aufgabenbeschreibung
-\end{itemize}
+In dieser Aufgabe ist ein Logic Analyzer zu realisieren. Es sollen 3 unbekannte Gatter erkannt werden und im Seriellen Monitor ausgegeben werden.
 
 \subsection{Vorbereitung}
 
@@ -43,10 +41,79 @@ TODO
 
 \subsection{Durchführung}
 
-\begin{itemize}
-    \item \href{https://www.tinkercad.com/things/7XiGVaMbiJp-3-realisierung-eines-logic-analyzers?sharecode=zr8OEADx1vwcRiCu8vCMqVJKR72VzTUJEwqNLhrm7_E}{Tinker CAD Link}
-    \item Stückliste
-\end{itemize}
+\begin{figure}[h]
+\centering
+\begin{circuitikz}[scale=0.9, transform shape]
+
+    \draw (0,0) node[above] {D2}
+        to[push button, o-, l=$SW_1$] ++ (0,-2)
+        to[R, l=$R_1$] ++(0,-2) node[ground]{};
+    \draw (2, 0) node[above] {D3}
+        to[stroke led, o-, l=$D_1$] ++ (0,-2)
+        to[R, l=$R_2$] ++(0,-2) node[ground]{};
+    \draw (4, 0) node[above] {D4}
+        to[stroke led, o-, l=$D_2$] ++ (0,-2)
+        to[R, l=$R_2$] ++(0,-2) node[ground]{};
+    \draw (6, 0) node[above] {D5}
+        to[stroke led, o-, l=$D_3$] ++ (0,-2)
+        to[R, l=$R_2$] ++(0,-2) node[ground]{};
+    \draw (8, 0) node[above] {D6}
+        to[stroke led, o-, l=$D_2$] ++ (0,-2)
+        to[R, l=$R_2$] ++(0,-2)node[ground]{};
+    \draw (10, 0) node[above] {D7}
+        to[stroke led, o-, l=$D_1$] ++ (0,-2)
+        to[R, l=$R_2$] ++(0,-2) node[ground]{};
+
+\end{circuitikz}
+\caption{Schaltplan für Aufgabe 1}
+\end{figure}
+
+Die für die Durchführung benötigten Bauteile sind in \autoref{tab:bom3} aufgeführt.
+
+\begin{table}[h]
+    \centering
+    \caption{Stückliste}\label{tab:bom3}
+    \begin{tabularx}{\textwidth}{XXXX}
+        \toprule
+        \textbf{Bez.} & \textbf{Bauteil} & \textbf{Wert} & \textbf{Stückzahl} \\ \midrule
+        $R_1$ & Widerstand & \SI{10}{\kilo\ohm} & 1 \\ 
+        $R_2$ & Widerstand & \SI{220}{\ohm} & 5 \\ 
+        $D_1$ & LED & Red & 2 \\ 
+        $D_2$ & LED & Yellow & 2 \\ 
+        $D_3$ & LED & Green & 1 \\ 
+        $SW_1$ & Taster & & 1 \\ \bottomrule
+    \end{tabularx}
+\end{table}
+
+\subsubsection{Aufbau am Steckbrett}
+
+Vor dem Aufbau wurde eine Prototyp-Schaltung in Tinker-CAD\footnote{\href{https://www.tinkercad.com/things/7XiGVaMbiJp-3-realisierung-eines-logic-analyzers?sharecode=zr8OEADx1vwcRiCu8vCMqVJKR72VzTUJEwqNLhrm7_E}{Tinker CAD Share Link}} aufgebaut und emuliert, um die Durchführung am Steckbrett zu erleichtern.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{tinkercad2.png}
+    \caption{Planung des Aufbaus in TinkerCAD.}
+\end{figure}
+
+Im Anschluss wurde die Schaltung am Steckbrett aufgebaut.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=.5\textwidth]{latex/images/fotos/2.JPEG}
+    \caption{Verdrahtung am Steckbrett.}
+\end{figure}
+
+\subsubsection{Implementierung}
+
+\lstinputlisting[
+    lastline=11,
+    caption={Globale Variablen und Definitionen}
+]{../02-Reaktionsspiel/react/react.ino}
+
+\lstinputlisting[
+    firstline=13,
+    caption={Setup und Loop}
+]{../02-Reaktionsspiel/react/react.ino}
 
 \subsection{Ergebnisse}
 
