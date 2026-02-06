@@ -43,10 +43,8 @@ TODO
 \]
 Das Verhältnis der Widerstände $R_1 : R_2$ entspricht dem Verhältnis der Spannungen $U_{R1} : U_a$, also \textbf{2:3}. Berechnung von $R_2$ mit $R_1 = \SI{10}{\kilo\ohm}$:
 \begin{align*}
-    \frac{R_1}{R_2} &= \frac{U_{R1}}{U_a} \\
-    R_2 &= R_1 \cdot \frac{U_a}{U_{R1}} \\
-    R_2 &= \SI{10}{\kilo\ohm} \cdot \frac{\SI{3}{\volt}}{\SI{2}{\volt}} \\
-    R_2 &= \SI{15}{\kilo\ohm}
+    \frac{R_1}{R_2} &= \frac{U_{R1}}{U_a} \implies R_2 = R_1 \cdot \frac{U_a}{U_{R1}} \\
+    R_2 &= \SI{10}{\kilo\ohm} \cdot \frac{\SI{3}{\volt}}{\SI{2}{\volt}} = \SI{15}{\kilo\ohm} 
 \end{align*}
 
 \paragraph{b)} Der Widerstand $R_2$ wird durch $R_x$ ersetzt. Die neue Ausgangsspannung beträgt $U_a = \SI{1}{\volt}$.
@@ -56,8 +54,7 @@ Das Verhältnis der Widerstände $R_1 : R_2$ entspricht dem Verhältnis der Span
 Berechnung von $R_x$:
 \begin{align*}
     R_x &= R_1 \cdot \frac{U_a}{U_{R1}} \\
-    R_x &= \SI{10}{\kilo\ohm} \cdot \frac{\SI{1}{\volt}}{\SI{4}{\volt}} \\
-    R_x &= \SI{2.5}{\kilo\ohm}
+    R_x &= \SI{10}{\kilo\ohm} \cdot \frac{\SI{1}{\volt}}{\SI{4}{\volt}} = \SI{2.5}{\kilo\ohm} \\
 \end{align*}
 
 \subsubsection{Kondensatorladung}
@@ -78,9 +75,7 @@ Daraus lässt sich die Kapazität $C$ berechnen:
     C &= \SI{0.00001}{\farad} = \SI{10}{\micro\farad}
 \end{align*}
 
-\paragraph{b)} Der Kondensator gilt als vollständig geladen (Spannung $> 99\,\%$), wenn eine Zeit von ca. $5 \cdot \tau$ vergangen ist ($1 - e^{-5} \approx 0.993$).
-
-\noindent Die Ladedauer beträgt somit:
+\paragraph{b)} Der Kondensator gilt als vollständig geladen (Spannung $> 99\,\%$), wenn eine Zeit von ca. $5 \cdot \tau$ vergangen ist ($1 - e^{-5} \approx 0.993$). Die Ladedauer beträgt somit:
 \begin{align*}
     t_{\text{voll}} &\approx 5 \cdot \tau \\
     t_{\text{voll}} &= 5 \cdot \SI{100}{\milli\second} \\
