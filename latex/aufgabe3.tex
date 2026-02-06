@@ -47,7 +47,7 @@ In dieser Aufgabe ist ein Logic Analyzer zu realisieren. Es sollen 3 unbekannte 
 
     \draw (0,0) node[dipchip, num pins=14, hide numbers](C){DUT};
     \draw (C.pin 14) -| ++(0.5,0.5) node[vcc]{};
-    \draw (C
+    \draw (C.pin 7) -| ++(-0.5, -0.5) node[ground]{};
 
 \end{circuitikz}
 \caption{Schaltplan für Aufgabe 1}
