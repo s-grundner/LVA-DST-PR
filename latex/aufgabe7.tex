@@ -148,9 +148,9 @@ Um die Buchstaben im Alphabet auf Morsecodewörter umzuwandeln, wird eine Tabell
     caption={Globale Variablen und Definitionen des Senders}
 ]{../07-IR/tx/tx.ino}
 
+\newpage
 Zum Senden wird zuerst überprüft ob der Eingabewert im Alphabet ist und ermittelt, an welcher Position im \lstinline!morseTable! er sich befindet. Der Morsecode wird in einer Schleife mit der Länge des Codewortes durchlaufen. Mit jeder Iteration wird der \SI{38}{\kilo\hertz} Ton am TX-Ausgang aktiviert. Ist das momentane Symbol \lstinline!1!, also ein \mdash, wird die definierte Dauer für einen Dash mittels \lstinline!delay()! gewartet, sonst die für einen \mdot. Danach wird der Ton mit \lstinline!noTone()! wieder ausgeschalten. Nach jedem Symbol wird eine definierte Zeit zwischen den Symbolen verzögert. Nach dem Codewort wird eine definierte Pausezeit gewartet.
 
-\newpage
 \lstinputlisting[
     firstline=33,
     lastline=56,
@@ -168,15 +168,21 @@ Es wird die serielle Schnittstelle mit \SI{9600}{\bit\per\second} initialisiert 
 \newpage
 \subsubsection{Implementierung des Empfängers}
 
+Hier wurden die Schwellwerte für die Symbole festgelegt. Dabei bedeuten \lstinline!DOT_THRESH_US!, dass alle empfangenen Symbole unter dieser Messdauer als \mdot gelten und Messdauern die sich zwischen \lstinline!DOT_THRESH_US! und \lstinline!DASH_THRESH_US! befinden als \mdash.
+
 \lstinputlisting[
-    firstline=2,
-    lastline=30,
+    firstline=3,
+    lastline=32,
     caption={Globale Variablen und Definitionen des Empfängers}
 ]{../07-IR/rx/rx.ino}
 
+\newpage
+Mit dem Oszilloskop wurde an den Flanken des IR-Empfängers Prellungen festgestellt. Diese Prellungen wurden im Programm kompensiert indem Pulse, die eine Mindestdauer unterschreiten, gefiltert werden.
+
 \lstinputlisting[
-    firstline=31,
-    caption={Setup und Loop des Empfängers}
+    firstline=34,
+    lastline=54,
+    caption={Entprellung für den IR-Senor}
 ]{../07-IR/rx/rx.ino}
 
 \subsection{Ergebnisse}
@@ -186,3 +192,14 @@ Es wird die serielle Schnittstelle mit \SI{9600}{\bit\per\second} initialisiert 
     \item Oszilbild
     \item Defekte IR Sensoren
 \end{itemize}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{latex/images/fotos/7_oszi.JPEG}
+    \caption{
+        Oszillogramm einer Datenübertragung des Buchstaben 'L' = \mdot\mdash\mdot\mdot.\\
+        CH1 Ausgang des IR-Empfängers.\\
+        CH2 Pin D3 des Senders, welcher das \SI{38}{\kilo\hertz} Rechtecksignal ausgibt.
+    }
+    \label{fig:placeholder}
+\end{figure}
