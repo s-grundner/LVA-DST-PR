@@ -52,29 +52,34 @@ Im hauptprogramm wird der steuer pin kurz auf high und wieder auf low gesetzt um
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.5\linewidth]{images/7-segment.png}
-    \caption{7-Segment Anzeige}
-    \label{fig:siebe-segment}
+    \begin{subfigure}[c]{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.5\textwidth]{6/7seg.png}
+    \end{subfigure}\hfill
+    \begin{subfigure}[c]{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.8\textwidth]{6/shiftreg.png}
+    \end{subfigure}
+    \caption{Pinbelegung und Ersatzschaltbild der verwendeten 7-Segment-Anzeige SC52}
 \end{figure}
 
 \begin{table}
 \centering
-
-\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
-\hline
-\textbf{Ziffer} & \textbf{a} & \textbf{b} & \textbf{c} & \textbf{d} & \textbf{e} & \textbf{f} & \textbf{g} & \textbf{dp} \\ \hline
-0 & 1 & 1 & 1 & 1 & 1 & 1 & 0 & 0 \\ \hline
-1 & 0 & 1 & 1 & 0 & 0 & 0 & 0 & 0 \\ \hline
-2 & 1 & 1 & 0 & 1 & 1 & 0 & 1 & 0 \\ \hline
-3 & 1 & 1 & 1 & 1 & 0 & 0 & 1 & 0 \\ \hline
-4 & 0 & 1 & 1 & 0 & 0 & 1 & 1 & 0 \\ \hline
-5 & 1 & 0 & 1 & 1 & 0 & 1 & 1 & 0 \\ \hline
-6 & 1 & 0 & 1 & 1 & 1 & 1 & 1 & 0 \\ \hline
-7 & 1 & 1 & 1 & 0 & 0 & 0 & 0 & 0 \\ \hline
-8 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 0 \\ \hline
-9 & 1 & 1 & 1 & 1 & 0 & 1 & 1 & 0 \\ \hline
-\end{tabular}
 \caption{Segmentbelegung für 7-Segment-Anzeige (High-aktiv)}
+\begin{tabularx}{\textwidth}{YYYYYYYYYY}
+\toprule
+\textbf{Ziffer} & \textbf{a} & \textbf{b} & \textbf{c} & \textbf{d} & \textbf{e} & \textbf{f} & \textbf{g} & \textbf{dp} \\ \midrule
+0 & 1 & 1 & 1 & 1 & 1 & 1 & 0 & 0 \\ \midrule
+1 & 0 & 1 & 1 & 0 & 0 & 0 & 0 & 0 \\ \midrule
+2 & 1 & 1 & 0 & 1 & 1 & 0 & 1 & 0 \\ \midrule
+3 & 1 & 1 & 1 & 1 & 0 & 0 & 1 & 0 \\ \midrule
+4 & 0 & 1 & 1 & 0 & 0 & 1 & 1 & 0 \\ \midrule
+5 & 1 & 0 & 1 & 1 & 0 & 1 & 1 & 0 \\ \midrule
+6 & 1 & 0 & 1 & 1 & 1 & 1 & 1 & 0 \\ \midrule
+7 & 1 & 1 & 1 & 0 & 0 & 0 & 0 & 0 \\ \midrule
+8 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 0 \\ \midrule
+9 & 1 & 1 & 1 & 1 & 0 & 1 & 1 & 0 \\ \bottomrule
+\end{tabularx}
 \end{table}
 
 \subsubsection{Berechnung Vorwiderstände}
@@ -88,9 +93,10 @@ Die Benötigte Dioden Spannung der LEDs ist $U_D=\SI{2}{\volt}$ bei einem Strom 
 
 Die E6 Reihe enthält die Werte (1,0 1,5 2,2 3,3 4,7 6,8). Damit sind die nähesten 2 Widerstände \SI{150}{\ohm} und \SI{220}{\ohm}. Da der Strom von $I_D=\SI{15}{\milli\ampere}$ nicht überschritten werden soll, wählen wir den größeren Widerstand. Somit ist der Vorwiderstand: $R_V=\SI{220}{\ohm}$
 
-\subsection{Praktikumsaufgabe}
+\subsection{Durchführung}
 
-\subsubsection{e}
-
-
-
+\begin{itemize}
+    \item Aufbau in Tinkercad
+    \item Fotos
+    \item Code
+\end{itemize}

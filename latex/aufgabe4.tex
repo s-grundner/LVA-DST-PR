@@ -22,7 +22,13 @@
 \newpage
 \section{Wertebestimmung von Widerstand und Kondensator}
 
+TODO
+\begin{itemize}
+    \item Aufgabenbeschreibung
+\end{itemize}
+
 \subsection{Vorbereitung}
+
 \subsubsection{Widerstandsbestimmung}
 
 \resistorRow{resistor1.png}{\SI{47}{\kilo\ohm}}{$\pm \SI{5}{\percent}$}
@@ -31,8 +37,7 @@
 
 \subsubsection{Spannungsteiler}
 
-\paragraph{a)}
-Die Spannung teilt sich am Spannungsteiler im Verhältnis der Widerstände auf.
+\paragraph{a)} Die Spannung teilt sich am Spannungsteiler im Verhältnis der Widerstände auf.
 \[
     U_{R1} = U_e - U_a = \SI{5}{\volt} - \SI{3}{\volt} = \SI{2}{\volt}
 \]
@@ -44,8 +49,7 @@ Das Verhältnis der Widerstände $R_1 : R_2$ entspricht dem Verhältnis der Span
     R_2 &= \SI{15}{\kilo\ohm}
 \end{align*}
 
-\paragraph{b)}
-Der Widerstand $R_2$ wird durch $R_x$ ersetzt. Die neue Ausgangsspannung beträgt $U_a = \SI{1}{\volt}$.
+\paragraph{b)} Der Widerstand $R_2$ wird durch $R_x$ ersetzt. Die neue Ausgangsspannung beträgt $U_a = \SI{1}{\volt}$.
 \[
     U_{R1} = \SI{5}{\volt} - \SI{1}{\volt} = \SI{4}{\volt}
 \]
@@ -91,14 +95,58 @@ Daraus lässt sich die Kapazität $C$ berechnen:
     \item Stückliste
 \end{itemize}
 
-Bilder
+TODO Bilder
 
 \begin{itemize}
     \item Schaltplan (tinkercad)
     \item Strom und Spannungsmessung
 \end{itemize}
 
-\begin{figure}
+\tikzset{ameter/.style={rmeterwa, t=A}}
+\tikzset{vmeter/.style={rmeterwa, t=V}}
+
+\begin{figure}[h]
+    \begin{subfigure}[t]{0.25\textwidth}
+    \centering
+    \begin{circuitikz}
+        \draw (0,0) node[vcc]{\SI{5}{\volt}}
+            to[R=$R_\text{REF}$] ++(0,-2) coordinate (k1)
+            to[R=$R_x$] ++(0,-2) node[ground]{};
+        \draw (k1) to[short, *-o] ++(1,0) node[above]{IO-PIN};
+    \end{circuitikz}
+    \caption{Widerstandsmessung mit Arduino}
+    \end{subfigure}\hfill
+    \begin{subfigure}[t]{0.25\textwidth}
+    \centering
+    \begin{circuitikz}
+        \draw (0,0) node[vcc]{\SI{5}{\volt}}
+            to[R=$R_\text{REF}$] ++(0,-2) coordinate (k1)
+            to[C=$C_x$] ++(0,-2) node[ground]{};
+        \draw (k1) to[short, *-o] ++(1,0) node[above]{IO-PIN};
+    \end{circuitikz}
+    \caption{Kapazitätsmessung mit Arduino}
+    \end{subfigure}\hfill
+    \begin{subfigure}[t]{0.25\textwidth}
+    \centering
+    \begin{circuitikz}
+        \draw (0,0) node[vcc]{\SI{5}{\volt}}
+            to[R=$R_\text{REF}$] ++(0,-2) coordinate (k1)
+            to[R=$R_x$, *-] ++(0,-2) node[ground]{};
+        \draw (k1) -- ++(1.5,0)
+            to[vmeter, v^=$U_x$] ++(0,-2) node[ground]{};
+    \end{circuitikz}
+    \caption{Spannungsmessung}
+    \end{subfigure}\hfill
+    \begin{subfigure}[t]{0.25\textwidth}
+    \centering
+    \begin{circuitikz}
+        \draw (0,0) node[vcc]{\SI{5}{\volt}}
+            to[R=$R_\text{REF}$] ++(0,-1)
+            to[R=$R_x$] ++(0,-1)
+            to[ameter, i_=$I_x$] ++(0,-2) node[ground]{};
+    \end{circuitikz}
+    \caption{Strommessung}
+    \end{subfigure}
     \caption{Messschaltung zur Strom und Spannungsmessung eines Widerstands.}\label{fig:ui-mess}
 \end{figure}
 
