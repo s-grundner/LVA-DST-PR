@@ -5,10 +5,7 @@
 \newpage
 \section{Reaktionsspiel}
 
-TODO
-\begin{itemize}
-    \item Aufgabenbeschreibung
-\end{itemize}
+In dieser Aufgabe ist ein Reaktionsspiel bestehend aus 5 LEDs und einem Taster zu realisieren. Die LEDs werden nacheinander als Lauflicht ein- und ausgeschaltet. Leuchtet die mittlere LED auf, so muss der Taster gedrückt werden. Reagiert der Spieler rechtzeitig und drückt den Taster während die LED grün leuchtet, so hat er das Level erfolgreich beendet und steigt zum nächsten Level auf. Im nächsten Level läuft das Lauflicht schneller. 
 
 \subsection{Vorbereitung}
 \subsubsection{Widerstandsberechnung}
@@ -39,20 +36,74 @@ Zudem kann in der ISR der aktuelle Status (z.B. welche LED gerade aktiv ist) ges
 
 \subsection{Durchführung}
 
-\begin{itemize}
-    \item \href{https://www.tinkercad.com/things/4kQIa2P7zRc-2-reaktionsspiel?sharecode=tN5XWwIVhA9dR5oYUQt6OY9f_J_8c10GSfd3RA9Iedc}{Tinker CAD Link}
-    \item Stückliste
-\end{itemize}
+\begin{figure}[h]
+\centering
+\begin{circuitikz}[scale=0.9, transform shape]
 
-\begin{lstlisting}
-const int ledPins[] = {3, 4, 5, 6, 7};
-const int buttonPin = 2;
+    \draw (0,0) node[above] {D2}
+        to[push button, o-, l=$SW_1$] ++ (0,-2)
+        to[R, l=$R_1$] ++(0,-2) node[ground]{};
+    \draw (2, 0) node[above] {D3}
+        to[stroke led, o-, l=$D_1$] ++ (0,-2)
+        to[R, l=$R_2$] ++(0,-2) node[ground]{};
+    \draw (4, 0) node[above] {D4}
+        to[stroke led, o-, l=$D_2$] ++ (0,-2)
+        to[R, l=$R_2$] ++(0,-2) node[ground]{};
+    \draw (6, 0) node[above] {D5}
+        to[stroke led, o-, l=$D_3$] ++ (0,-2)
+        to[R, l=$R_2$] ++(0,-2) node[ground]{};
+    \draw (8, 0) node[above] {D6}
+        to[stroke led, o-, l=$D_2$] ++ (0,-2)
+        to[R, l=$R_2$] ++(0,-2)node[ground]{};
+    \draw (10, 0) node[above] {D7}
+        to[stroke led, o-, l=$D_1$] ++ (0,-2)
+        to[R, l=$R_2$] ++(0,-2) node[ground]{};
 
-for (int i = 0; i < 5; i++) {
-    pinMode(ledPins[i], OUTPUT);
-}
-pinMode(buttonPin, INPUT_PULLUP);
-attachInterrupt(digitalPinToInterrupt(buttonPin), handlePress, FALLING);
-\end{lstlisting}
+\end{circuitikz}
+\caption{Schaltplan für Aufgabe 1}
+\end{figure}
 
-Da nur die Pins 2 und 3 mit einem Interrupt konfiguriert werden können, wurde der Taster mit Pin 2 verbunden. Pin 3 bis 7 sind von den LEDs belegt. 
+Die für die Durchführung benötigten Bauteile sind in \autoref{tab:bom2} aufgeführt.
+
+\begin{table}[h]
+    \centering
+    \caption{Stückliste}\label{tab:bom2}
+    \begin{tabularx}{\textwidth}{XXXX}
+        \toprule
+        \textbf{Bez.} & \textbf{Bauteil} & \textbf{Wert} & \textbf{Stückzahl} \\ \midrule
+        $R_1$ & Widerstand & \SI{220}{\ohm} & 3 \\ 
+        $D_1$ & LED & Red & 1 \\ 
+        $D_2$ & LED & Yellow & 1 \\ 
+        $D_3$ & LED & Green & 1 \\ \bottomrule
+    \end{tabularx}
+\end{table}
+
+\subsubsection{Aufbau am Steckbrett}
+
+Vor dem Aufbau wurde eine Prototyp-Schaltung in Tinker-CAD\footnote{\href{https://www.tinkercad.com/things/4kQIa2P7zRc-2-reaktionsspiel?sharecode=tN5XWwIVhA9dR5oYUQt6OY9f_J_8c10GSfd3RA9Iedc}{Tinker CAD Share Link}} aufgebaut und emuliert, um die Durchführung am Steckbrett zu erleichtern.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{tinkercad2.png}
+    \caption{Planung des Aufbaus in TinkerCAD.}
+\end{figure}
+
+Im Anschluss wurde die Schaltung am Steckbrett aufgebaut.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=.5\textwidth]{latex/images/fotos/2.JPEG}
+    \caption{Verdrahtung am Steckbrett.}
+\end{figure}
+
+\subsubsection{Implementierung}
+
+\lstinputlisting[
+    lastline=3,
+    caption={Globale Variablen und Definitionen}
+]{../01-Ampel/ampel/ampel.ino}
+
+\lstinputlisting[
+    firstline=5,
+    caption={Setup und Loop}
+]{../01-Ampel/ampel/ampel.ino}
