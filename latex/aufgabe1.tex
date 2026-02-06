@@ -32,10 +32,65 @@ R_V = \SI{220}{\ohm}
 
 \subsection{Durchführung}
 
-\subsubsection{Aufbau}
+\begin{figure}[h]
+\centering
+\begin{circuitikz}[scale=0.9, transform shape]
+    \draw (0,3) node[above] {D4}
+    to[stroke led, o-, l=$D_1$] (0,1)
+    to[R, l=$R_1$] (0,-1);
+    \draw (2,3) node[above] {D3} 
+    to[stroke led, o-,l=$D_2$] (2,1)
+    to[R, l=$R_1$] (2,-1);
+    \draw (4,3) node[above] {D2}
+    to[stroke led, o-,l=$D_3$] (4,1)
+    to[R, l=$R_1$] (4,-1);
+    \draw (0,-1) -- (4,-1);
+    \draw (2,-1) to[short, *-] (2,-1.5) node[ground]{};
+\end{circuitikz}
+\caption{Schaltplan für Aufgabe 1}
+\end{figure}
 
+Die für die Durchführung benötigten Bauteile sind in \autoref{tab:bom1} aufgeführt.
+
+\begin{table}[h]
+    \centering
+    \caption{Stückliste}\label{tab:bom1}
+    \begin{tabularx}{\textwidth}{XXXX}
+        \toprule
+        \textbf{Bez.} & \textbf{Bauteil} & \textbf{Wert} & \textbf{Stückzahl} \\ \midrule
+        $R_1$ & Widerstand & \SI{220}{\ohm} & 3 \\ 
+        $D_1$ & LED & Red & 1 \\ 
+        $D_2$ & LED & Yellow & 1 \\ 
+        $D_3$ & LED & Green & 1 \\ \bottomrule
+    \end{tabularx}
+\end{table}
+
+\subsubsection{Aufbau am Steckbrett}
+
+Vor dem Aufbau wurde eine Prototyp-Schaltung in Tinker-CAD\footnote{\href{https://www.tinkercad.com/things/hDSeunse9sA-swanky-blad?sharecode=EEkllt3jS0LajhnF6WsLHml5EfgG90PDwNNq3XKcHVo}{Tinker CAD Share Link}} aufgebaut und emuliert, um die Durchführung am Steckbrett zu erleichtern.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{tinkercad1.png}
+    \caption{Planung des Aufbaus in TinkerCAD.}
+\end{figure}
+
+Im Anschluss wurde die Schaltung am Steckbrett aufgebaut.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=.5\textwidth]{latex/images/fotos/1.JPEG}
+    \caption{Verdrahtung am Steckbrett.}
+\end{figure}
 
 \subsubsection{Implementierung}
+
 \lstinputlisting[
-    caption={Globale Variablen und Definitionen des Senders}
+    lastline=3,
+    caption={Globale Variablen und Definitionen}
+]{../01-Ampel/ampel/ampel.ino}
+
+\lstinputlisting[
+    firstline=5,
+    caption={Setup und Loop}
 ]{../01-Ampel/ampel/ampel.ino}

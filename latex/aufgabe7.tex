@@ -62,10 +62,10 @@ Damit die Methode \lstinline!tone()! funktioniert, muss der Pin ein PWM Pin sein
 
 \subsubsection{Widerstandsberechnung}
 
-\begin{wrapfigure}[14]{r}{5cm}
+\begin{wrapfigure}[13]{r}{6.5cm + 12pt}
 \vspace*{-11pt}
 \centering
-\begin{circuitikz}[scale=0.9, transform shape]
+\begin{circuitikz}[scale=0.8, transform shape]
     \draw (0,0) node[ground]{} node[nmos, anchor=S](T1){$R_{\text{DS,on}}$};
     \draw (T1.G) to[R,l_=$R_1$, -o] ++(-1.5,0) node[anchor=east]{IO-Pin};
     \draw (T1.D) to[R,l_=$R_2$, i<_=\SI{130}{\milli\ampere}] ++(0,1.5) to[stroke led, invert, l^={IR-LED}, v<=\SI{1.6}{\volt}] ++(0,1) node[vcc]{$\SI{5}{\volt}$};
@@ -79,40 +79,81 @@ Die restliche Spannung die nicht über die Diode abfällt, muss über $R_2$ und 
 \[
 R_2 = \frac{\SI{5}{\volt} - \SI{1.6}{\volt}}{\SI{130}{\milli\ampere}} - R_\text{DS,on} = \SI{12.15}{\ohm}
 \]
-Um den Maximalstrom nicht zu überschreiten, wird der nächst höhere Widerstand aus der E6 Reihe gewählt.
-\[
-R_2 = \SI{15}{\ohm}
-\]
+
+Um den Maximalstrom nicht zu überschreiten, wird der nächst höhere Widerstand aus der E6 Reihe mit $R_2 = \SI{15}{\ohm}$ gewählt.
 
 \subsection{Durchführung}
 
-\begin{itemize}
-    \item \href{https://www.tinkercad.com/things/0UY9zs3iKwE-dst-07-ir?sharecode=mE1HyXRFxTP7FBArqWQ20zcDbVb7zpU4BAKAofIcNlk}{Tinker CAD Link}
-    \item Stückliste
-\end{itemize}
+\begin{wrapfigure}[10]{r}{6.5cm + 12pt}
+\vspace*{-12pt}
+\centering
+\begin{circuitikz}[scale=0.8, transform shape]
+    \draw (0,0) node[ground]{} node[nmos, anchor=S](Q1){$Q_1$};
+    \draw (Q1.G) to[R,l_=$R_1$, -o] ++(-1.5,0) node[left]{Pin D3};
+    \draw (Q1.D) to[R,l^=$R_2$] ++(0,1)
+        to[stroke led, mirror, invert, l^={$D_1$}] ++(0,1) coordinate(vcc) node[vcc]{$\SI{5}{\volt}$};
+    \draw (2,0) node[ground]{} to[twoport,name={ir}] (vcc -| 2,0) node[vcc]{$\SI{5}{\volt}$};
+    \draw (ir.e) to[stroke photodiode, mirror, l_={$IC_1$}] (ir.w);
+    \draw (ir.s) to[short, -o] ++(1,0) node[right]{Pin D3};
+\end{circuitikz}
+\caption{Schaltplan}\label{fig:schem7}
+\end{wrapfigure}
 
+Der Schaltplan der Aufgabe ist in \autoref{fig:schem7} gegeben. Der niedrigste Widerstandswert der in der Bauteilbox vorhanden war hatte \SI{24}{\ohm}. Daher wurde dieser Wert als Vorwiderstand $R_2$ für die IR-LED genommen. Die für die Durchführung benötigten Bauteile sind in \autoref{tab:bom7} aufgeführt.
+
+Hier wurden zwei Arduino UNO Boards benötigt, Sender und Empfänger gleichzeitig aufzubauen. Die Pin-Belegungen sind wie im Schaltplan dargestellt gewählt.
+
+\begin{table}[b]
+    \centering
+    \caption{Stückliste}\label{tab:bom7}
+    \begin{tabularx}{\textwidth}{lXXr}
+        \toprule
+        \textbf{Bezeichnung} & \textbf{Bauteil} & \textbf{Wert} & \textbf{Stückzahl} \\ \midrule
+        $R_1$ & \multirow{2}{*}{Widerstand} & \SI{100}{\ohm} & 1 \\ 
+        $R_2$ & & \SI{24}{\ohm} & 1 \\ 
+        $D_1$ & Infrarot Diode & $U_F = \SI{1.6}{\volt}$ & 1 \\ 
+        $Q_1$ & NMOS Transistor & BS170 & 1 \\
+        $IC_1$ & IR Sensor Modul & KY022 & 1 \\ 
+         & Arduino UNO & & 2 \\ \bottomrule
+    \end{tabularx}
+\end{table}
+
+\newpage
 \subsubsection{Aufbau am Steckbrett}
+
+Vor dem Aufbau wurde eine Prototyp-Schaltung in Tinker-CAD\footnote{\href{https://www.tinkercad.com/things/0UY9zs3iKwE-dst-07-ir?sharecode=mE1HyXRFxTP7FBArqWQ20zcDbVb7zpU4BAKAofIcNlk}{Tinker CAD Share Link}} aufgebaut und emuliert, um die Durchführung am Steckbrett zu erleichtern.
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=\textwidth]{7/tinkercad.png}
-    \caption{Planung des Aufbaus in TinkerCAD}
+    \includegraphics[width=\textwidth]{tinkercad7.png}
+    \caption{Planung des Aufbaus in TinkerCAD.}
 \end{figure}
 
-Foto vom Aufbau Einfügen
+Im Anschluss wurde die Schaltung am Steckbrett aufgebaut.
 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=.7\textwidth]{latex/images/fotos/7.JPEG}
+    \caption{Verdrahtung am Steckbrett.}
+\end{figure}
+
+\newpage
 \subsubsection{Implementierung des Senders}
 
-Um die Buchstaben im Alphabet auf Morsecodewörter umzuwandeln, wird eine Tabelle verwendet, welche die Zusammensetzungen von Dots und Dashes, sowie die Länge des jeweiligen Codewortes speichert. Der Code wird als eine binäre Zahl gespeichert, dabei korrespondiert eine 0 zu einem Dot und eine 1 zu einem Dash.
+Um die Buchstaben im Alphabet auf Morsecodewörter umzuwandeln, wird eine Tabelle verwendet, welche die Zusammensetzungen von Dots und Dashes, sowie die Länge des jeweiligen Codewortes speichert. Der Code wird als eine binäre Zahl gespeichert, dabei korrespondiert eine 0 zu einem Dot (\mdot) und eine 1 zu einem Dash (\mdash).
+
+In einem Enum werden die Anzahl an Zeiteinheiten (\lstinline!UNIT!) definiert, die für jedes Symbol gelten soll. Die Konstante \lstinline!UNIT_LEN_MS! definiert, wie lange eine Zeiteinheit sein soll.
 
 \lstinputlisting[
     firstline=2,
-    lastline=31,
+    lastline=26,
     caption={Globale Variablen und Definitionen des Senders}
 ]{../07-IR/tx/tx.ino}
 
+Zum Senden wird zuerst überprüft ob der Eingabewert im Alphabet ist und ermittelt an welcher Position im \lstinline!morseTable! er sich befindet. Der Morse Code wird in einer Schleife mit der Länge des Codewortes durchlaufen. Mit jeder Iteration wird der \SI{38}{\kilo\hertz} Ton am TX-Ausgang aktiviert. Ist das momentane Symbol \lstinline!1!, also ein \mdash, wird die definierte Dauer für einen Dash mittels \lstinline!delay()! gewartet, sonst die für einen \mdot.
+
 \lstinputlisting[
-    firstline=33,
+    firstline=29,
     lastline=56,
     caption={Methode zum Senden von Charakteren als Morsesymbolen}
 ]{../07-IR/tx/tx.ino}

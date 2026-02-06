@@ -48,7 +48,7 @@ Der Grobe Plan für die verwendung ist, dass der Trigger und der Ausgangs Pin mi
 
 Im hauptprogramm wird der steuer pin kurz auf high und wieder auf low gesetzt um eine messung zu triggern. Anschließend wird ein delay von 30ms durchgeführt damit wir die maximale Messrate nicht unterschreiten. Anschließend wird falls der Mess-boolean gesetzt wurde der Motor Ausgeschaltet.
 
-\subsubsection{Schieberegister für 7 segment Anzeige}
+\subsubsection{Schieberegister für 7 Segment Anzeige}
 
 \begin{figure}
     \centering
@@ -63,7 +63,7 @@ Im hauptprogramm wird der steuer pin kurz auf high und wieder auf low gesetzt um
     \caption{Pinbelegung und Ersatzschaltbild der verwendeten 7-Segment-Anzeige SC52}
 \end{figure}
 
-\begin{table}
+\begin{table}[h]
 \centering
 \caption{Segmentbelegung für 7-Segment-Anzeige (High-aktiv)}
 \begin{tabularx}{\textwidth}{YYYYYYYYYY}
@@ -91,7 +91,7 @@ Die Benötigte Dioden Spannung der LEDs ist $U_D=\SI{2}{\volt}$ bei einem Strom 
     R_V &= \frac{U_{R_V}}{I_{R_V}} = \frac{\SI{3}{\volt}}{\SI{15}{\milli\ampere}} = \SI{200}{\ohm}
 \end{align*}
 
-Die E6 Reihe enthält die Werte (1,0 1,5 2,2 3,3 4,7 6,8). Damit sind die nähesten 2 Widerstände \SI{150}{\ohm} und \SI{220}{\ohm}. Da der Strom von $I_D=\SI{15}{\milli\ampere}$ nicht überschritten werden soll, wählen wir den größeren Widerstand. Somit ist der Vorwiderstand: $R_V=\SI{220}{\ohm}$
+Die E6 Reihe enthält die Werte $\{1.0; 1.5; 2.2; 3.3; 4.7; 6.8\}$. Damit sind die Nachbar-Widerstände \SI{150}{\ohm} und \SI{220}{\ohm}. Da der Strom von $I_D=\SI{15}{\milli\ampere}$ nicht überschritten werden soll, wählen wir den größeren Widerstand. Somit ist der Vorwiderstand: $R_V=\SI{220}{\ohm}$
 
 \subsection{Durchführung}
 
@@ -100,3 +100,14 @@ Die E6 Reihe enthält die Werte (1,0 1,5 2,2 3,3 4,7 6,8). Damit sind die nähes
     \item Fotos
     \item Code
 \end{itemize}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{tinkercad6.png}
+    \caption{Planung des Aufbaus der letzten Ausbaustufe in TinkerCAD bei der alle Baugruppen kombiniert sind}
+\end{figure}
+
+
+\subsubsection{Aufbau am Steckbrett}
+
+
