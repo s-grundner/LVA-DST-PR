@@ -140,23 +140,24 @@ Im Anschluss wurde die Schaltung am Steckbrett aufgebaut.
 \newpage
 \subsubsection{Implementierung des Senders}
 
-Um die Buchstaben im Alphabet auf Morsecodewörter umzuwandeln, wird eine Tabelle verwendet, welche die Zusammensetzungen von Dots und Dashes, sowie die Länge des jeweiligen Codewortes speichert. Der Code wird als eine binäre Zahl gespeichert, dabei korrespondiert eine 0 zu einem Dot (\mdot) und eine 1 zu einem Dash (\mdash).
-
-In einem Enum werden die Anzahl an Zeiteinheiten (\lstinline!UNIT!) definiert, die für jedes Symbol gelten soll. Die Konstante \lstinline!UNIT_LEN_MS! definiert, wie lange eine Zeiteinheit sein soll.
+Um die Buchstaben im Alphabet auf Morsecodewörter umzuwandeln, wird eine Tabelle verwendet, welche die Zusammensetzungen von Dots und Dashes, sowie die Länge des jeweiligen Codewortes speichert. Der Code wird als eine binäre Zahl gespeichert, dabei korrespondiert eine 0 zu einem Dot (\mdot) und eine 1 zu einem Dash (\mdash). In einem Enum werden die Anzahl an Zeiteinheiten (\lstinline!UNIT!) definiert, die für jedes Symbol gelten soll. Die Konstante \lstinline!UNIT_LEN_MS! definiert, wie lange eine Zeiteinheit sein soll.
 
 \lstinputlisting[
-    firstline=2,
-    lastline=26,
+    firstline=3,
+    lastline=31,
     caption={Globale Variablen und Definitionen des Senders}
 ]{../07-IR/tx/tx.ino}
 
-Zum Senden wird zuerst überprüft ob der Eingabewert im Alphabet ist und ermittelt an welcher Position im \lstinline!morseTable! er sich befindet. Der Morse Code wird in einer Schleife mit der Länge des Codewortes durchlaufen. Mit jeder Iteration wird der \SI{38}{\kilo\hertz} Ton am TX-Ausgang aktiviert. Ist das momentane Symbol \lstinline!1!, also ein \mdash, wird die definierte Dauer für einen Dash mittels \lstinline!delay()! gewartet, sonst die für einen \mdot.
+Zum Senden wird zuerst überprüft ob der Eingabewert im Alphabet ist und ermittelt, an welcher Position im \lstinline!morseTable! er sich befindet. Der Morsecode wird in einer Schleife mit der Länge des Codewortes durchlaufen. Mit jeder Iteration wird der \SI{38}{\kilo\hertz} Ton am TX-Ausgang aktiviert. Ist das momentane Symbol \lstinline!1!, also ein \mdash, wird die definierte Dauer für einen Dash mittels \lstinline!delay()! gewartet, sonst die für einen \mdot. Danach wird der Ton mit \lstinline!noTone()! wieder ausgeschalten. Nach jedem Symbol wird eine definierte Zeit zwischen den Symbolen verzögert. Nach dem Codewort wird eine definierte Pausezeit gewartet.
 
+\newpage
 \lstinputlisting[
-    firstline=29,
+    firstline=33,
     lastline=56,
     caption={Methode zum Senden von Charakteren als Morsesymbolen}
 ]{../07-IR/tx/tx.ino}
+
+Es wird die serielle Schnittstelle mit \SI{9600}{\bit\per\second} initialisiert und alle empfangenen Zeichen direkt als Morse code gesendet.
 
 \lstinputlisting[
     firstline=58,
@@ -164,6 +165,7 @@ Zum Senden wird zuerst überprüft ob der Eingabewert im Alphabet ist und ermitt
     caption={Setup und Loop des Senders}
 ]{../07-IR/tx/tx.ino}
 
+\newpage
 \subsubsection{Implementierung des Empfängers}
 
 \lstinputlisting[
