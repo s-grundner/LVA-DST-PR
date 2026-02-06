@@ -37,15 +37,14 @@ R_V = \SI{220}{\ohm}
 \begin{circuitikz}[scale=0.9, transform shape]
     \draw (0,3) node[above] {D4}
     to[stroke led, o-, l=$D_1$] (0,1)
-    to[R, l=$R_1$] (0,-1);
+    to[R, l=$R_1$] (0,-1) node[ground]{};
     \draw (2,3) node[above] {D3} 
     to[stroke led, o-,l=$D_2$] (2,1)
-    to[R, l=$R_1$] (2,-1);
+    to[R, l=$R_1$] (2,-1) node[ground]{};
     \draw (4,3) node[above] {D2}
     to[stroke led, o-,l=$D_3$] (4,1)
-    to[R, l=$R_1$] (4,-1);
-    \draw (0,-1) -- (4,-1);
-    \draw (2,-1) to[short, *-] (2,-1.5) node[ground]{};
+    to[R, l=$R_1$] (4,-1) node[ground]{};
+
 \end{circuitikz}
 \caption{Schaltplan für Aufgabe 1}
 \end{figure}
