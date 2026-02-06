@@ -2,6 +2,10 @@
 
 #define F_IR_HZ 38000
 
+const int TX_PIN = 3;
+static const uint16_t UNIT_LEN_MS = 20;
+static const uint32_t UNIT_LEN_US = UNIT_LEN_MS * 1000;
+
 // Number of UNITs representing a morse symbol
 typedef enum {
   UNIT = 1,
@@ -25,10 +29,6 @@ static const morseCode morseTable[26] = {
   {0b001,  3}, {0b0001, 4}, {0b011,  3}, {0b1001, 4}, // U V W X
   {0b1011, 4}, {0b1100, 4}                            // Y Z
 };
-
-const int TX_PIN = 3;
-static const uint16_t UNIT_LEN_MS = 20;
-static const uint32_t UNIT_LEN_US = UNIT_LEN_MS * 1000;
 
 static void sendMorseChar(char c) {
   uint8_t idx = 0;
