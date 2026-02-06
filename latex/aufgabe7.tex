@@ -170,6 +170,14 @@ Es wird die serielle Schnittstelle mit \SI{9600}{\bit\per\second} initialisiert 
 
 Hier wurden die Schwellwerte für die Symbole festgelegt. Dabei bedeuten \lstinline!DOT_THRESH_US!, dass alle empfangenen Symbole unter dieser Messdauer als \mdot gelten und Messdauern die sich zwischen \lstinline!DOT_THRESH_US! und \lstinline!DASH_THRESH_US! befinden als \mdash.
 
+Zur Dekodierung des Codewortes wird ein Binärer Suchbaum verwendet. Es werden laufend Symbole empfangen. Ist das Symbol ein \mdot wird der rechte Pfad gewählt, sonst der linke. Wird das Codewort mit einer Pause beendet, wird der Buchstabe an der aktuellen Position im Baum.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\linewidth]{binMorseTree.png}
+    \caption{Binärer Suchbaum für den Morsecode} \label{fig:morsetree}
+\end{figure}
+
 \lstinputlisting[
     firstline=3,
     lastline=32,
@@ -187,7 +195,7 @@ Mit dem Oszilloskop wurde an den Flanken des IR-Empfängers Prellungen festgeste
 
 \lstinputlisting[
     firstline=52,
-    lastline=79,
+    lastline=80,
     caption={Entprellung für den IR-Senor}
 ]{../07-IR/rx/rx.ino}
 \subsection{Ergebnisse}

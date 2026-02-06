@@ -48,6 +48,9 @@ In dieser Aufgabe ist ein Logic Analyzer zu realisieren. Es sollen 3 unbekannte 
     \draw (0,0) node[dipchip, num pins=14, hide numbers](C){DUT};
     \draw (C.pin 14) -| ++(0.5,0.5) node[vcc]{};
     \draw (C.pin 7) -| ++(-0.5, -0.5) node[ground]{};
+    \draw (C.pin 1) to[short, -o] ++(-0.5, 0) node[left]{D3};
+    \draw (C.pin 2) to[short, -o] ++(-0.5, 0) node[left]{D4};
+    \draw (C.pin 3) to[short, -o] ++(-0.5, 0) node[left]{D2};
 
 \end{circuitikz}
 \caption{Schaltplan für Aufgabe 1}
@@ -61,12 +64,7 @@ Die für die Durchführung benötigten Bauteile sind in \autoref{tab:bom3} aufge
     \begin{tabularx}{\textwidth}{XXXX}
         \toprule
         \textbf{Bez.} & \textbf{Bauteil} & \textbf{Wert} & \textbf{Stückzahl} \\ \midrule
-        $R_1$ & Widerstand & \SI{10}{\kilo\ohm} & 1 \\ 
-        $R_2$ & Widerstand & \SI{220}{\ohm} & 5 \\ 
-        $D_1$ & LED & Red & 2 \\ 
-        $D_2$ & LED & Yellow & 2 \\ 
-        $D_3$ & LED & Green & 1 \\ 
-        $SW_1$ & Taster & & 1 \\ \bottomrule
+        $DUT$ & Gatter & unbekannt & 3 \\ 
     \end{tabularx}
 \end{table}
 
