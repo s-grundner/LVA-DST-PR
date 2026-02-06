@@ -32,7 +32,6 @@ static const char morseTree[MORSE_TREE_LEN] = {
 };
 
 uint32_t readDebouncedPulse() {
-  
   // IR Sensor yields LOW when receiving
   uint32_t totalDuration = pulseIn(RX_PIN, LOW, TIMEOUT_US);
   if (totalDuration == 0) {
@@ -41,14 +40,12 @@ uint32_t readDebouncedPulse() {
 
   while (true) {
     uint32_t fragment = pulseIn(RX_PIN, LOW, DEBOUNCE_TIME_US);
-
     if (fragment == 0) {
       break;
     } else {
       totalDuration += fragment;
     }
   }
-  
   return totalDuration;
 }
 
