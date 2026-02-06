@@ -56,7 +56,6 @@ void setup() {
 
 void loop() {
   uint8_t morseTreeIdx = 0;
-
   uint32_t meas_us = readDebouncedPulse();
 
   while (meas_us > MIN_TIME_US && morseTreeIdx < MORSE_TREE_LEN) {
