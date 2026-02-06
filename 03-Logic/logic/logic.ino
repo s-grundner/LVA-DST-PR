@@ -4,7 +4,6 @@ const int pinY = 2;
 
 void setup() {
   Serial.begin(9600);
-
   pinMode(pinA, OUTPUT);
   pinMode(pinB, OUTPUT);
   pinMode(pinY, INPUT);
