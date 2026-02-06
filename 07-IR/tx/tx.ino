@@ -64,8 +64,4 @@ void loop() {
   if (Serial.available() > 0) {
     sendMorseChar(Serial.read());
   }
-  
-  // sendMorseChar('Q');
-  // sendMorseChar('S');
-  // sendMorseChar('L');
 }

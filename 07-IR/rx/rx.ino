@@ -31,10 +31,13 @@ static const uint32_t MIN_TIME_US = (DOT - 2*UNIT) * UNIT_LEN_US;
 static const uint32_t DOT_THRESH_US = (DOT + UNIT) * UNIT_LEN_US;
 static const uint32_t DASH_THRESH_US = (DASH + 4*UNIT) * UNIT_LEN_US;
 
-
 uint32_t readDebouncedPulse() {
+  
+  // IR Sensor yields LOW when receiving
   uint32_t totalDuration = pulseIn(RX_PIN, LOW, TIMEOUT_US);
-  if (totalDuration == 0) return 0;
+  if (totalDuration == 0) {
+    return 0;
+  }
 
   while (true) {
     uint32_t fragment = pulseIn(RX_PIN, LOW, DEBOUNCE_TIME_US);
@@ -57,8 +60,6 @@ void setup() {
 void loop() {
   uint8_t morseTreeIdx = 0;
 
-  // IR Sensor yields LOW when receiving
-  
   uint32_t meas_us = readDebouncedPulse();
 
   while (meas_us > MIN_TIME_US && morseTreeIdx < MORSE_TREE_LEN) {

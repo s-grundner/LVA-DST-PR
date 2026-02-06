@@ -61,6 +61,7 @@
 \usepackage{algpseudocode, algorithm}
 \usepackage{fontawesome5} 
 \usepackage[dvipsnames]{xcolor}
+\usepackage{pdfpages}
 
 %% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -121,23 +122,11 @@
 
 \cleardoubleoddpage
 \tableofcontents
+\includepdf{images/stempelblatt.pdf}
 
-\cleardoubleoddpage
+\section*{Anmerkung}
 
-\section*{Geräteliste}
-
-\begin{table}[h]
-    \centering
-    \caption{Caption}
-    \label{tab:geraeteliste}
-    \begin{tabularx}{\textwidth}{rXX}
-    \toprule
-    Pos. & Bezeichnung & Serien Nummer \\ \midrule
-    \rownumber & Multimeter & IH807686 \\
-    \rownumber & Oszilloskop & \\
-    \bottomrule
-    \end{tabularx}
-\end{table}
+Von den Teilnehmern war vorgesehen, die Praktikumsaufgaben in 4er Gruppen durchzuführen. Die Aufgaben wurde gemeinsam \textbf{vor} dem Praktikumstermin mit der Gruppe 7 (Philip, Julian) vorbereitet. Deshalb ist es möglich, dass sich der Aufbau und die Implementierungen mit der Gruppe 7 ähneln.
 
 \input{aufgabe1}
 \input{aufgabe2}
