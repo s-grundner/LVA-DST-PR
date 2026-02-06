@@ -71,10 +71,12 @@ Die für die Durchführung benötigten Bauteile sind in \autoref{tab:bom2} aufge
     \begin{tabularx}{\textwidth}{XXXX}
         \toprule
         \textbf{Bez.} & \textbf{Bauteil} & \textbf{Wert} & \textbf{Stückzahl} \\ \midrule
-        $R_1$ & Widerstand & \SI{220}{\ohm} & 3 \\ 
-        $D_1$ & LED & Red & 1 \\ 
-        $D_2$ & LED & Yellow & 1 \\ 
-        $D_3$ & LED & Green & 1 \\ \bottomrule
+        $R_1$ & Widerstand & \SI{10}{\kilo\ohm} & 1 \\ 
+        $R_2$ & Widerstand & \SI{220}{\ohm} & 5 \\ 
+        $D_1$ & LED & Red & 2 \\ 
+        $D_2$ & LED & Yellow & 2 \\ 
+        $D_3$ & LED & Green & 1 \\ 
+        $SW_1$ & Taster & & 1 \\ \bottomrule
     \end{tabularx}
 \end{table}
 
@@ -92,18 +94,22 @@ Im Anschluss wurde die Schaltung am Steckbrett aufgebaut.
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=.5\textwidth]{latex/images/fotos/2.JPEG}
+    \includegraphics[height=5cm]{latex/images/fotos/2.JPEG}
     \caption{Verdrahtung am Steckbrett.}
 \end{figure}
 
+\newpage
 \subsubsection{Implementierung}
 
 \lstinputlisting[
-    lastline=3,
+    lastline=11,
     caption={Globale Variablen und Definitionen}
-]{../01-Ampel/ampel/ampel.ino}
+]{../02-Reaktionsspiel/react/react.ino}
 
 \lstinputlisting[
-    firstline=5,
+    firstline=13,
     caption={Setup und Loop}
-]{../01-Ampel/ampel/ampel.ino}
+]{../02-Reaktionsspiel/react/react.ino}
+
+\subsection{Ergebnisse}
+Bei jedem drücken des Tasters während die grüne LED leuchtete wurde das Spiel beschleunigt. Bei falschem drücken wurde das Spiel von neu gestartet. 
