@@ -168,9 +168,7 @@ Es wird die serielle Schnittstelle mit \SI{9600}{\bit\per\second} initialisiert 
 \newpage
 \subsubsection{Implementierung des Empfängers}
 
-Hier wurden die Schwellwerte für die Symbole festgelegt. Dabei bedeuten \lstinline!DOT_THRESH_US!, dass alle empfangenen Symbole unter dieser Messdauer als \mdot gelten und Messdauern die sich zwischen \lstinline!DOT_THRESH_US! und \lstinline!DASH_THRESH_US! befinden als \mdash.
-
-Zur Dekodierung des Codewortes wird ein Binärer Suchbaum verwendet. Es werden laufend Symbole empfangen. Ist das Symbol ein \mdot wird der rechte Pfad gewählt, sonst der linke. Wird das Codewort mit einer Pause beendet, wird der Buchstabe an der aktuellen Position im Baum.
+Hier wurden die Schwellwerte für die Symbole festgelegt. Dabei bedeuten \lstinline!DOT_THRESH_US!, dass alle empfangenen Symbole unter dieser Messdauer als \mdot gelten und Messdauern die sich zwischen \lstinline!DOT_THRESH_US! und \lstinline!DASH_THRESH_US! befinden als \mdash. Zur Dekodierung des Codewortes wird ein Binärer Suchbaum (\autoref{fig:morsetree}) verwendet. Es werden laufend Symbole empfangen. Ist das Symbol ein \mdot wird der rechte Pfad gewählt, sonst der linke. Wird das Codewort mit einer Pause beendet, wird der Buchstabe an der aktuellen Position im Baum.
 
 \begin{figure}[h]
     \centering
@@ -196,9 +194,11 @@ Mit dem Oszilloskop wurde an den Flanken des IR-Empfängers Prellungen festgeste
 \lstinputlisting[
     firstline=52,
     lastline=80,
-    caption={Entprellung für den IR-Senor}
+    caption={Setup und Loop des Empfängerprogramms}
 ]{../07-IR/rx/rx.ino}
 \subsection{Ergebnisse}
+
+Sobald in der Hauptschleife eine Symbolzeit gemessen wird, wird eine Schleife betreten in der die gemessene Zeit anhand der definierten Schwellwerte ausgewertet wird und solange wiederholt wird, bis der Suchbaum 
 
 \begin{itemize}
     \item Konsolenausgabe
