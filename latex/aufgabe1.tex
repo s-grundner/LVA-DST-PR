@@ -4,11 +4,7 @@
 
 \newpage
 \section{Ampelsteuerung}
-
-TODO
-\begin{itemize}
-    \item Aufgabenbeschreibung
-\end{itemize}
+In dieser Aufgabe soll der Ablauf einer einfachen Ampel für den Straßenverkehr mit Hilfe des Mikrocontrollers simuliert werden. Die Ampel wird dabei durch 3 verschiedenfarbige Leuchtdioden (rot, gelb und grun) am Steckbrett visualisiert.
 
 \subsection{Vorbereitung}
 
@@ -24,12 +20,22 @@ TODO
 \caption{LED mit Vorwiderstand}
 \end{wrapfigure}
 
-Im Betrieb weisen die verwendeten Leuchtdioden eine Vorwärtsspannung von ca. $U_F = \SI{2}{\volt}$ auf. Um den Strom durch die Leuchtdiode zu begrenzen, wird ein Vorwiderstand so dimensioniert, dass die restliche Spannung mit dem gewählten Maximalstorm an ihm abfällt.
+Im Betrieb weisen die verwendeten Leuchtdioden eine Vorwärtsspannung von ca. $U_F = \SI{2}{\volt}$ auf. Um den Strom durch die Leuchtdiode zu begrenzen, wird ein Vorwiderstand so dimensioniert, dass die restliche Spannung mit dem gewählten Maximalstrom an ihm abfällt.
 \[
 R_V = \frac{U_\text{IO} - U_F}{I_D} = \frac{\SI{5}{\volt} - \SI{2}{\volt}}{\SI{15}{\milli\ampere}} = \SI{200}{\ohm}
 \]
 
-Zur vefügung steht die E6 Widerstandsbaureihe. Damit keinesfalls der Maximalstorm überschritten wird, wird der nächst höhere Wert aus der Reihe gewählt.
+Zur Verfügung steht die E6 Widerstandsbaureihe. Damit keinesfalls der Maximalstrom überschritten wird, wird der nächst höhere Wert aus der Reihe gewählt.
 \[
 R_V = \SI{220}{\ohm}
 \]
+
+\subsection{Durchführung}
+
+\subsubsection{Aufbau}
+
+
+\subsubsection{Implementierung}
+\lstinputlisting[
+    caption={Globale Variablen und Definitionen des Senders}
+]{../01-Ampel/ampel/ampel.ino}
