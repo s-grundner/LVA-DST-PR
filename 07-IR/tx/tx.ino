@@ -5,10 +5,10 @@
 // Number of UNITs representing a morse symbol
 typedef enum {
   UNIT = 1,
-  DOT = 1,
-  DASH = 3,
+  DOT = 5,
+  DASH = 15,
   INTER_SYM = 1,
-  PAUSE = 7
+  PAUSE = 70
 } morseUnit;
 
 typedef struct {
@@ -27,8 +27,8 @@ static const morseCode morseTable[26] = {
 };
 
 const int TX_PIN = 3;
-static const uint16_t UNIT_LEN_MS = 200;
-static const uint32_t UNIT_LEN_US = 200000;
+static const uint16_t UNIT_LEN_MS = 20;
+static const uint32_t UNIT_LEN_US = UNIT_LEN_MS * 1000;
 
 static void sendMorseChar(char c) {
   uint8_t idx = 0;
@@ -49,7 +49,7 @@ static void sendMorseChar(char c) {
     } else {
       delay(DOT * UNIT_LEN_MS);
     }
-    noTone();
+    noTone(TX_PIN);
     delay(INTER_SYM * UNIT_LEN_MS);
   }
   delay(PAUSE * UNIT_LEN_MS);
@@ -61,11 +61,11 @@ void setup() {
 }
 
 void loop() {
-  // if (Serial.available() > 0) {
-  //  sendMorseChar(Serial.read());
-  // }
+  if (Serial.available() > 0) {
+    sendMorseChar(Serial.read());
+  }
   
-  sendMorseChar('Q');
-  sendMorseChar('S');
-  sendMorseChar('L');
+  // sendMorseChar('Q');
+  // sendMorseChar('S');
+  // sendMorseChar('L');
 }
