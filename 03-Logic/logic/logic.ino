@@ -12,7 +12,7 @@ void setup() {
 
 void loop() {
   int result00, result01, result10, result11;
-
+  // Test all input combinations
   setInputs(0, 0);
   result00 = digitalRead(pinY);
 
@@ -36,7 +36,7 @@ void setInputs(int a, int b) {
 }
 
 void identifyGate(int r00, int r01, int r10, int r11) {
-
+  // Identify the logic gate based on the results
   if (r00 == 0 && r01 == 0 && r10 == 0 && r11 == 1) {
     Serial.println("AND Gate");
   } else if (r00 == 0 && r01 == 1 && r10 == 1 && r11 == 1) {
