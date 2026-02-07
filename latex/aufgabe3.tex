@@ -53,7 +53,7 @@ In dieser Aufgabe ist ein Logic Analyzer zu realisieren. Es sollen 3 unbekannte 
     \draw (C.pin 3) to[short, -o] ++(-0.5, 0) node[left]{D2};
 
 \end{circuitikz}
-\caption{Schaltplan für Aufgabe 1}
+\caption{Schaltplan}
 \end{figure}
 
 Die für die Durchführung benötigten Bauteile sind in \autoref{tab:bom3} aufgeführt.
@@ -89,14 +89,19 @@ Im Anschluss wurde die Schaltung am Steckbrett aufgebaut.
 \end{figure}
 
 \subsubsection{Implementierung}
+Die Prüfung erfolgt über das sequentielle Anlegen der 4 möglichen Zustände und Überprüfung der resultierenden Ergebnisse.
 
 \lstinputlisting[
     caption={Implentierung des Logic Analyzer}
 ]{../03-Logic/logic/logic.ino}
 
 \subsection{Ergebnisse}
+Die Erweiterung für weitere logische 2 Bit Funktionen ist einfach. Es muss nur bei der Überprüfung eine weitere Abfrage hinzugefügt werden. Für Funktionen mit mehr Bit müsste das Programm umstrukturiert werden.
+
+Die vom Programm über den Seriellen Monitor ausgegebenen Gatter-Art stimmte mit der manuell ermittelten Logik:
 
 \begin{table}[h]
+    \caption{Ergebnisse der Überprüfung der DUTs}
     \begin{tabularx}{\textwidth}{YYY}
         \toprule
         Gatter 1 & Gatter 2 & Gatter 3 \\ \midrule
@@ -104,5 +109,6 @@ Im Anschluss wurde die Schaltung am Steckbrett aufgebaut.
         \bottomrule
     \end{tabularx}
 \end{table}
+
 
 

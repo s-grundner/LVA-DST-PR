@@ -21,11 +21,7 @@
 
 \newpage
 \section{Wertebestimmung von Widerstand und Kondensator}
-
-TODO
-\begin{itemize}
-    \item Aufgabenbeschreibung
-\end{itemize}
+Ziel dieser Aufgabe ist die Entwicklung zweier Programme zur Bestimmung elektrischer Größen. Das erste Programm dient der Ermittlung eines Widerstandswertes, das zweite der Berechnung einer Kapazität.
 
 \subsection{Vorbereitung}
 
@@ -67,39 +63,16 @@ Es ist bekannt, dass der Kondensator nach der Zeitkonstante $\tau = R \cdot C$ c
 \tau = \SI{100}{\milli\second}
 \]
 Daraus lässt sich die Kapazität $C$ berechnen:
-\begin{align*}
-    \tau &= R \cdot C \\
-    C &= \frac{\tau}{R} \\
-    C &= \frac{\SI{0.1}{\second}}{\SI{10}{\kilo\ohm}} \\
-    C &= \SI{0.00001}{\farad} = \SI{10}{\micro\farad}
-\end{align*}
+\[
+    \tau = R \cdot C \implies C = \frac{\tau}{R} = \frac{\SI{1.1}{\second}}{\SI{10}{\kilo\ohm}} = \SI{0.00001}{\farad} = \SI{10}{\micro\farad}
+\]
 
 \paragraph{b)} Der Kondensator gilt als vollständig geladen (Spannung $> 99\,\%$), wenn eine Zeit von ca. $5 \cdot \tau$ vergangen ist ($1 - e^{-5} \approx 0.993$). Die Ladedauer beträgt somit:
-\begin{align*}
-    t_{\text{voll}} &\approx 5 \cdot \tau \\
-    t_{\text{voll}} &= 5 \cdot \SI{100}{\milli\second} \\
-    t_{\text{voll}} &= \SI{500}{\milli\second}
-\end{align*}
+\[
+    t_{\text{voll}} \approx 5 \cdot \tau = 5 \cdot \SI{100}{\milli\second} = \SI{500}{\milli\second}
+\]
 
 \subsection{Durchführung}
-
-\begin{itemize}
-    \item \href{https://www.tinkercad.com/things/6dP6bOFcvVJ-4-widerstandsmessung?sharecode=cloxrV9fQVUj9Cfl4C-4CEYhAw4g13SRQi1Q5vM9bJg}{Tinker CAD Link Aufgabe 1}
-    \item \href{https://www.tinkercad.com/things/84XtVuCZHAm-4-kapazitatsmessung?sharecode=4kCbAaRwm3v1nCWt6jAq8217Vbh7pe0KWzrzvLyUI0Q}{Tinker CAD Link Aufgabe 2}
-    \item Stückliste
-\end{itemize}
-
-TODO Bilder
-
-\begin{itemize}
-    \item Schaltplan (tinkercad)
-    \item Strom und Spannungsmessung
-\end{itemize}
-
-\subsubsection{Aufbau am Steckbrett}
-
-
-\subsubsection{Messmethode}
 
 \tikzset{ameter/.style={rmeterwa, t=A}}
 \tikzset{vmeter/.style={rmeterwa, t=V}}
@@ -148,6 +121,74 @@ TODO Bilder
     \end{subfigure}
     \caption{Messschaltung zur Strom und Spannungsmessung eines Widerstands.}\label{fig:ui-mess}
 \end{figure}
+
+Die für die Durchführung benötigten Bauteile sind in \autoref{tab:bom4} aufgeführt.
+
+\begin{table}[h]
+    \centering
+    \caption{Stückliste}\label{tab:bom4}
+    \begin{tabularx}{\textwidth}{XXXX}
+        \toprule
+        \textbf{Bez.} & \textbf{Bauteil} & \textbf{Wert} & \textbf{Stückzahl} \\ \midrule
+        $R_\text{REF}$ & Widerstand & \SI{10}{\kilo\ohm} & 1 \\ 
+        $R_x$ & Widerstand & unbekannt & 4 \\ 
+        $C_x$ & Kondensator & unbekannt & 3 \\ \bottomrule
+    \end{tabularx}
+\end{table}
+
+\subsubsection{Aufbau am Steckbrett Widerstandsmessung}
+
+Vor dem Aufbau wurde eine Prototyp-Schaltung in Tinker-CAD\footnote{\href{https://www.tinkercad.com/things/4kQIa2P7zRc-2-reaktionsspiel?sharecode=tN5XWwIVhA9dR5oYUQt6OY9f_J_8c10GSfd3RA9Iedc}{Tinker CAD Share Link}} aufgebaut und emuliert, um die Durchführung am Steckbrett zu erleichtern.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{tinkercad2.png}
+    \caption{Planung des Aufbaus in TinkerCAD.}
+\end{figure}
+
+Im Anschluss wurde die Schaltung am Steckbrett aufgebaut.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[height=5cm]{latex/images/fotos/2.JPEG}
+    \caption{Verdrahtung am Steckbrett.}
+\end{figure}
+
+\subsubsection{Aufbau am Steckbrett Kapazitätsmessung}
+
+Vor dem Aufbau wurde eine Prototyp-Schaltung in Tinker-CAD\footnote{\href{https://www.tinkercad.com/things/4kQIa2P7zRc-2-reaktionsspiel?sharecode=tN5XWwIVhA9dR5oYUQt6OY9f_J_8c10GSfd3RA9Iedc}{Tinker CAD Share Link}} aufgebaut und emuliert, um die Durchführung am Steckbrett zu erleichtern.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{tinkercad2.png}
+    \caption{Planung des Aufbaus in TinkerCAD.}
+\end{figure}
+
+Im Anschluss wurde die Schaltung am Steckbrett aufgebaut.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[height=5cm]{latex/images/fotos/2.JPEG}
+    \caption{Verdrahtung am Steckbrett.}
+\end{figure}
+
+\newpage
+\subsubsection{Implementierung}
+
+\lstinputlisting[
+    lastline=11,
+    caption={Globale Variablen und Definitionen}
+]{../02-Reaktionsspiel/react/react.ino}
+
+\lstinputlisting[
+    firstline=13,
+    caption={Setup und Loop}
+]{../02-Reaktionsspiel/react/react.ino}
+
+
+\subsubsection{Messmethode}
+
+
 
 \newpage
 \subsection{Ergebnisse}

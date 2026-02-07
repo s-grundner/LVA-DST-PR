@@ -5,10 +5,7 @@
 \newpage
 \section{Ansteuerung eines Lautsprechers}
 
-TODO
-\begin{itemize}
-    \item Aufgabenbeschreibung
-\end{itemize}
+Mithilfe des Arduino UNOs sollen Töne an einem Lautsprecher ausgegeben werden. Dafür sollen an Ausgangspins ein \SI{4}{\bit} großer digitaler Wert ausgegeben werden. Die Binärzahl am Ausgang soll anschließend durch eine geeignete Schaltung am Steckbrett in ein analoges Signal umgewandelt und an einem Lautsprecher ausgegeben werden.
 
 \subsection{Vorbereitung}
 
@@ -123,17 +120,14 @@ U_\text{a,4-Bit} = \frac{U_\text{B1}}{2} + \frac{U_\text{B2}}{4} + \frac{U_\text
 
 \subsubsection{Sinus Wellentabelle}
 
-\paragraph{a)} Die Amplitude eines Sinus wird über eine Periode in 20 Werte diskretisiert. Die diskreten Werte erhält durch lineares Abbilden des Sinus auf den \SI{4}{\bit} Wertebereich.
+\paragraph{a)} Die Amplitude eines Sinus wird über eine Periode in 20 Werte diskretisiert. Die diskreten Werte erhält durch lineares Abbilden des Sinus auf den \SI{4}{\bit} Wertebereich. Die Berechneten Werte sind in \autoref{tab:sin-wavetable} aufgeführt.
 \[
 D_\text{SIN} = \mathrm{round\left(U_\text{SIN}\frac{D_\text{MAX}}{U_\text{MAX}}\right)} = \mathrm{round\left(U_\text{SIN}\frac{15}{\SI{5}{\volt}}\right)} 
 \]
 
-Die Berechneten Werte sind in \autoref{tab:sin-wavetable} aufgeführt.
-
-\begin{table}[h]
-    \centering
-    \caption{Amplituden des Sinus im Bereich \si{0}-\SI{5}{\volt}, unterteilt in 20 Stützwerte.}\label{tab:sin-wavetable}
-    \begin{tabularx}{10cm}{YYY}
+\begin{longtable}{ccc}
+    \caption{Amplituden des Sinus im Bereich \si{0}-\SI{5}{\volt}, unterteilt in 20 Stützwerte.}
+    \label{tab:sin-wavetable}
     \toprule
     $U_\text{SIN}$ / \si{\volt} & $D_\text{SIN}$ Dezimal & $D_\text{SIN}$ Hexadezimal \\ \midrule
     2.5 & 8  & 0x8 \\
@@ -157,10 +151,8 @@ Die Berechneten Werte sind in \autoref{tab:sin-wavetable} aufgeführt.
     1.0 & 3  & 0x3 \\
     1.7 & 5  & 0x5 \\
     \bottomrule
-    \end{tabularx}
-\end{table}
+\end{longtable}
 
-\newpage
 \paragraph{b)} In einer Periodendauer $T$ müssen alle $N=20$ Werte der Wellentabelle durchlaufen werden. Die Zeit, wie lange ein Bitmuster am Ausgang anliegen muss, ergibt sich durch 
 \[
 t_\text{b} = \frac{T}{N} = \frac{1}{fN}.
