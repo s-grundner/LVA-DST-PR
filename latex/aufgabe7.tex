@@ -89,12 +89,12 @@ Um den Maximalstrom nicht zu überschreiten, wird der nächst höhere Widerstand
 \centering
 \begin{circuitikz}[scale=0.8, transform shape]
     \draw (0,0) node[ground]{} node[nmos, anchor=S](Q1){$Q_1$};
-    \draw (Q1.G) to[R,l_=$R_1$, -o] ++(-1.5,0) node[left]{Pin D3};
+    \draw (Q1.G) to[R,l_=$R_1$, -o] ++(-1.5,0) node[left]{Pin D3'};
     \draw (Q1.D) to[R,l^=$R_2$] ++(0,1)
         to[stroke led, mirror, invert, l^={$D_1$}] ++(0,1) coordinate(vcc) node[vcc]{$\SI{5}{\volt}$};
     \draw (2,0) node[ground]{} to[twoport,name={ir}] (vcc -| 2,0) node[vcc]{$\SI{5}{\volt}$};
     \draw (ir.e) to[stroke photodiode, mirror, l_={$IC_1$}] (ir.w);
-    \draw (ir.s) to[short, -o] ++(1,0) node[right]{Pin D3};
+    \draw (ir.s) to[short, -o] ++(1,0) node[right]{Pin $D3_\text{}$};
 \end{circuitikz}
 \caption{Schaltplan}\label{fig:schem7}
 \end{wrapfigure}
@@ -106,9 +106,9 @@ Hier wurden zwei Arduino UNO Boards benötigt, Sender und Empfänger gleichzeiti
 \begin{table}[b]
     \centering
     \caption{Stückliste}\label{tab:bom7}
-    \begin{tabularx}{\textwidth}{lXXr}
+    \begin{tabularx}{\textwidth}{XXXX}
         \toprule
-        \textbf{Bezeichnung} & \textbf{Bauteil} & \textbf{Wert} & \textbf{Stückzahl} \\ \midrule
+        \textbf{Bez.} & \textbf{Bauteil} & \textbf{Wert} & \textbf{Stückzahl} \\ \midrule
         $R_1$ & \multirow{2}{*}{Widerstand} & \SI{100}{\ohm} & 1 \\ 
         $R_2$ & & \SI{24}{\ohm} & 1 \\ 
         $D_1$ & Infrarot Diode & $U_F = \SI{1.6}{\volt}$ & 1 \\ 
@@ -168,7 +168,7 @@ Es wird die serielle Schnittstelle mit \SI{9600}{\bit\per\second} initialisiert 
 \newpage
 \subsubsection{Implementierung des Empfängers}
 
-Hier wurden die Schwellwerte für die Symbole festgelegt. Dabei bedeuten \lstinline!DOT_THRESH_US!, dass alle empfangenen Symbole unter dieser Messdauer als \mdot gelten und Messdauern die sich zwischen \lstinline!DOT_THRESH_US! und \lstinline!DASH_THRESH_US! befinden als \mdash. Zur Dekodierung des Codewortes wird ein Binärer Suchbaum (\autoref{fig:morsetree}) verwendet. Es werden laufend Symbole empfangen. Ist das Symbol ein \mdot wird der rechte Pfad gewählt, sonst der linke. Wird das Codewort mit einer Pause beendet, wird der Buchstabe an der aktuellen Position im Baum.
+Hier wurden die Schwellwerte für die Symbole festgelegt. Dabei bedeuten \lstinline!DOT_THRESH_US!, dass alle empfangenen Symbole unter dieser Messdauer als \mdot gelten und Messdauern die sich zwischen \lstinline!DOT_THRESH_US! und \lstinline!DASH_THRESH_US! befinden als \mdash. Zur Dekodierung des Codewortes wird ein Binärer Suchbaum (\autoref{fig:morsetree}) verwendet. Es werden laufend Symbole empfangen. Ist das Symbol ein \mdot wird der rechte Pfad gewählt, sonst der linke. Wird das Codewort mit einer Pause beendet, wird der Buchstabe an der aktuellen Position im Baum ausgegeben.
 
 \begin{figure}[h]
     \centering
@@ -196,15 +196,31 @@ Mit dem Oszilloskop wurde an den Flanken des IR-Empfängers Prellungen festgeste
     lastline=80,
     caption={Setup und Loop des Empfängerprogramms}
 ]{../07-IR/rx/rx.ino}
+
+Sobald in der eine Symbolzeit gemessen wird, wird eine Schleife betreten. In dieser wird die gemessene Zeit anhand der definierten Schwellwerte ausgewertet wird und solange wiederholt wird, bis der Suchbaum vollständig traversiert wurde, oder eine längere Pause gemessen wird.  
+
+Die Ebenen des Suchbaums wurden in einem Array gespeichert. Um die Baumstruktur auf das lineare Array zu übertragen, müssen für die Indexierung des Arrays folgende Regeln beachtet werden, wenn man sich im Baum nach links oder nach rechts bewegen möchte.
+
+\begin{itemize}[noitemsep]
+    \item \textbf{Rechts:} $i_{n+1} = 2i_{n} + 2$
+    \item \textbf{Links:} $i_{n+1} = 2i_{n} + 1$
+\end{itemize}
+
+Das funktioniert nur wenn der Binäre Suchbaum komplett ist. Das wird erzielt indem die Leeren Blätter mit dem Nullcharacter \lstinline!'\0'! aufgefüllt werden.
+
 \subsection{Ergebnisse}
 
-Sobald in der Hauptschleife eine Symbolzeit gemessen wird, wird eine Schleife betreten in der die gemessene Zeit anhand der definierten Schwellwerte ausgewertet wird und solange wiederholt wird, bis der Suchbaum 
+Mit dem Sender lässt sich ein Text in der Konsole eingeben, welcher dann mit der IR-LED ausgesendet wird. Test mit dem String \lstinline!HALLO! liefert in der Empfängerkonsole:
 
-\begin{itemize}
-    \item Konsolenausgabe
-    \item Oszilbild
-    \item Defekte IR Sensoren
+\begin{itemize}[noitemsep]
+    \item \texttt{....H}
+    \item \texttt{.-A}
+    \item \texttt{.-..L}
+    \item \texttt{.-..L}
+    \item \texttt{...O}
 \end{itemize}
+
+Mit dem Oszilloskop wurde während der Übertragung ein Oszillogramm aufgezeichnet.
 
 \begin{figure}[h]
     \centering
