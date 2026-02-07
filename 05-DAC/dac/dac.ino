@@ -11,25 +11,16 @@ const uint8_t sinTable[WT_SIZE] = {
   0x0, 0x2, 0x3, 0x5
 };
 const uint16_t octaveFreqs[12] = {
-  262, // C
-  277, // C#
-  294, // D
-  311, // D#
-  330, // E
-  349, // F
-  370, // F#
-  392, // G
-  315, // G#
-  440, // A
-  466, // A#
-  494, // B
+  262, 277, 294, 311, // C C# D D#
+  330, 349, 370, 392, // E F F# G
+  315, 440, 466, 494  // G# A A# B
 };
 
 const uint8_t alleMeineEntchen[] = {
     0, 2, 4, 5, 7, 7,
     9, 9, 9, 9, 7,
     9, 9, 9, 9, 7,
-    5, 5, 5, 5, 4,
+    5, 5, 5, 5, 4, 4,
     2, 2, 2, 2, 0
 };
 const int entchenSize = sizeof(alleMeineEntchen)/sizeof(uint8_t);
