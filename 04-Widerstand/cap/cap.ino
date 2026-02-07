@@ -1,8 +1,8 @@
 const int chargePin = 7; 
-const int measurePin = A0;   
-const float resistorValue = 10000.0; // Measurement
+const int measurePin = A0; // Pin connected to the capacitor
+const float R_REF = 9970.0; // Reference resistor value in ohms
 
-const int targetReading = 1023 * 0.632; 
+const int targetReading = 1023 * 0.632; // Target reading for 63.2% charge
 
 unsigned long startTime;
 unsigned long endTime;
@@ -15,6 +15,7 @@ void setup() {
 }
 
 void loop() {
+  // Discharge the capacitor
   digitalWrite(chargePin, LOW);
   while(analogRead(measurePin) > 0){
     //wait till empty
@@ -23,18 +24,19 @@ void loop() {
   digitalWrite(chargePin, HIGH);
   startTime = micros();
 
+  // Wait until the capacitor is charged to the target reading
   while(analogRead(measurePin) < targetReading){
-	//wait till charged
+	  //wait till charged
   }
 
   endTime = micros() - startTime;
-  
-  capacity = (endTime / resistorValue);
+  // Calculate the capacity
+  capacity = (endTime / R_REF);
 
-  Serial.print("\\item Charge Time: ");
+  Serial.print("Charge Time: ");
   Serial.print(endTime);
   Serial.println(" us");
-  Serial.print("\\item Kapazität: ");
+  Serial.print("Kapazität: ");
   Serial.print(capacity);
   Serial.println(" uF");
 

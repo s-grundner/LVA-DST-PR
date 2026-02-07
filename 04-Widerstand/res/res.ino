@@ -1,6 +1,6 @@
-const int analogPin = A1;
-const float R_REF = 9970.0; // Measurement
-const float VCC = 5.0;
+const int analogPin = A1; // Pin connected to the voltage divider
+const float R_REF = 9970.0; // Reference resistor value in ohms
+const float VCC = 5.0; // Supply voltage
 
 void setup() {
   Serial.begin(9600);
@@ -8,13 +8,14 @@ void setup() {
 }
 
 void loop() {
+  // Read the analog value
   int rawValue = analogRead(analogPin);
+  // Convert the analog value to voltage
   float u_x = rawValue * (VCC / 1024.0);
+  // Calculate the resistance
   float r_x = R_REF * (u_x / (VCC - u_x));
 
   Serial.print(r_x);
-  Serial.print(", ");
-  Serial.println(rawValue);
-
+  Serial.println(" Ohms");
   delay(1000);
 }
