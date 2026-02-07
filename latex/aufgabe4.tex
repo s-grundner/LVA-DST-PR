@@ -161,7 +161,7 @@ Vor dem Aufbau wurde eine Prototyp-Schaltung in Tinker-CAD\footnote{\href{https:
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=\textwidth]{tinkercad4cap.png}
+    \includegraphics[width=.7\textwidth]{tinkercad4cap.png}
     \caption{Planung des Aufbaus in TinkerCAD.}
 \end{figure}
 
@@ -198,7 +198,6 @@ Im Anschluss wurde die Schaltung am Steckbrett aufgebaut.
 ]{../04-Widerstand/cap/cap.ino}
 
 \subsubsection{Messmethode}
-
 
 
 \newpage
@@ -404,3 +403,13 @@ Widerstandswert / \si{\ohm} & ADC Messwert \\ \midrule
     \item Ladezeit: \SI{103276}{\micro\second}
     \item Kapazität: \SI{10.33}{\micro\farad}
 \end{itemize}
+
+\subsubsection{Fazit der unterschiedlichen Messmethoden}
+
+\paragraph{Widerstände} Es sind deutliche Unterschiede feststellbar. Während Farbcode und Multimeter konsistente Werte liefern, weicht die Mikrocontroller-Messung teilweise stark ab. Besonders bei sehr kleinen Widerständen (z. B. \SI{100}{\ohm}) ist der Fehler massiv, während er bei Werten nahe dem Referenzwiderstand (\SI{12}{\kilo\ohm}) geringer ist. Die Abweichungen liegen primär in der Auflösung des ADCs (10-Bit) und der Dimensionierung des Spannungsteilers:
+\begin{itemize}
+    \item Quantisierungsfehler: Bei kleinen Widerständen ($R_x \ll R_{Ref}$) ist die Messspannung extrem niedrig. Der ADC nutzt nur \SI{10}{\bit}, wodurch bereits ein Fehler von $\pm 1$ Bit zu enormen prozentualen Abweichungen führt.
+    \item Spannungsteiler-Prinzip: Die Messung ist nur präzise, wenn $R_x$ in einer ähnlichen Größenordnung wie $R_{Ref}$ ($\approx$ \SI{10}{\kilo\ohm}) liegt.
+\end{itemize}
+
+\paragraph{Kondensatoren} Bei der Kondensatoren konnte eine geringe Abweichung zwischen Messung und Marking Code festgestellt werden. Durch die hohe Toleranz von \SI{10}{\percent} wird jedoch die Messung durch das Programm genauer sein als der angegebene Kondensator.

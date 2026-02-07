@@ -5,16 +5,13 @@
 \newpage
 \section{Motorsteuerung mit Näherungssensor}
 
-\begin{itemize}
-    \item \href{https://www.tinkercad.com/things/hbu5BrjimWH-motorsteuerung-mit-naherungssensor?sharecode=gi4HZSHWYtQ_-pqyN-BGPv7sjuL0sj8BF5-5UPD97Eg}{Tinker CAD Link}
-    \item Stückliste
-\end{itemize} 
+Ein Gleichstrommotor soll mit einem Motortreiber angesteuert werden. Die Drehzahl des Motors wird dabei mittels PWM geregelt und kann mit zwei Tastern inkrementiert oder dekrementiert werden. Auf einer 7-Segment anzeige wird die momentane Drehzahlstellung angezeigt. Weiters wird mit einem Ultraschallmodul eine Notabschaltung implementiert, wenn jemand dem Motor zu nahe kommt.
 
 \subsection{Vorbereitung} 
 
 \subsubsection{Ultraschall-Modul HC-SR04 information} 
-%https://www.mikrocontroller.net/attachment/218122/HC-SR04_ultraschallmodul_beschreibung_3.pdf
-Folgende wichtige Spezifikationsdaten konnten auf Mikrocontroller.net gefunden werden:
+
+Folgende wichtige Spezifikationsdaten konnten auf \href{https://www.mikrocontroller.net/attachment/218122/HC-SR04_ultraschallmodul_beschreibung_3.pdf}{Mikrocontroller.net} gefunden werden:
 
 \begin{itemize}[noitemsep]
     \item Messbereich: 2 cm bis ca. 300 cm.
@@ -26,33 +23,31 @@ Folgende wichtige Spezifikationsdaten konnten auf Mikrocontroller.net gefunden w
 Pin Belegung (Von links nach Rechts):
 
 \begin{itemize}[noitemsep]
-    \item \textbf{Pin 1: } VCC (\SI{5}{\volt})
-    \item \textbf{Pin 2: } Trigger eingang TTL (0-0.8V ist low, 2,4-5V ist High)
-    \item \textbf{Pin 3: } Ausgang Messergebnis TTL
-    \item \textbf{Pin 4: } Ground
+    \item \textbf{Pin 1:} VCC (\SI{5}{\volt})
+    \item \textbf{Pin 2:} Trigger Eingang TTL (0-\SI{0.8}{\volt} ist low, 2.4-\SI{5}{\volt} ist High)
+    \item \textbf{Pin 3:} Ausgang Messergebnis TTL
+    \item \textbf{Pin 4:} Ground
 \end{itemize}
 
-Eine Messung wird gestartet durch eine fallende Flanke am Triggereingang (Pint 1) die 10 $\mu\sec$ andauert. \\
-Das modul sendet nach 250 $\mu\sec$ ein signal. Nun geht der ausgang auf High. Sobald das Echo empfangen wird geht der ausgang wieder auf low. Wird kein echo empfangen, blaubt der ausgang für 200ms auf High.
-Damit ergibt sich die entfernung als:
+Eine Messung wird gestartet durch eine fallende Flanke am Triggereingang (Pin 1) die \SI{10}{\micro\second} andauert. Das Modul sendet nach \SI{250}{\micro\second} ein Signal. Nun geht der Ausgang auf High. Sobald das Echo empfangen wird geht der Ausgang wieder auf Low. Wird kein Echo empfangen, bleibt der Ausgang für \SI{200}{\milli\second} auf High.
+Damit ergibt sich die Entfernung als:
 
 \[
     d = \frac{t \cdot 34.3\frac{\si{\centi\meter}}{\si{\milli\second}}}{2}
 \]
 
-Das Ergebnis kann durch Temperatur, rauhe oberflächen und schlechtem winkel verschlechtert werden.
+Das Ergebnis kann durch Temperatur, raue Oberflächen und schlechtem Winkel verschlechtert werden.
 
-\subsubsection{Plan für die Verwendung des Ultraschall Moduls}
+\paragraph{Plan für die Verwendung des Ultraschall Moduls} Im Programm wird der Trigger Pin kurz auf High und wieder auf Low gesetzt um eine Messung zu starten. Anschließend wird ein delay von \SI{30}{\micro\second} durchgeführt damit die maximale Messrate nicht unterschritten wird.
 
-Der Grobe Plan für die verwendung ist, dass der Trigger und der Ausgangs Pin mit dem Arduino verbunden werden. Es werden Interrupts für den ausgang konfiguriert. Bei steigender Flanke wird die aktuelle systemzeit gespeichert. Bei fallender Flanke wird mit der differenz der aktuellen zeit und der gespeicherten zeit die Distanz berechnet und ein boolean gesetzt um anzuzeigen, dass die messung bereit ist,
-
-Im hauptprogramm wird der steuer pin kurz auf high und wieder auf low gesetzt um eine messung zu triggern. Anschließend wird ein delay von 30ms durchgeführt damit wir die maximale Messrate nicht unterschreiten. Anschließend wird falls der Mess-boolean gesetzt wurde der Motor Ausgeschaltet.
-
+\newpage
 \subsubsection{Schieberegister für 7 Segment Anzeige}
 
-\begin{figure}
+In \autoref{fig:7seg-pins} sind die Anschlüsse für die Segmentanzeige abgebildet und wie diese mit dem Schieberegister verbunden werden sollen. Um Zahlen auf der Segmentanzeige darzustellen, werden im Vorhinein die Pin Stellungen für die Ziffern gespeichert. Die Segmentanzeige weist eine Common-Cathode Konfiguration auf, wodurch die Pins auf HIGH gesetzt werden müssen um das Segment zu erleuchten.
+
+\begin{figure}[h]
     \centering
-    \begin{subfigure}[c]{0.5\textwidth}
+    \begin{subfigure}[c]{0.4\textwidth}
         \centering
         \includegraphics[width=0.5\textwidth]{6/7seg.png}
     \end{subfigure}\hfill
@@ -60,7 +55,7 @@ Im hauptprogramm wird der steuer pin kurz auf high und wieder auf low gesetzt um
         \centering
         \includegraphics[width=0.8\textwidth]{6/shiftreg.png}
     \end{subfigure}
-    \caption{Pinbelegung und Ersatzschaltbild der verwendeten 7-Segment-Anzeige SC52}
+    \caption{Pinbelegung und Ersatzschaltbild der verwendeten 7-Segment-Anzeige SC52}\label{fig:7seg-pins}
 \end{figure}
 
 \begin{table}[h]
@@ -84,7 +79,6 @@ Im hauptprogramm wird der steuer pin kurz auf high und wieder auf low gesetzt um
 
 \subsubsection{Berechnung Vorwiderstände}
 Die Benötigte Dioden Spannung der LEDs ist $U_D=\SI{2}{\volt}$ bei einem Strom $I_D=\SI{15}{\milli\ampere}$. Es ist mit einer Spannung von $U_{CC}=\SI{5}{\volt}$ an den Ausgängen des Schieberegisters zu rechnen. Der Vorwiederstand Kann wie folgt berechnet werden:
-
 \begin{align*}
     U_{R_V} &= U_{CC} - U_D = \SI{5}{\volt} - \SI{2}{\volt} = \SI{3}{\volt} \\
     I_{R_V} &= I_D = \SI{15}{\milli\ampere} \\
@@ -95,9 +89,49 @@ Die E6 Reihe enthält die Werte $\{1.0; 1.5; 2.2; 3.3; 4.7; 6.8\}$. Damit sind d
 
 \subsection{Durchführung}
 
+\begin{table}[b]
+    \centering
+    \caption{Stückliste}\label{tab:bom6}
+    \begin{tabularx}{\textwidth}{XXXX}
+        \toprule
+        \textbf{Bez.} & \textbf{Bauteil} & \textbf{Wert} & \textbf{Stückzahl} \\ \midrule
+        $R_1$ & \multirow{2}{*}{Widerstand} & \SI{100}{\ohm} & 1 \\ 
+        $R_2$ & & \SI{24}{\ohm} & 1 \\ 
+        $D_1$ & Infrarot Diode & $U_F = \SI{1.6}{\volt}$ & 1 \\ 
+        $Q_1$ & NMOS Transistor & BS170 & 1 \\
+        $IC_1$ & IR Sensor Modul & KY022 & 1 \\ 
+         & Arduino UNO & & 2 \\ \bottomrule
+    \end{tabularx}
+\end{table}
+
+\subsubsection{Aufbau am Steckbrett}
+
+Vor dem Aufbau wurde eine Prototyp-Schaltung in Tinker-CAD\footnote{\href{https://www.tinkercad.com/things/hbu5BrjimWH-motorsteuerung-mit-naherungssensor?sharecode=gi4HZSHWYtQ_-pqyN-BGPv7sjuL0sj8BF5-5UPD97Eg}{Tinker CAD Share Link}} aufgebaut und emuliert, um die Durchführung am Steckbrett zu erleichtern.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{tinkercad6.png}
+    \caption{Planung des Aufbaus in TinkerCAD.}
+\end{figure}
+
+Im Anschluss wurde die Schaltung am Steckbrett aufgebaut.
+
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}[c]{.49\textwidth}
+        \centering
+        \includegraphics[width=.3\textwidth]{latex/images/fotos/6_1.JPEG}
+        \caption{Verdrahtung am Steckbrett.}
+    \end{subfigure}
+    \begin{subfigure}[c]{.49\textwidth}
+        \centering
+        \includegraphics[width=.3\textwidth]{latex/images/fotos/6_2.JPEG}
+        \caption{Verdrahtung am Steckbrett.}
+    \end{subfigure}
+    \caption{Verdrahtung am Steckbrett.}
+\end{figure}
+
 \begin{itemize}
-    \item Aufbau in Tinkercad
-    \item Fotos
     \item Code
 \end{itemize}
 
@@ -107,7 +141,5 @@ Die E6 Reihe enthält die Werte $\{1.0; 1.5; 2.2; 3.3; 4.7; 6.8\}$. Damit sind d
     \caption{Planung des Aufbaus der letzten Ausbaustufe in TinkerCAD bei der alle Baugruppen kombiniert sind}
 \end{figure}
 
-
-\subsubsection{Aufbau am Steckbrett}
-
-
+\newpage
+\newpage
