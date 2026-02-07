@@ -86,7 +86,7 @@ void loop()
   if(time - sensorPeriodMillis > lastSensorTime) {
     float distance = getDistance();
     Serial.print(distance);
-  	Serial.println(" cm");
+    Serial.println(" cm");
     
     if((distance < 30.0) != motorOff) {
       motorOff = distance < 30.0;
@@ -135,9 +135,7 @@ void countDown() {
 
 void setShiftRegister(int number) {
   digitalWrite(SHIFT_OUTPUT, LOW);
-  
   shiftOut(SHIFT_IN, SHIFT_CLK, LSBFIRST, segmentPatterns[number]);
-  
   digitalWrite(SHIFT_OUTPUT, HIGH);
 }
 
