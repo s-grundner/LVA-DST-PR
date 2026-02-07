@@ -154,6 +154,7 @@ Im Anschluss wurde die Schaltung am Steckbrett aufgebaut.
     \caption{Verdrahtung am Steckbrett.}
 \end{figure}
 
+\newpage
 \subsubsection{Aufbau am Steckbrett Kapazitätsmessung}
 
 Vor dem Aufbau wurde eine Prototyp-Schaltung in Tinker-CAD\footnote{\href{https://www.tinkercad.com/things/84XtVuCZHAm-4-kapazitatsmessung?sharecode=4kCbAaRwm3v1nCWt6jAq8217Vbh7pe0KWzrzvLyUI0Q}{Tinker CAD Share Link}} aufgebaut und emuliert, um die Durchführung am Steckbrett zu erleichtern.
@@ -172,7 +173,6 @@ Im Anschluss wurde die Schaltung am Steckbrett aufgebaut.
     \caption{Verdrahtung am Steckbrett.}
 \end{figure}
 
-\newpage
 \subsubsection{Implementierung der Widerstandsmessung}
 
 \lstinputlisting[
@@ -185,6 +185,17 @@ Im Anschluss wurde die Schaltung am Steckbrett aufgebaut.
     caption={Setup und Loop}
 ]{../04-Widerstand/res/res.ino}
 
+\subsubsection{Implementierung der Kapazitätsmessung}
+
+\lstinputlisting[
+    lastline=9,
+    caption={Globale Variablen und Definitionen}
+]{../04-Widerstand/cap/cap.ino}
+
+\lstinputlisting[
+    firstline=11,
+    caption={Setup und Loop}
+]{../04-Widerstand/cap/cap.ino}
 
 \subsubsection{Messmethode}
 
