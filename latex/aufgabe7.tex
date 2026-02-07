@@ -6,8 +6,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% AUFGABE 7
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newpage
 
+text
+\newpage
 \section{Datenübertragung mittels Infra-Rot (IR)}
 
 Mit zwei Arduino Uno Boards soll eine Übertragung von Morsecodes mittels Infra-Rot Lichtsignalen aufgebaut werden. Sender seitig wird eine IR-LED angesteuert, sodass Infrarotsignale mit einer Frequenz von \SI{38}{\kilo\hertz} gesendet werden. Die Symbole der Morsezeichen (\mdash,\textbullet) werden dabei mit unterschiedlicher Sendedauer enkodiert. Als Empfänger wird das IR-Detektor-Modul KY-022 verwendet, welches am Ausgang \lstinline!LOW! ausgibt, wenn es ein IR-Lichtignal mit der genannten Frequenz detektiert, ansonsten \lstinline!HIGH!.
@@ -106,7 +107,7 @@ Hier wurden zwei Arduino UNO Boards benötigt, Sender und Empfänger gleichzeiti
 \begin{table}[b]
     \centering
     \caption{Stückliste}\label{tab:bom7}
-    \begin{tabularx}{\textwidth}{XXXX}
+    \begin{tabularx}{\textwidth}{lXXr}
         \toprule
         \textbf{Bez.} & \textbf{Bauteil} & \textbf{Wert} & \textbf{Stückzahl} \\ \midrule
         $R_1$ & \multirow{2}{*}{Widerstand} & \SI{100}{\ohm} & 1 \\ 
@@ -121,7 +122,7 @@ Hier wurden zwei Arduino UNO Boards benötigt, Sender und Empfänger gleichzeiti
 \newpage
 \subsubsection{Aufbau am Steckbrett}
 
-Vor dem Aufbau wurde eine Prototyp-Schaltung in Tinker-CAD\footnote{\href{https://www.tinkercad.com/things/0UY9zs3iKwE-dst-07-ir?sharecode=mE1HyXRFxTP7FBArqWQ20zcDbVb7zpU4BAKAofIcNlk}{Tinker CAD Share Link}} aufgebaut und emuliert, um die Durchführung am Steckbrett zu erleichtern.
+Vor dem Aufbau wurde eine Prototyp-Schaltung in Tinker-CAD\footnote{\href{https://www.tinkercad.com/things/4qO4ZR4RNOr-dst-06-motor?sharecode=5wnYOkwKl1iYFE9mkhQYIMa-CpVZ3Xqr2pB6cb84XQg}{Tinker CAD Share Link}} aufgebaut und emuliert, um die Durchführung am Steckbrett zu erleichtern.
 
 \begin{figure}[h]
     \centering

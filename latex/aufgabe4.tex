@@ -74,6 +74,24 @@ Daraus lässt sich die Kapazität $C$ berechnen:
 
 \subsection{Durchführung}
 
+Um die Werte zu bestimmen wurden unterschiedliche Methoden verwendet um die Bauteilgrößen zu bestimmen.
+
+\begin{minipage}[t]{0.49\textwidth}
+    \textbf{Widerstand}:
+    \begin{itemize}[nolistsep, noitemsep]
+        \item Ablesen des Farbcodes und Vergleich mit der Wertetabelle.
+        \item Messung von Strom und Spannung wie in \autoref{fig:ui-mess} (c) und (d) gezeigt.
+        \item Spannungsteiler Messung mit dem ADC des Arduinos.
+    \end{itemize}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.49\textwidth}
+    \textbf{Kondensator}:
+    \begin{itemize}[nolistsep, noitemsep]
+        \item Ablesen der Kapazität am Bauteil.
+        \item Messung der Ladezeit über den ADC des Arduinos.
+    \end{itemize}
+\end{minipage}
+
 \tikzset{ameter/.style={rmeterwa, t=A}}
 \tikzset{vmeter/.style={rmeterwa, t=V}}
 
@@ -127,7 +145,7 @@ Die für die Durchführung benötigten Bauteile sind in \autoref{tab:bom4} aufge
 \begin{table}[h]
     \centering
     \caption{Stückliste}\label{tab:bom4}
-    \begin{tabularx}{\textwidth}{XXXX}
+    \begin{tabularx}{\textwidth}{lXXr}
         \toprule
         \textbf{Bez.} & \textbf{Bauteil} & \textbf{Wert} & \textbf{Stückzahl} \\ \midrule
         $R_\text{REF}$ & Widerstand & \SI{10}{\kilo\ohm} & 1 \\ 
@@ -138,41 +156,39 @@ Die für die Durchführung benötigten Bauteile sind in \autoref{tab:bom4} aufge
 
 \subsubsection{Aufbau am Steckbrett Widerstandsmessung}
 
-Vor dem Aufbau wurde eine Prototyp-Schaltung in Tinker-CAD\footnote{\href{https://www.tinkercad.com/things/6dP6bOFcvVJ-4-widerstandsmessung?sharecode=cloxrV9fQVUj9Cfl4C-4CEYhAw4g13SRQi1Q5vM9bJg}{Tinker CAD Share Link}} aufgebaut und emuliert, um die Durchführung am Steckbrett zu erleichtern.
+Vor dem Aufbau wurde eine Prototyp-Schaltung in Tinker-CAD\footnote{\href{https://www.tinkercad.com/things/6dP6bOFcvVJ-4-widerstandsmessung?sharecode=cloxrV9fQVUj9Cfl4C-4CEYhAw4g13SRQi1Q5vM9bJg}{Tinker CAD Share Link}} aufgebaut und emuliert, um die Durchführung am Steckbrett zu erleichtern. Im Anschluss wurde die Schaltung am Steckbrett aufgebaut.
 
 \begin{figure}[h]
-    \centering
+\centering
+\begin{subfigure}[b]{0.65\textwidth}
     \includegraphics[width=\textwidth]{tinkercad4res.png}
-    \caption{Planung des Aufbaus in TinkerCAD.}
+    \caption{Planung des Aufbaus in TinkerCAD}
+\end{subfigure}\hfill
+\begin{subfigure}[b]{0.3\textwidth}
+    \centering
+    \includegraphics[width=.9\textwidth]{latex/images/fotos/4_a.JPEG}
+    \caption{Verdrahtung am Steckbrett}
+\end{subfigure}
 \end{figure}
 
-Im Anschluss wurde die Schaltung am Steckbrett aufgebaut.
+\subsubsection{Aufbau am Steckbrett Kapazitätsmessung}
+
+Vor dem Aufbau wurde eine Prototyp-Schaltung in Tinker-CAD\footnote{\href{https://www.tinkercad.com/things/84XtVuCZHAm-4-kapazitatsmessung?sharecode=4kCbAaRwm3v1nCWt6jAq8217Vbh7pe0KWzrzvLyUI0Q}{Tinker CAD Share Link}} aufgebaut und emuliert, um die Durchführung am Steckbrett zu erleichtern. Im Anschluss wurde die Schaltung am Steckbrett aufgebaut.
 
 \begin{figure}[h]
+\centering
+\begin{subfigure}[b]{0.65\textwidth}
+    \includegraphics[width=\textwidth]{tinkercad4cap.png}
+    \caption{Planung des Aufbaus in TinkerCAD}
+\end{subfigure}\hfill
+\begin{subfigure}[b]{0.3\textwidth}
     \centering
-    \includegraphics[height=5cm]{latex/images/fotos/4_a.JPEG}
-    \caption{Verdrahtung am Steckbrett.}
+    \includegraphics[width=.9\textwidth]{latex/images/fotos/4_b.JPEG}
+    \caption{Verdrahtung am Steckbrett}
+\end{subfigure}
 \end{figure}
 
 \newpage
-\subsubsection{Aufbau am Steckbrett Kapazitätsmessung}
-
-Vor dem Aufbau wurde eine Prototyp-Schaltung in Tinker-CAD\footnote{\href{https://www.tinkercad.com/things/84XtVuCZHAm-4-kapazitatsmessung?sharecode=4kCbAaRwm3v1nCWt6jAq8217Vbh7pe0KWzrzvLyUI0Q}{Tinker CAD Share Link}} aufgebaut und emuliert, um die Durchführung am Steckbrett zu erleichtern.
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=.7\textwidth]{tinkercad4cap.png}
-    \caption{Planung des Aufbaus in TinkerCAD.}
-\end{figure}
-
-Im Anschluss wurde die Schaltung am Steckbrett aufgebaut.
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[height=5cm]{latex/images/fotos/4_b.JPEG}
-    \caption{Verdrahtung am Steckbrett.}
-\end{figure}
-
 \subsubsection{Implementierung der Widerstandsmessung}
 
 \lstinputlisting[
@@ -192,13 +208,11 @@ Im Anschluss wurde die Schaltung am Steckbrett aufgebaut.
     caption={Globale Variablen und Definitionen}
 ]{../04-Widerstand/cap/cap.ino}
 
+\newpage
 \lstinputlisting[
     firstline=11,
     caption={Setup und Loop}
 ]{../04-Widerstand/cap/cap.ino}
-
-\subsubsection{Messmethode}
-
 
 \newpage
 \subsection{Ergebnisse}

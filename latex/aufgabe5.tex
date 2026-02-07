@@ -127,12 +127,13 @@ D_\text{SIN} = \mathrm{round\left(U_\text{SIN}\frac{D_\text{MAX}}{U_\text{MAX}}\
 
 Die Berechneten Werte sind in \autoref{tab:sin-wavetable} aufgeführt.
 
-\begin{longtable}{ccc}
+\begin{longtable}{ *{3}{>{\centering\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.333}}} }
     \caption{Amplituden des Sinus im Bereich \si{0}-\SI{5}{\volt}, unterteilt in 20 Stützwerte.}
     \label{tab:sin-wavetable} \\
     \toprule
     $U_\text{SIN}$ / \si{\volt} & $D_\text{SIN}$ Dezimal & $D_\text{SIN}$ Hexadezimal 
     \\ \midrule \endhead 
+    \bottomrule \endfoot
     2.5 & 8  & 0x8 \\
     3.3 & 10 & 0xA \\
     4.0 & 12 & 0xC \\
@@ -152,8 +153,7 @@ Die Berechneten Werte sind in \autoref{tab:sin-wavetable} aufgeführt.
     0.1 & 0  & 0x0 \\
     0.5 & 2  & 0x2 \\
     1.0 & 3  & 0x3 \\
-    1.7 & 5  & 0x5 \\
-    \bottomrule
+    1.7 & 5  & 0x5
 \end{longtable}
 
 \paragraph{b)} In einer Periodendauer $T$ müssen alle $N=20$ Werte der Wellentabelle durchlaufen werden. Die Zeit, wie lange ein Bitmuster am Ausgang anliegen muss, ergibt sich durch 
@@ -165,7 +165,7 @@ Die berechneten Werte sind in \autoref{tab:bittime} dargestellt.
 
 \begin{table}[h]
     \centering
-    \caption{Caption}\label{tab:bittime}
+    \caption{Zeitabstände in denen für verschiedene Frequenzen die digitalen Ausgangswerte aktualisiert werden müssen}\label{tab:bittime}
     \begin{tabularx}{\textwidth}{YYY}
     \toprule
     Ton & Frequenz $f$ / \si{\hertz} & Zeit pro Bitmuster $t_\text{b}$ /  \si{\micro\second} \\ \midrule
@@ -182,13 +182,75 @@ Die berechneten Werte sind in \autoref{tab:bittime} dargestellt.
 
 \subsection{Durchführung}
 
-\begin{itemize}
-    \item \href{https://www.tinkercad.com/things/hU8WRWTzGr5-dst-05-dac?sharecode=2duybfDI0pM_EacXxbHUI9-fU3gsZ_a5ntZMXiP6KmM}{Tinker CAD Link}
-    \item Stückliste
-\end{itemize}
+\begin{wrapfigure}[7]{r}{6cm}
+\vspace{-12pt}
+\centering
+\begin{circuitikz}[scale= 0.8, transform shape]
+    \draw (0,0) node[anchor=east]{D7}
+        to[R=$R_2$, o-*] ++(1.5,0) coordinate (k0)
+        -- ++(1,0) coordinate(out);
+    \draw (k0)
+        to[R=$R_1$] ++(0,-1.5) coordinate(k1)
+        to[R, l_=$R_2$, *-o] ++(-1.5,0) node[anchor=east]{D6};
+    \draw (k1)
+        to[R=$R_1$] ++(0,-1.5) coordinate(k2)
+        to[R, l_=$R_2$, *-o] ++(-1.5,0) node[anchor=east]{D5};
+    \draw (k2)
+        to[R=$R_1$] ++(0,-1.5) coordinate(k3)
+        to[R, l_=$R_2$, *-o] ++(-1.5,0) node[anchor=east]{D4};
+    \draw (k3) to[R=$R_2$] ++(0,-1.5) coordinate(g) node[ground]{};
+    \draw (out) node[op amp, anchor=+, noinv input up](OP){};
+    \draw (OP.out) -- ++(0,-1.5) coordinate(o1) -| (OP.-);
+    \draw (o1) to[ecapacitor, l=$C_C$, *-] ++(0,-1) to[R=$R_D$] ++(0,-1) to[loudspeaker, l={LS}] (o1 |- g) node[ground]{};
+\end{circuitikz}
+\caption{Schaltplan}\label{fig:schem5}
+\end{wrapfigure}
 
+Es wurde das 4-Bit R2R Netzwerk mit den Impedanzwandler als Lautsprecher Treiber gemäß \autoref{fig:schem5} aufgebaut. Als Ausgangspins wurden die Pins 4-7 in Port D benutzt um gleich das Port Register zu Schreiben und nicht jeden Pin einzeln setzen zu müssen. Die für die Durchführung benötigten Bauteile sind in \autoref{tab:bom5} aufgeführt.
+
+\begin{table}[h]
+    \centering
+    \caption{Stückliste}\label{tab:bom5}
+    \begin{tabularx}{\textwidth}{lXXr}
+        \toprule
+        \textbf{Bez.} & \textbf{Bauteil} & \textbf{Wert} & \textbf{Stückzahl} \\ \midrule
+        $R_1$ & \multirow{3}{*}{Widerstand} & \SI{51}{\kilo\ohm} & 3 \\ 
+        $R_2$ & & \SI{100}{\kilo\ohm} & 5 \\ 
+        $R_D$ & & \SI{220}{\ohm} & 1 \\ 
+        $C_C$ & Elektrolyt Kondensator & \SI{10}{\micro\farad} & 1 \\
+        LS & Lautsprecher & \SI{8}{\ohm} & 1 \\ \bottomrule
+    \end{tabularx}
+\end{table}
+
+\newpage
 \subsubsection{Aufbau am Steckbrett}
+
+Vor dem Aufbau wurde eine Prototyp-Schaltung in Tinker-CAD\footnote{\href{https://www.tinkercad.com/things/hU8WRWTzGr5-dst-05-dac?sharecode=2duybfDI0pM_EacXxbHUI9-fU3gsZ_a5ntZMXiP6KmM}{Tinker CAD Share Link}} aufgebaut und emuliert, um die Durchführung am Steckbrett zu erleichtern.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=.6\textwidth]{tinkercad5.png}
+    \caption{Planung des Aufbaus in Tinker-CAD.}
+\end{figure}
+
+Im Anschluss wurde die Schaltung am Steckbrett aufgebaut.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[height=5cm]{latex/images/fotos/5_2.JPEG}
+    \caption{Verdrahtung am Steckbrett.}
+\end{figure}
+
+\newpage
 
 \subsubsection{Programmierung}
 
 \subsection{Ergebnisse}
+
+Da der Lautsprecher sehr leise war, wurde der Dämpfungswiderstand entfernt.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[height=5cm]{latex/images/fotos/5_oszi.JPEG}
+    \caption{Darstellung des wert diskreten Sinus am Ausgang des DACs}
+\end{figure}
