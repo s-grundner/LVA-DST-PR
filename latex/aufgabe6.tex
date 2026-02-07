@@ -94,22 +94,22 @@ Die E6 Reihe enthält die Werte $\{1.0; 1.5; 2.2; 3.3; 4.7; 6.8\}$. Damit sind d
 \begin{circuitikz}
     \ctikzset{multipoles/external pins width=0.3} 
 
-    \draw (0,0) node[dipchip, num pins=10, hide numbers, no topmark, fill=black!80](C){};
-    \draw (0,0) node[seven segment val=8 dot none box off]{};
-    \draw (C.pin 1) to[R] ++(-1.5, 0) node[left]{label};
+    \draw (0,0) node[dipchip, num pins=10, no topmark](C){};
+    \draw (0,0) node[seven segment val=8 dot none box off, scale=1.2]{};
+    \draw (C.pin 1) to[R] ++(-1.5, 0) coordinate(r1) node[left]{label};
     \draw (C.pin 2) to[R] ++(-1.5, 0) node[left]{label};
-    \draw (C.pin 3) -| ++(0, -1.5) node[ground]{};
+    \draw (C.pin 3) -| ++(0.2, -1.5) node[ground]{};
     \draw (C.pin 4) to[R] ++(-1.5, 0) node[left]{label};
-    \draw (C.pin 5) to[R] ++(-1.5, 0) coordinate(r1) node[left]{label};
-    \draw [red, dashed] ($(C.pin 1) + (-0.2,0.3)$) rectangle ($(r1) + (0.2,-0.3)$) node[pos=.5] {$R_1$};
+    \draw [red, dashed] ($(C.pin 5) + (-0.2,0.3)$) rectangle ($(r1) + (0.2,-0.3)$) node[pos=.5] {$R_1$};
     
     \draw (C.pin 6) to[R] ++(1.5, 0) coordinate(r2) node[right]{label};
     \draw (C.pin 7) to[R] ++(1.5, 0) node[right]{label};
     \draw (C.pin 8) -| ++(0, -1.5) node[ground]{};
     \draw (C.pin 9) to[R] ++(1.5, 0) node[right]{label};
+    \draw (C.pin 10) to[R] ++(1.5, 0) node[right]{label};
     \draw [red, dashed] ($(C.pin 10) + (0.2,0.3)$) rectangle ($(r2) + (-0.2,-0.3)$) node[pos=.5] {$R_1$};
 
-    \draw (0,5) node[dipchip, num pins=16, hide numbers](SR){};
+    \draw (8,0) node[dipchip, num pins=16, hide numbers](SR){};
 
 \end{circuitikz}
 \caption{Schaltplan}
