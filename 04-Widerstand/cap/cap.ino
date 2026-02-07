@@ -36,7 +36,7 @@ void loop() {
   Serial.print("Charge Time: ");
   Serial.print(endTime);
   Serial.println(" us");
-  Serial.print("Kapazität: ");
+  Serial.print("Capacity: ");
   Serial.print(capacity);
   Serial.println(" uF");
 
