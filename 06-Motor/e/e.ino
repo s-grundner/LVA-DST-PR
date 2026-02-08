@@ -45,8 +45,6 @@ void setup()
 {
   Serial.begin(9600);
   
-  pinMode(LED_BUILTIN, OUTPUT);
-  
   pinMode(SHIFT_IN, OUTPUT);
   pinMode(SHIFT_CLK, OUTPUT);
   pinMode(SHIFT_OUTPUT, OUTPUT);
