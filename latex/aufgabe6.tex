@@ -93,6 +93,7 @@ Die E6 Reihe enthält die Werte $\{1.0; 1.5; 2.2; 3.3; 4.7; 6.8\}$. Damit sind d
 \centering
 \begin{circuitikz}
     \draw (0,0) node[dipchip, num pins=10, no topmark](C){};
+    \node[above] at (C.north) {$IC_1$};
     \draw (0,0) node[seven segment val=8 dot none box off, scale=1.2]{};
     \draw (C.pin 1) to[R] ++(-1.5, 0) to[short, -o] ++(0, 0) node[left]{E};
     \draw (C.pin 2) to[R] ++(-1.5, 0) to[short, -o] ++(0, 0) node[left]{D};
@@ -108,7 +109,8 @@ Die E6 Reihe enthält die Werte $\{1.0; 1.5; 2.2; 3.3; 4.7; 6.8\}$. Damit sind d
     \draw (C.pin 10) to[R] ++(1.5, 0) to[short, -o] ++(0, 0) node[right]{G};
     \draw [red, dashed] ($(C.pin 10) + (0.2,0.3)$) rectangle ($(r2) + (-0.2,-0.3)$) node[black, pos=.5] {$R_1$};
 
-    \draw (6,0) node[dipchip, num pins=16](SR){\rotatebox{90}{74HC595}};
+    \draw (5.5,0) node[dipchip, num pins=16](SR){\rotatebox{90}{74HC595}};
+    \node[above] at (SR.north) {$IC_2$};
     \draw (SR.pin 1) to[short, -o] ++(0, 0) node[left]{B};
     \draw (SR.pin 2) to[short, -o] ++(0, 0) node[left]{C};
     \draw (SR.pin 3) to[short, -o] ++(0, 0) node[left]{D};
@@ -116,13 +118,13 @@ Die E6 Reihe enthält die Werte $\{1.0; 1.5; 2.2; 3.3; 4.7; 6.8\}$. Damit sind d
     \draw (SR.pin 5) to[short, -o] ++(0, 0) node[left]{F};
     \draw (SR.pin 6) to[short, -o] ++(0, 0) node[left]{G};
     \draw (SR.pin 8) -| ++(0, -0.5) node[ground]{};
-    \draw (SR.pin 10) -| ++(0.3, 4) node[vcc]{};
-    \draw (SR.pin 11) to[short, -o] ++(0.7, 0) node[right]{D6};
-    \draw (SR.pin 12) to[short, -o] ++(0.7, 0) node[right]{D5};
-    \draw (SR.pin 13) -| ++(0.1, -2.8) node[ground]{};
-    \draw (SR.pin 14) to[short, -o] ++(0.7, 0) node[right]{D4};
-    \draw (SR.pin 15) to[short, -o] ++(0.7, 0) node[right]{A};
-    \draw (SR.pin 16) to[short, -*] ++(0.3, 0);
+    \draw (SR.pin 10) -| ++(0.5, 4) node[vcc]{};
+    \draw (SR.pin 11) to[short, -o] ++(1, 0) node[right]{D6};
+    \draw (SR.pin 12) to[short, -o] ++(1, 0) node[right]{D5};
+    \draw (SR.pin 13) -| ++(0.25, -2.8) node[ground]{};
+    \draw (SR.pin 14) to[short, -o] ++(1, 0) node[right]{D4};
+    \draw (SR.pin 15) to[short, -o] ++(1, 0) node[right]{A};
+    \draw (SR.pin 16) to[short, -*] ++(0.5, 0);
 
     \draw (11,1) node[pushbuttonshape, label=above:$SW_1$](SW1){};
     \draw (SW1.left) to[short, -o] ++(-0.5, 0) node[left]{D2};
@@ -139,34 +141,59 @@ Die E6 Reihe enthält die Werte $\{1.0; 1.5; 2.2; 3.3; 4.7; 6.8\}$. Damit sind d
 \begin{figure}[h]
 \centering
 \begin{circuitikz}
+    \draw (-4, 0) node[elmech](M){$M_1$};
+    \draw (M.top) |- ++(2.9, 0.28);
+    \draw (M.bottom) |- ++(2.9, -0.28);
+    
     \draw (0,0) node[dipchip, num pins=16](C){\rotatebox{90}{L293D}};
+    \node[above] at (C.north) {$IC_3$};
     \draw (C.pin 1) to[short, -*] ++(-1.5, 0);
-    \draw (C.pin 8) -| ++(-1.5, 5) node[vcc]{};
+    \draw (C.pin 8) -| ++(-1.5, 4.5) node[vcc]{};
     \draw (C.pin 16) -| ++(0, 0.5) node[vcc]{};
     \draw (C.pin 2) to[short, -o] ++(0, 0) node[left]{D11};
     \draw (C.pin 4) -| ++(-1, -2.5) node[ground]{};
     \draw (C.pin 5) to[short, -*] ++(-1, 0);
-    \draw (C.pin 6) to[short, -o] ++(0, 0) node[left]{D10};
+    \draw (C.pin 7) to[short, -o] ++(0, 0) node[left]{D10};
 
-    \draw (4, 0) node[above] {D3}to[stroke led, o-, l=$D_1$] ++ (0,-2) to[R, l=$R_2$] ++(0,-2) node[ground]{};
+    \draw (3, 2.5) node[above] {D9}to[stroke led, o-, l=$D_1$] ++ (0,-2) to[R, l=$R_1$] ++(0,-2) node[ground]{};
+    \draw (5, 2.5) node[above] {D8}to[stroke led, o-, l=$D_2$] ++ (0,-2) to[R, l=$R_1$] ++(0,-2) node[ground]{};
 
+
+    \draw (9,0) node[draw, thick, minimum width=1.5cm, minimum height=3cm, rounded corners=2pt] (SR04) {\rotatebox{90}{\small HC-SR04}};
+    \node[above] at (SR04.north) {$IC_4$};
+    \draw (SR04.north west) ++(0, -0.5) coordinate (pVCC);
+    \draw (SR04.north west) ++(0, -1.2) coordinate (pTrig);
+    \draw (SR04.north west) ++(0, -1.9) coordinate (pEcho);
+    \draw (SR04.south west) ++(0, 0.5)  coordinate (pGND);
+
+    \node[right, font=\tiny] at (pVCC) {1};
+    \node[right, font=\tiny] at (pTrig) {2};
+    \node[right, font=\tiny] at (pEcho) {3};
+    \node[right, font=\tiny] at (pGND) {4};
+
+    \draw (pVCC) -- ++(-0.5, 0) node[vcc]{};
+    \draw (pTrig) to[short, -o] ++(-0.5, 0) node[left]{D13};
+    \draw (pEcho) to[short, -o] ++(-0.5, 0) node[left]{D12};
+    \draw (pGND) -- ++(-0.5, 0) node[ground]{};
 
 \end{circuitikz}
 \caption{Schaltplan der Motorsteuerung}
 \end{figure}
 
-\begin{table}[b]
+\begin{table}[h]
     \centering
     \caption{Stückliste}\label{tab:bom6}
     \begin{tabularx}{\textwidth}{lXXr}
         \toprule
         \textbf{Bez.} & \textbf{Bauteil} & \textbf{Wert} & \textbf{Stückzahl} \\ \midrule
-        $R_1$ & \multirow{2}{*}{Widerstand} & \SI{100}{\ohm} & 1 \\ 
-        $R_2$ & & \SI{24}{\ohm} & 1 \\ 
-        $D_1$ & Infrarot Diode & $U_F = \SI{1.6}{\volt}$ & 1 \\ 
-        $Q_1$ & NMOS Transistor & BS170 & 1 \\
-        $IC_1$ & IR Sensor Modul & KY022 & 1 \\ 
-         & Arduino UNO & & 2 \\ \bottomrule
+        $R_1$ & Widerstand & \SI{220}{\ohm} & 9 \\ 
+        $D_1$ & LED & Red & 1 \\
+        $D_2$ & LED & Green & 1 \\ 
+        $IC_1$ & 7 Segment Anzeige & SC52 & 1 \\
+        $IC_2$ & Schriftregister & 74HC595 & 1 \\ 
+        $IC_3$ & Motortreiber & L293D & 1 \\ 
+        $IC_4$ & Ultraschall-Modul & HC-SR04 & 1 \\
+        $M_1$ & Ultraschall-Modul & HC-SR04 & 1 \\\bottomrule
     \end{tabularx}
 \end{table}
 
@@ -182,25 +209,30 @@ Vor dem Aufbau wurde eine Prototyp-Schaltung in Tinker-CAD\footnote{\href{https:
 
 Im Anschluss wurde die Schaltung am Steckbrett aufgebaut.
 
-\begin{figure}[h]
+\begin{figure}[h!]
     \centering
     \begin{subfigure}[c]{.49\textwidth}
         \centering
-        \includegraphics[width=.5\textwidth]{latex/images/fotos/6_1.JPEG}
-        \caption{Verdrahtung am Steckbrett.}
+        \includegraphics[height=5cm]{latex/images/fotos/6_1.JPEG}
+        \caption{Inbetriebnahme der 7-Segment Anzeige}
     \end{subfigure}
     \begin{subfigure}[c]{.49\textwidth}
         \centering
-        \includegraphics[width=.5\textwidth]{latex/images/fotos/6_2.JPEG}
-        \caption{Verdrahtung am Steckbrett.}
+        \includegraphics[height=5cm]{latex/images/fotos/6_2.JPEG}
+        \caption{Gesamter Aufbau}
     \end{subfigure}
     \caption{Verdrahtung am Steckbrett.}
 \end{figure}
 
-\begin{itemize}
-    \item Code
-\end{itemize}
-
-
 \newpage
-\newpage
+\subsubsection{Programmcode}
+
+\lstinputlisting[
+    lastline=29,
+    caption={Globale Variablen und Definitionen}
+]{../06-Motor/e/e.ino}
+
+\lstinputlisting[
+    firstline=31,
+    caption={}
+]{../06-Motor/e/e.ino}
