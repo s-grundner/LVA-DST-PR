@@ -157,9 +157,9 @@ Die Berechneten Werte sind in \autoref{tab:sin-wavetable} aufgeführt.
 \end{longtable}
 
 \paragraph{b)} In einer Periodendauer $T$ müssen alle $N=20$ Werte der Wellentabelle durchlaufen werden. Die Zeit, wie lange ein Bitmuster am Ausgang anliegen muss, ergibt sich durch 
-\[
-t_\text{b} = \frac{T}{N} = \frac{1}{fN}.
-\]
+\begin{equation}
+t_\text{b} = \frac{T}{N} = \frac{1}{fN}.\label{eq:wt-time}
+\end{equation}
 
 Die berechneten Werte sind in \autoref{tab:bittime} dargestellt.
 
@@ -245,16 +245,21 @@ Im Anschluss wurde die Schaltung am Steckbrett aufgebaut.
 
 \subsubsection{Programmierung}
 
+Im Programm wurde zunächst \autoref{tab:sin-wavetable} in einem Array gespeichert. Für die Noten in der mittleren Klavieroktave wurden außerdem die Frequenzwerte gespeichert. Für das Lied ``Alle meine Entchen'' wurden die Indizes für die Noten in der Oktave gespeichert.
+
 \lstinputlisting[
     firstline=2,
-    lastline=26,
+    lastline=44,
     caption={Globale Variablen und Definitionen}
 ]{../05-DAC/dac/dac.ino}
 
+\newpage
+Um den Sinuswert am Ausgang auszugeben, wird der Methode \lstinline!playSine()! eine Frequenz und eine Dauer mitgegeben. Die Wellentabelle wird dann mit einer Periode gemäß \autoref{eq:wt-time} durchlaufen und am Ausgang ausgegeben, bis die gegebene Zeit erreicht ist. Der Ausgangswert wird dabei direkt in das Ausgangsregister von Port D geschrieben. Die Ausgangswerte werden in den oberen \SI{4}{\bit} des Registers ausgegeben. Zuerst werden nur die 4 Bits mit \lstinline!PORTD & ~DAC_MASK! gelöscht. Anschließend wird der Wert aus der Tabelle an die richtige Position geschoben und mit dem Port ver-odert (\lstinline!|!).
+
 \lstinputlisting[
-    firstline=28,
+    firstline=46,
     lastline=65,
-    caption={}
+    caption={Methoden zur Synthese der Wellentabelle}
 ]{../05-DAC/dac/dac.ino}
 
 In der Hauptschleife werden für Tastenanschläge die in \lstinline!keyboardToFreq! definierten Töne in der Oktave gespielt. Wird \lstinline!'y'! gedrückt, wird das Lied ``Alle Meine Entchen'' gespielt.
@@ -265,13 +270,17 @@ In der Hauptschleife werden für Tastenanschläge die in \lstinline!keyboardToFr
     caption={Setup und Loop des Programms}
 ]{../05-DAC/dac/dac.ino}
 
+\newpage
 \subsection{Ergebnisse}
 
-\begin{wrapfigure}[5]{r}{5cm}
-    \vspace{-12pt}
-    \centering
-    \includegraphics[width=5cm]{latex/images/fotos/5_oszi.JPEG}
-    \caption{Darstellung des wert diskreten Sinus am Ausgang des DACs}\label{fig:dac-osc}
-\end{wrapfigure}
+\begin{itemize}
+    \item Da der Lautsprecher sehr leise war, wurde der Dämpfungswiderstand entfernt. 
+    \item Für die Definierten Tastenanschläge wurde der Richtige Ton gespielt. 
+    \item Der Synthetisierte Sinus wurde mit einem Oszilloskop aufgezeichnet. Das Oszillogramm ist in \autoref{fig:dac-osc} dargestellt.
+\end{itemize}
 
-Da der Lautsprecher sehr leise war, wurde der Dämpfungswiderstand entfernt. Für die Definierten Tastenanschläge wurde der Richtige Ton gespielt. Der Synthetisierte Sinus wurde mit einem Oszilloskop aufgezeichnet. Das Oszillogramm ist in \autoref{fig:dac-osc} dargestellt.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=6cm]{latex/images/fotos/5_oszi.JPEG}
+    \caption{Darstellung des wert diskreten Sinus am Ausgang des DACs}\label{fig:dac-osc}
+\end{figure}
