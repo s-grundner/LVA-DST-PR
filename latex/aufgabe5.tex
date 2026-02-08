@@ -246,16 +246,32 @@ Im Anschluss wurde die Schaltung am Steckbrett aufgebaut.
 \subsubsection{Programmierung}
 
 \lstinputlisting[
-    firstline=1,
+    firstline=2,
+    lastline=26,
     caption={Globale Variablen und Definitionen}
+]{../05-DAC/dac/dac.ino}
+
+\lstinputlisting[
+    firstline=28,
+    lastline=65,
+    caption={}
+]{../05-DAC/dac/dac.ino}
+
+In der Hauptschleife werden für Tastenanschläge die in \lstinline!keyboardToFreq! definierten Töne in der Oktave gespielt. Wird \lstinline!'y'! gedrückt, wird das Lied ``Alle Meine Entchen'' gespielt.
+
+\lstinputlisting[
+    firstline=66,
+    lastline=82,
+    caption={Setup und Loop des Programms}
 ]{../05-DAC/dac/dac.ino}
 
 \subsection{Ergebnisse}
 
-Da der Lautsprecher sehr leise war, wurde der Dämpfungswiderstand entfernt.
-
-\begin{figure}[h]
+\begin{wrapfigure}[5]{r}{5cm}
+    \vspace{-12pt}
     \centering
-    \includegraphics[height=5cm]{latex/images/fotos/5_oszi.JPEG}
-    \caption{Darstellung des wert diskreten Sinus am Ausgang des DACs}
-\end{figure}
+    \includegraphics[width=5cm]{latex/images/fotos/5_oszi.JPEG}
+    \caption{Darstellung des wert diskreten Sinus am Ausgang des DACs}\label{fig:dac-osc}
+\end{wrapfigure}
+
+Da der Lautsprecher sehr leise war, wurde der Dämpfungswiderstand entfernt. Für die Definierten Tastenanschläge wurde der Richtige Ton gespielt. Der Synthetisierte Sinus wurde mit einem Oszilloskop aufgezeichnet. Das Oszillogramm ist in \autoref{fig:dac-osc} dargestellt.

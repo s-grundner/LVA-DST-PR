@@ -92,8 +92,6 @@ Die E6 Reihe enthält die Werte $\{1.0; 1.5; 2.2; 3.3; 4.7; 6.8\}$. Damit sind d
 \begin{figure}[h]
 \centering
 \begin{circuitikz}
-    \ctikzset{multipoles/external pins width=0.3} 
-
     \draw (0,0) node[dipchip, num pins=10, no topmark](C){};
     \draw (0,0) node[seven segment val=8 dot none box off, scale=1.2]{};
     \draw (C.pin 1) to[R] ++(-1.5, 0) to[short, -o] ++(0, 0) node[left]{E};
@@ -126,8 +124,13 @@ Die E6 Reihe enthält die Werte $\{1.0; 1.5; 2.2; 3.3; 4.7; 6.8\}$. Damit sind d
     \draw (SR.pin 15) to[short, -o] ++(0.7, 0) node[right]{A};
     \draw (SR.pin 16) to[short, -*] ++(0.3, 0);
 
-    \draw (12,0) node[pushbuttonshape](SW){$SW_1$};
-    \draw (SW.pin 1) to[short, -o] ++(0, 0) node[left]{D2};
+    \draw (11,1) node[pushbuttonshape, label=above:$SW_1$](SW1){};
+    \draw (SW1.left) to[short, -o] ++(-0.5, 0) node[left]{D2};
+    \draw (SW1.right) -| ++(0.5, -0.2) node[ground]{};
+
+    \draw (11,-1) node[pushbuttonshape, label=above:$SW_2$](SW2){};
+    \draw (SW2.left) to[short, -o] ++(-0.5, 0) node[left]{D3};
+    \draw (SW2.right) -| ++(0.5, -0.2) node[ground]{};
 
 \end{circuitikz}
 \caption{Schaltplan der 7 Segment Anzeige}
@@ -136,9 +139,16 @@ Die E6 Reihe enthält die Werte $\{1.0; 1.5; 2.2; 3.3; 4.7; 6.8\}$. Damit sind d
 \begin{figure}[h]
 \centering
 \begin{circuitikz}
-    \ctikzset{multipoles/external pins width=0.3} 
+    \draw (0,0) node[dipchip, num pins=16](C){\rotatebox{90}{L293D}};
+    \draw (C.pin 1) to[short, -*] ++(-1.5, 0);
+    \draw (C.pin 8) -| ++(-1.5, 5) node[vcc]{};
+    \draw (C.pin 16) -| ++(0, 0.5) node[vcc]{};
+    \draw (C.pin 2) to[short, -o] ++(0, 0) node[left]{D11};
+    \draw (C.pin 4) -| ++(-1, -2.5) node[ground]{};
+    \draw (C.pin 5) to[short, -*] ++(-1, 0);
+    \draw (C.pin 6) to[short, -o] ++(0, 0) node[left]{D10};
 
-    \draw (0,0) node[dipchip, num pins=10, no topmark](C){};
+    \draw (4, 0) node[above] {D3}to[stroke led, o-, l=$D_1$] ++ (0,-2) to[R, l=$R_2$] ++(0,-2) node[ground]{};
 
 
 \end{circuitikz}
