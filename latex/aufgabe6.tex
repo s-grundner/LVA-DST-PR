@@ -96,23 +96,53 @@ Die E6 Reihe enthält die Werte $\{1.0; 1.5; 2.2; 3.3; 4.7; 6.8\}$. Damit sind d
 
     \draw (0,0) node[dipchip, num pins=10, no topmark](C){};
     \draw (0,0) node[seven segment val=8 dot none box off, scale=1.2]{};
-    \draw (C.pin 1) to[R] ++(-1.5, 0) coordinate(r1) node[left]{label};
-    \draw (C.pin 2) to[R] ++(-1.5, 0) node[left]{label};
-    \draw (C.pin 3) -| ++(0.2, -1.5) node[ground]{};
-    \draw (C.pin 4) to[R] ++(-1.5, 0) node[left]{label};
-    \draw [red, dashed] ($(C.pin 5) + (-0.2,0.3)$) rectangle ($(r1) + (0.2,-0.3)$) node[pos=.5] {$R_1$};
+    \draw (C.pin 1) to[R] ++(-1.5, 0) to[short, -o] ++(0, 0) node[left]{E};
+    \draw (C.pin 2) to[R] ++(-1.5, 0) to[short, -o] ++(0, 0) node[left]{D};
+    \draw (C.pin 3) -| ++(-0.1, -1.5) node[ground]{};
+    \draw (C.pin 4) to[R] ++(-1.5, 0) coordinate(r1) to[short, -o] ++(0, 0)  node[left]{C};
+    \draw [red, dashed] ($(C.pin 1) + (-0.2,0.3)$) rectangle ($(r1) + (0.2,-0.3)$);
+    \node at ($(C.pin 1)!0.5!(r1) + (0,-0.25)$) {$R_1$};
     
-    \draw (C.pin 6) to[R] ++(1.5, 0) coordinate(r2) node[right]{label};
-    \draw (C.pin 7) to[R] ++(1.5, 0) node[right]{label};
+    \draw (C.pin 6) to[R] ++(1.5, 0) coordinate(r2) to[short, -o] ++(0, 0)  node[right]{B};
+    \draw (C.pin 7) to[R] ++(1.5, 0) to[short, -o] ++(0, 0) node[right]{A};
     \draw (C.pin 8) -| ++(0, -1.5) node[ground]{};
-    \draw (C.pin 9) to[R] ++(1.5, 0) node[right]{label};
-    \draw (C.pin 10) to[R] ++(1.5, 0) node[right]{label};
-    \draw [red, dashed] ($(C.pin 10) + (0.2,0.3)$) rectangle ($(r2) + (-0.2,-0.3)$) node[pos=.5] {$R_1$};
+    \draw (C.pin 9) to[R] ++(1.5, 0) to[short, -o] ++(0, 0) node[right]{F};
+    \draw (C.pin 10) to[R] ++(1.5, 0) to[short, -o] ++(0, 0) node[right]{G};
+    \draw [red, dashed] ($(C.pin 10) + (0.2,0.3)$) rectangle ($(r2) + (-0.2,-0.3)$) node[black, pos=.5] {$R_1$};
 
-    \draw (8,0) node[dipchip, num pins=16, hide numbers](SR){};
+    \draw (6,0) node[dipchip, num pins=16](SR){\rotatebox{90}{74HC595}};
+    \draw (SR.pin 1) to[short, -o] ++(0, 0) node[left]{B};
+    \draw (SR.pin 2) to[short, -o] ++(0, 0) node[left]{C};
+    \draw (SR.pin 3) to[short, -o] ++(0, 0) node[left]{D};
+    \draw (SR.pin 4) to[short, -o] ++(0, 0) node[left]{E};
+    \draw (SR.pin 5) to[short, -o] ++(0, 0) node[left]{F};
+    \draw (SR.pin 6) to[short, -o] ++(0, 0) node[left]{G};
+    \draw (SR.pin 8) -| ++(0, -0.5) node[ground]{};
+    \draw (SR.pin 10) -| ++(0.3, 4) node[vcc]{};
+    \draw (SR.pin 11) to[short, -o] ++(0.7, 0) node[right]{D6};
+    \draw (SR.pin 12) to[short, -o] ++(0.7, 0) node[right]{D5};
+    \draw (SR.pin 13) -| ++(0.1, -2.8) node[ground]{};
+    \draw (SR.pin 14) to[short, -o] ++(0.7, 0) node[right]{D4};
+    \draw (SR.pin 15) to[short, -o] ++(0.7, 0) node[right]{A};
+    \draw (SR.pin 16) to[short, -*] ++(0.3, 0);
+
+    \draw (12,0) node[pushbuttonshape](SW){$SW_1$};
+    \draw (SW.pin 1) to[short, -o] ++(0, 0) node[left]{D2};
 
 \end{circuitikz}
-\caption{Schaltplan}
+\caption{Schaltplan der 7 Segment Anzeige}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\begin{circuitikz}
+    \ctikzset{multipoles/external pins width=0.3} 
+
+    \draw (0,0) node[dipchip, num pins=10, no topmark](C){};
+
+
+\end{circuitikz}
+\caption{Schaltplan der Motorsteuerung}
 \end{figure}
 
 \begin{table}[b]
