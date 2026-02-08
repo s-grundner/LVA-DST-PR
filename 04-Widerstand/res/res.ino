@@ -11,7 +11,7 @@ void loop() {
   // Read the analog value
   int rawValue = analogRead(analogPin);
   // Convert the analog value to voltage
-  float u_x = rawValue * (VCC / 1024.0);
+  float u_x = rawValue * (VCC / 1023.0);
   // Calculate the resistance
   float r_x = R_REF * (u_x / (VCC - u_x));
 
