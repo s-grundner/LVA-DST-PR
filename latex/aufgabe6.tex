@@ -235,14 +235,34 @@ Im Anschluss wurde die Schaltung am Steckbrett aufgebaut.
     caption={Globale Variablen und Definitionen}
 ]{../06-Motor/e/e.ino}
 
+Zunächst werden alle Ein- und Ausgänge initialisiert. Bei den Button Eingängen ist zu beachten, dass die Inputs mit internen Pullup-Widerständen konfiguriert werden müssen, da diese in der Schaltung weggelassen werden. Die Taster-Eingänge werden als Interrupt konfiguriert. Als Interrupt Service Routine (ISR) werden die Methoden \lstinline!countUp()! und \lstinline!countDown! eingestellt.
+
 \lstinputlisting[
     firstline=44,
-    lastline=95,
-    caption={}
+    lastline=73,
+    caption={Setup}
 ]{../06-Motor/e/e.ino}
+
+In der Hauptschleife wird überprüft, ob die \lstinline!needUpdate! Flag, welche in den ISRs gesetzt werden aktiv ist. Dann werden die Motorgeschwindigkeit und die Segmentanzeige aktualisiert. Als zweiten Teil der Hauptschleife wird die Distanz des Ultraschallsensors periodisch abgefragt. Falls die Distanz zu einem Objekt geringer als \SI{30}{\centi\meter} ist, schaltet sich der Motor ab.
+
+\lstinputlisting[
+    firstline=75,
+    lastline=95,
+    caption={Hauptschleife}
+]{../06-Motor/e/e.ino}
+
+Die beiden ISRs \lstinline!countUp! und \lstinline!countDown! implementieren beide eine Entprellung für den Taster. Bei Betätigung des rechten Tasters (Pin 2) wird die Drehgeschwindigkeit nach recht erhöht. hat sich der Motor zuvor in die linke Richtung gedreht, wird die Motorstellung auf 0 gesetzt und der Motor Stoppt. Umgekehrt gilt dies für den linken Taster.
+
+Um die Segmentanzeige anzusteuern, werden die in \lstinline!segmentPatterns! definierten Bitmuster für jede Zahl mittels der Methode \lstinline!shiftOut()! seriell ausgegeben. Im Shiftregister 74HC595 werden diese dann Parallel ausgegeben.
 
 \lstinputlisting[
     firstline=97,
-    lastline=140,
-    caption={}
+    lastline=137,
+    caption={Buttons und Segment Anzeige aktualisieren}
+]{../06-Motor/e/e.ino}
+
+Die Funktion \lstinline!setMotorSpeed()! regelt die Richtung und Geschwindigkeit des Motors mittels einer PWM, wobei die Werte 0-9 der 7 Segment Anzeige auf den 8-Bit PWM Bereich skaliert werden. Zusätzlich werden die Status LEDs aktualisiert. Die Funktion \lstinline!getDistance! ermittelt die Entfernung zu einem Hindernis und gibt diese zurück.
+\lstinputlisting[
+    firstline=139,
+    caption={Motor}
 ]{../06-Motor/e/e.ino}
