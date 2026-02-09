@@ -127,7 +127,7 @@ D_\text{SIN} = \mathrm{round\left(U_\text{SIN}\frac{D_\text{MAX}}{U_\text{MAX}}\
 
 Die Berechneten Werte sind in \autoref{tab:sin-wavetable} aufgeführt.
 
-\begin{longtable}{ *{3}{>{\centering\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.333}}} }
+\begin{longtable}{ *{3}{>{\centering\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.32}}} }
     \caption{Amplituden des Sinus im Bereich \si{0}-\SI{5}{\volt}, unterteilt in 20 Stützwerte.}
     \label{tab:sin-wavetable} \\
     \toprule
@@ -208,7 +208,7 @@ Die berechneten Werte sind in \autoref{tab:bittime} dargestellt.
 
 Es wurde das 4-Bit R2R Netzwerk mit den Impedanzwandler als Lautsprecher Treiber gemäß \autoref{fig:schem5} aufgebaut. Als Ausgangspins wurden die Pins 4-7 in Port D benutzt um gleich das Port Register zu Schreiben und nicht jeden Pin einzeln setzen zu müssen. Die für die Durchführung benötigten Bauteile sind in \autoref{tab:bom5} aufgeführt.
 
-\begin{table}[h]
+\begin{table}[ht]
     \centering
     \caption{Stückliste}\label{tab:bom5}
     \begin{tabularx}{\textwidth}{lXXr}
