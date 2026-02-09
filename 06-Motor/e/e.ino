@@ -130,7 +130,6 @@ void countDown() {
   lastInterruptTime = time;
 }
 
-
 void setShiftRegister(int number) {
   digitalWrite(SHIFT_OUTPUT, LOW);
   shiftOut(SHIFT_IN, SHIFT_CLK, LSBFIRST, segmentPatterns[number]);
