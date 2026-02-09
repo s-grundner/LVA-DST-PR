@@ -40,12 +40,11 @@ Das Ergebnis kann durch Temperatur, raue Oberflächen und schlechtem Winkel vers
 
 \paragraph{Plan für die Verwendung des Ultraschall Moduls} Im Programm wird der Trigger Pin kurz auf High und wieder auf Low gesetzt um eine Messung zu starten. Anschließend wird ein delay von \SI{30}{\micro\second} durchgeführt damit die maximale Messrate nicht unterschritten wird.
 
-\newpage
 \subsubsection{Schieberegister für 7 Segment Anzeige}
 
 In \autoref{fig:7seg-pins} sind die Anschlüsse für die Segmentanzeige abgebildet und wie diese mit dem Schieberegister verbunden werden sollen. Um Zahlen auf der Segmentanzeige darzustellen, werden im Vorhinein die Pin Stellungen für die Ziffern gespeichert. Die Segmentanzeige weist eine Common-Cathode Konfiguration auf, wodurch die Pins auf HIGH gesetzt werden müssen um das Segment zu erleuchten.
 
-\begin{figure}[h]
+\begin{figure}[ht]
     \centering
     \begin{subfigure}[c]{0.4\textwidth}
         \centering
@@ -58,7 +57,7 @@ In \autoref{fig:7seg-pins} sind die Anschlüsse für die Segmentanzeige abgebild
     \caption{Pinbelegung und Ersatzschaltbild der verwendeten 7-Segment-Anzeige SC52}\label{fig:7seg-pins}
 \end{figure}
 
-\begin{table}[h]
+\begin{table}[ht]
 \centering
 \caption{Segmentbelegung für 7-Segment-Anzeige (High-aktiv)}
 \begin{tabularx}{\textwidth}{YYYYYYYYYY}
@@ -89,9 +88,11 @@ Die E6 Reihe enthält die Werte $\{1.0; 1.5; 2.2; 3.3; 4.7; 6.8\}$. Damit sind d
 
 \subsection{Durchführung}
 
+Die Endgültige Schaltung wird gemäß \autoref{fig:schem-seg} und \autoref{fig:schem-motor} Aufgebaut.
+
 \begin{figure}[h]
 \centering
-\begin{circuitikz}
+\begin{circuitikz}[scale=0.8, transform shape]
     \draw (0,0) node[dipchip, num pins=10, no topmark](C){};
     \node[above] at (C.north) {$IC_1$};
     \draw (0,0) node[seven segment val=8 dot none box off, scale=1.2]{};
@@ -135,12 +136,12 @@ Die E6 Reihe enthält die Werte $\{1.0; 1.5; 2.2; 3.3; 4.7; 6.8\}$. Damit sind d
     \draw (SW2.right) -| ++(0.5, -0.2) node[ground]{};
 
 \end{circuitikz}
-\caption{Schaltplan der 7 Segment Anzeige}
+\caption{Schaltplan der 7 Segment Anzeige}\label{fig:schem-seg}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\begin{circuitikz}
+\begin{circuitikz} [scale=0.8, transform shape]
     \draw (-4, 0) node[elmech](M){$M_1$};
     \draw (M.top) |- ++(2.9, 0.28);
     \draw (M.bottom) |- ++(2.9, -0.28);
@@ -177,10 +178,12 @@ Die E6 Reihe enthält die Werte $\{1.0; 1.5; 2.2; 3.3; 4.7; 6.8\}$. Damit sind d
     \draw (pGND) -- ++(-0.5, 0) node[ground]{};
 
 \end{circuitikz}
-\caption{Schaltplan der Motorsteuerung}
+\caption{Schaltplan der Motorsteuerung}\label{fig:schem-motor}
 \end{figure}
 
-\begin{table}[h]
+Die für die Durchführung benötigten Bauteile sind in \autoref{tab:bom6} aufgeführt.
+
+\begin{table}[h!]
     \centering
     \caption{Stückliste}\label{tab:bom6}
     \begin{tabularx}{\textwidth}{lXXr}
@@ -193,7 +196,7 @@ Die E6 Reihe enthält die Werte $\{1.0; 1.5; 2.2; 3.3; 4.7; 6.8\}$. Damit sind d
         $IC_2$ & Schriftregister & 74HC595 & 1 \\ 
         $IC_3$ & Motortreiber & L293D & 1 \\ 
         $IC_4$ & Ultraschall-Modul & HC-SR04 & 1 \\
-        $M_1$ & Ultraschall-Modul & HC-SR04 & 1 \\\bottomrule
+        $M_1$ & Motor &  & 1 \\\bottomrule
     \end{tabularx}
 \end{table}
 
@@ -209,7 +212,7 @@ Vor dem Aufbau wurde eine Prototyp-Schaltung in Tinker-CAD\footnote{\href{https:
 
 Im Anschluss wurde die Schaltung am Steckbrett aufgebaut.
 
-\begin{figure}[h!]
+\begin{figure}[h]
     \centering
     \begin{subfigure}[c]{.49\textwidth}
         \centering
@@ -228,11 +231,18 @@ Im Anschluss wurde die Schaltung am Steckbrett aufgebaut.
 \subsubsection{Programmcode}
 
 \lstinputlisting[
-    lastline=29,
+    lastline=42,
     caption={Globale Variablen und Definitionen}
 ]{../06-Motor/e/e.ino}
 
 \lstinputlisting[
-    firstline=31,
+    firstline=44,
+    lastline=95,
+    caption={}
+]{../06-Motor/e/e.ino}
+
+\lstinputlisting[
+    firstline=97,
+    lastline=140,
     caption={}
 ]{../06-Motor/e/e.ino}
